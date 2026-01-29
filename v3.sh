@@ -678,7 +678,7 @@ cleanup_default() {
 # ============================================
 
 final_setup() {
-    marpd_log "STEP" "Finalizing installation")
+    marpd_log "STEP" "Finalizing installation"
     
     # Create completion file
     cat > "$MARPD_DIR/install_complete" << EOF
