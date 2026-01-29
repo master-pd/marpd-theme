@@ -576,7 +576,7 @@ fi
 EOF
     fi
     
-    nexus_log "SYNC" "Nexus prompt operating system configured")
+    nexus_log "SYNC" "Nexus prompt operating system configured"
 }
 
 # ============================================
