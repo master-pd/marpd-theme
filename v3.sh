@@ -324,7 +324,7 @@ EOF
 ╚══════════════════════════════════════════════════════════════╝
 EOF
     
-    nexus_log "NEXUS" "Nexus vault system established")
+    nexus_log "NEXUS" "Nexus vault system established"
 }
 
 # ============================================
