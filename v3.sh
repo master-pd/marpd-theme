@@ -702,7 +702,7 @@ EOF
     # Reload Termux settings
     termux-reload-settings > /dev/null 2>&1
     
-    marpd_log "SUCCESS" "Final setup completed")
+    marpd_log "SUCCESS" "Final setup completed"
 }
 
 # ============================================
