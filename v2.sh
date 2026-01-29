@@ -717,7 +717,7 @@ quantum_cleanup() {
     sed -i '/default-theme/d' "$HOME/.bashrc" 2>/dev/null
     sed -i '/color-theme/d' "$HOME/.bashrc" 2>/dev/null
     
-    quantum_log "ATOMIC" "Quantum cleanup completed")
+    quantum_log "ATOMIC" "Quantum cleanup completed"
 }
 
 # ============================================
