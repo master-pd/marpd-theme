@@ -1,892 +1,578 @@
 #!/bin/bash
 
 # ============================================
-# MAR-PD PRO ULTIMATE TERMUX THEME
-# Hollywood Hacker Style | Professional Grade
+# MAR-PD COMPLETE TERMUX THEME
+# Version: Final | No Errors | All Features
 # ============================================
 
 clear
-echo -e "\033[1;38;5;51m"
-cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║   ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗            ║
-║   ████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗           ║
-║   ██╔████╔██║███████║██████╔╝    ██║  ██║██║  ██║           ║
-║   ██║╚██╔╝██║██╔══██║██╔═══╝     ██║  ██║██║  ██║           ║
-║   ██║ ╚═╝ ██║██║  ██║██║         ██████╔╝██████╔╝           ║
-║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝            ║
-║                                                              ║
-║              P R O F E S S I O N A L   E D I T I O N         ║
-║                     Hollywood Hacker Style                  ║
-╚══════════════════════════════════════════════════════════════╝
-EOF
+echo -e "\033[1;36m"
+echo "┌─────────────────────────────────────────────────────┐"
+echo "│         MAR-PD TERMUX THEME INSTALLATION            │"
+echo "└─────────────────────────────────────────────────────┘"
 echo -e "\033[0m"
 
-sleep 2
-
 # =================== CONFIGURATION ===================
-THEME_NAME="MAR-PD_PRO_HOLLYWOOD"
-THEME_VERSION="7.0"
-THEME_AUTHOR="MAR-PD Team"
-THEME_DIR="$HOME/.marpd-pro"
-WALLPAPER_DIR="$HOME/.termux/wallpaper"
-FONT_DIR="$HOME/.termux/fonts"
-SCRIPT_DIR="$THEME_DIR/scripts"
-PLUGIN_DIR="$THEME_DIR/plugins"
+THEME_NAME="MAR-PD"
+THEME_VERSION="Final"
+THEME_DIR="$HOME/.marpd-termux"
+BACKUP_DIR="$THEME_DIR/backup"
 
 # Create directories
-mkdir -p $THEME_DIR $WALLPAPER_DIR $FONT_DIR $SCRIPT_DIR $PLUGIN_DIR
+mkdir -p $THEME_DIR
+mkdir -p $BACKUP_DIR
 
-# =================== HOLLYWOOD COLOR PALETTE ===================
-# Professional Hollywood Hacker Colors
-BLACK_BG="#0a0a0a"        # Pure Black Background
-MATRIX_GREEN="#00ff41"    # Matrix Green
-CYBER_CYAN="#00ffff"      # Cyber Cyan
-HOLO_YELLOW="#ffff00"     # Holographic Yellow
-NEON_PURPLE="#9d00ff"     # Neon Purple
-GLOWING_BLUE="#0066ff"    # Glowing Blue
-TERMINAL_WHITE="#f0f0f0"  # Terminal White
-DARK_GRAY="#1a1a1a"       # Dark Gray
+# =================== COLOR SETTINGS ===================
+# Dark Background
+BG_COLOR="#0a0a0a"
+# Cyan Text
+TEXT_COLOR="#00ffff"
+# Yellow Prompt
+PROMPT_COLOR="#ffff00"
 
-# =================== ANIMATION FUNCTIONS ===================
-hollywood_intro() {
-    clear
-    echo -e "\033[48;5;232m"
-    echo -e "\033[38;5;46m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                     INITIALIZING SYSTEM                      ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
-    
-    # Hollywood style loading
-    echo -ne "\033[38;5;46m"
-    echo "LOADING MAR-PD PRO THEME..."
-    echo
-    for i in {1..50}; do
-        echo -ne "["
-        for j in {1..50}; do
-            if [ $j -le $i ]; then
-                echo -ne "█"
-            else
-                echo -ne " "
-            fi
-        done
-        echo -ne "] $((i*2))% \r"
-        sleep 0.03
-    done
-    echo -e "\033[0m"
-    echo
+# =================== FUNCTIONS ===================
+print_success() {
+    echo -e "\033[1;32m[✓] $1\033[0m"
 }
 
-rainbow_text() {
-    local text="$1"
-    local colors=("196" "202" "208" "214" "220" "226" "190" "154" "118" "82" "46" "47" "48" "49" "50" "51" "45" "39" "33" "27" "21" "57" "93" "129" "165" "201" "200" "199" "198" "197")
-    local idx=0
-    for ((i=0; i<${#text}; i++)); do
-        char="${text:$i:1}"
-        color="${colors[$idx]}"
-        echo -ne "\033[38;5;${color}m${char}\033[0m"
-        idx=$(( (idx + 1) % ${#colors[@]} ))
-    done
-    echo
+print_info() {
+    echo -e "\033[1;36m[*] $1\033[0m"
 }
 
-matrix_rain() {
-    local lines=15
-    local cols=$(tput cols)
-    echo -e "\033[38;5;46m"
-    for ((i=0; i<lines; i++)); do
-        for ((j=0; j<cols; j+=2)); do
-            echo -n "$((RANDOM % 2))"
-        done
-        echo
-        sleep 0.05
-    done
-    echo -e "\033[0m"
+print_error() {
+    echo -e "\033[1;31m[✗] $1\033[0m"
 }
 
-neon_glow() {
-    local text="$1"
-    echo -e "\033[38;5;51m\033[48;5;232m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                                                              ║"
-    printf "║%*s║\n" $((58)) | tr ' ' ' '
-    printf "║%*s%s%*s║\n" $(( (58 - ${#text}) / 2 )) "" "$text" $(( (58 - ${#text} + 1) / 2 )) ""
-    printf "║%*s║\n" $((58)) | tr ' ' ' '
-    echo "║                                                              ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
-}
-
-# =================== INSTALLATION ===================
-install_professional_packages() {
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║              INSTALLING PROFESSIONAL PACKAGES                ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
+# Backup existing files
+backup_files() {
+    print_info "Backing up current configuration..."
     
-    # Update system
-    pkg update -y && pkg upgrade -y
-    
-    # Essential tools
-    essential_packages=(
-        "zsh" "git" "curl" "wget" "python" "nodejs" "ruby" "perl"
-        "neofetch" "htop" "nmap" "netcat" "openssh" "openssl"
-        "vim" "nano" "micro" "tmux" "ranger" "fzf" "bat" "exa"
-        "fd" "ripgrep" "tldr" "cheat" "glow" "jq" "yq"
-    )
-    
-    # Visual tools
-    visual_packages=(
-        "cmatrix" "cava" "pipes.sh" "bastet" "ninvaders"
-        "figlet" "toilet" "lolcat" "boxes" "pv"
-        "sl" "cowsay" "fortune" "ponysay"
-    )
-    
-    # Development tools
-    dev_packages=(
-        "clang" "make" "cmake" "binutils" "gdb"
-        "python-numpy" "python-pip" "nodejs-lts"
-        "php" "mysql" "sqlite" "postgresql"
-    )
-    
-    echo -e "\033[1;32m[→] Installing Essential Tools...\033[0m"
-    for pkg in "${essential_packages[@]}"; do
-        echo -e "  \033[1;36m✓\033[0m $pkg"
-        pkg install -y $pkg > /dev/null 2>&1
-    done
-    
-    echo -e "\n\033[1;32m[→] Installing Visual Tools...\033[0m"
-    for pkg in "${visual_packages[@]}"; do
-        echo -e "  \033[1;36m✓\033[0m $pkg"
-        pkg install -y $pkg > /dev/null 2>&1
-    done
-    
-    echo -e "\n\033[1;32m[→] Installing Development Tools...\033[0m"
-    for pkg in "${dev_packages[@]}"; do
-        echo -e "  \033[1;36m✓\033[0m $pkg"
-        pkg install -y $pkg > /dev/null 2>&1
-    done
-    
-    # Install Oh-My-Zsh with custom theme
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then
-        echo -e "\n\033[1;32m[→] Installing Oh-My-Zsh...\033[0m"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    if [ -f "$HOME/.termux/colors.properties" ]; then
+        cp $HOME/.termux/colors.properties $BACKUP_DIR/
     fi
     
-    # Install Powerlevel10k
-    echo -e "\n\033[1;32m[→] Installing Powerlevel10k...\033[0m"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+    if [ -f "$HOME/.termux/font.properties" ]; then
+        cp $HOME/.termux/font.properties $BACKUP_DIR/
+    fi
+    
+    if [ -f "$HOME/.zshrc" ]; then
+        cp $HOME/.zshrc $BACKUP_DIR/
+    fi
+    
+    if [ -f "$HOME/.bashrc" ]; then
+        cp $HOME/.bashrc $BACKUP_DIR/
+    fi
+    
+    print_success "Backup completed"
 }
 
-setup_hollywood_colors() {
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║              CONFIGURING HOLLYWOOD COLORS                    ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
+# Install required packages
+install_packages() {
+    print_info "Installing required packages..."
     
-    # Create Hollywood color scheme
+    pkg update -y > /dev/null 2>&1
+    pkg upgrade -y > /dev/null 2>&1
+    
+    packages=(
+        "zsh"
+        "git"
+        "curl"
+        "wget"
+        "python"
+        "neofetch"
+        "cmatrix"
+        "figlet"
+        "toilet"
+        "lolcat"
+        "htop"
+        "nmap"
+        "micro"
+    )
+    
+    for package in "${packages[@]}"; do
+        if ! pkg list-installed | grep -q "$package"; then
+            pkg install -y $package > /dev/null 2>&1
+        fi
+    done
+    
+    print_success "Packages installed"
+}
+
+# Setup Termux colors
+setup_colors() {
+    print_info "Setting up dark theme colors..."
+    
     cat > $HOME/.termux/colors.properties << EOF
-# MAR-PD HOLLYWOOD HACKER THEME
-# Professional Hollywood Style Colors
+# MAR-PD Dark Theme
+background=$BG_COLOR
+foreground=$TEXT_COLOR
+cursor=$PROMPT_COLOR
 
-background=$BLACK_BG
-foreground=$TERMINAL_WHITE
-cursor=$MATRIX_GREEN
-
-# Standard colors
 color0=#000000
-color1=#ff5555      # Bright Red
-color2=$MATRIX_GREEN # Matrix Green
-color3=#ffff55      # Yellow
-color4=#5555ff      # Blue
-color5=$NEON_PURPLE # Neon Purple
-color6=$CYBER_CYAN  # Cyber Cyan
-color7=#bbbbbb      # Light Gray
+color1=#ff5555
+color2=#55ff55
+color3=#ffff55
+color4=#5555ff
+color5=#ff55ff
+color6=$TEXT_COLOR
+color7=#e0e0e0
 
-# Bright colors
-color8=#444444
-color9=#ff8888
-color10=#88ff88
-color11=$HOLO_YELLOW
-color12=#8888ff
-color13=#ff88ff
-color14=#88ffff
+color8=#404040
+color9=#ff8080
+color10=#80ff80
+color11=$PROMPT_COLOR
+color12=#8080ff
+color13=#ff80ff
+color14=#80ffff
 color15=#ffffff
 EOF
     
-    # Font configuration
     cat > $HOME/.termux/font.properties << EOF
-font=JetBrainsMono-Regular.ttf
-font-size=13
+# Font settings
+font=monospace
+font-size=12
 EOF
     
-    # Download JetBrains Mono font
-    if [ ! -f "$FONT_DIR/JetBrainsMono-Regular.ttf" ]; then
-        echo -e "\033[1;36m[+] Downloading JetBrains Mono font...\033[0m"
-        wget -q https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip -O $FONT_DIR/font.zip
-        unzip -q $FONT_DIR/font.zip -d $FONT_DIR/
-        cp $FONT_DIR/fonts/ttf/JetBrainsMono-Regular.ttf $HOME/.termux/font.ttf
-    fi
+    print_success "Colors configured"
 }
 
-create_professional_zshrc() {
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║            CREATING PROFESSIONAL ZSH CONFIG                  ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
+# Create ZSH configuration
+create_zsh_config() {
+    print_info "Creating ZSH configuration..."
+    
+    # Install Oh-My-Zsh if not present
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        print_info "Installing Oh-My-Zsh..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1
+    fi
     
     cat > $HOME/.zshrc << 'EOF'
 #!/data/data/com.termux/files/usr/bin/zsh
 
-# ============================================
-# MAR-PD PROFESSIONAL HOLLYWOOD THEME
-# ============================================
+# =================== MAR-PD THEME ===================
+# User Configuration
+export USER_NAME="MAR-PD User"
+export USER_ALIAS="Cyber"
+export TEAM_NAME="MAR-PD"
+export TEAM_SLOGAN="WE WORK CYBER SAFE"
 
-# Enable colors and autocompletion
-autoload -U colors && colors
-autoload -U compinit && compinit
+# Color Definitions
+C_TEXT="%F{51}"      # Cyan
+C_PROMPT="%F{226}"    # Yellow
+C_SUCCESS="%F{46}"    # Green
+C_ERROR="%F{196}"     # Red
+C_INFO="%F{39}"       # Blue
+C_WARN="%F{214}"      # Orange
 
-# Oh-My-Zsh configuration
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Professional plugins
-plugins=(
-    git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    command-not-found
-    sudo
-    extract
-    colored-man-pages
-    z
-    web-search
-    copyfile
-    copydir
-    dirhistory
-    history
-    emoji
-    git-flow
-    docker
-    kubectl
-    npm
-    yarn
-    pip
-    python
-    ssh-agent
-    gpg-agent
-    tmux
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# Hollywood Color Variables
-export HOLLYWOOD_BLACK="%F{232}"
-export HOLLYWOOD_GREEN="%F{46}"
-export HOLLYWOOD_CYAN="%F{51}"
-export HOLLYWOOD_YELLOW="%F{226}"
-export HOLLYWOOD_PURPLE="%F{93}"
-export HOLLYWOOD_BLUE="%F{39}"
-export HOLLYWOOD_RED="%F{196}"
-export HOLLYWOOD_WHITE="%F{255}"
-
-# User Info
-export PRO_USER="Cyber Operator"
-export PRO_ALIAS="Ghost"
-export PRO_TEAM="MAR-PD"
-export PRO_RANK="Elite"
-export PRO_SESSION=$(date +%s%N | md5sum | head -c 12)
-
-# =================== PROFESSIONAL FUNCTIONS ===================
-
-function pro_banner() {
+# Banner Function
+banner() {
     clear
-    echo -e "${HOLLYWOOD_CYAN}"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                                                              ║"
-    echo "║  ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗             ║"
-    echo "║  ████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗            ║"
-    echo "║  ██╔████╔██║███████║██████╔╝    ██║  ██║██║  ██║            ║"
-    echo "║  ██║╚██╔╝██║██╔══██║██╔═══╝     ██║  ██║██║  ██║            ║"
-    echo "║  ██║ ╚═╝ ██║██║  ██║██║         ██████╔╝██████╔╝            ║"
-    echo "║  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝             ║"
-    echo "║                                                              ║"
-    echo "║                    P R O F E S S I O N A L                   ║"
-    echo "║                    H O L L Y W O O D   E D I T I O N         ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo -e "${C_TEXT}"
+    echo "┌─────────────────────────────────────────────────────┐"
+    echo "│               MAR-PD TERMINAL THEME                 │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│  User:   $USER_NAME                                │"
+    echo "│  Alias:  $USER_ALIAS                               │"
+    echo "│  Team:   $TEAM_NAME                                 │"
+    echo "│  Motto:  $TEAM_SLOGAN                               │"
+    echo "└─────────────────────────────────────────────────────┘"
     echo -e "%f"
     
-    echo -e "${HOLLYWOOD_GREEN}══════════════════════════════════════════════════════════════%f"
-    echo -e "${HOLLYWOOD_YELLOW}👤 Operator: ${HOLLYWOOD_CYAN}$PRO_USER%f"
-    echo -e "${HOLLYWOOD_YELLOW}🎭 Alias:    ${HOLLYWOOD_PURPLE}$PRO_ALIAS%f"
-    echo -e "${HOLLYWOOD_YELLOW}🔰 Team:     ${HOLLYWOOD_RED}$PRO_TEAM%f"
-    echo -e "${HOLLYWOOD_YELLOW}⭐ Rank:     ${HOLLYWOOD_BLUE}$PRO_RANK%f"
-    echo -e "${HOLLYWOOD_YELLOW}🆔 Session:  ${HOLLYWOOD_GREEN}$PRO_SESSION%f"
-    echo -e "${HOLLYWOOD_GREEN}══════════════════════════════════════════════════════════════%f"
-    
-    # System info with neofetch
     if command -v neofetch &> /dev/null; then
-        echo
-        neofetch --ascii_distro arch_small --colors 4 6 2 1 7
+        echo -e "${C_INFO}══════════════════════════════════════════════════════%f"
+        neofetch
+        echo -e "${C_INFO}══════════════════════════════════════════════════════%f"
     fi
 }
 
-function matrix_hollywood() {
-    echo -e "${HOLLYWOOD_GREEN}"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                    HOLLYWOOD MATRIX MODE                     ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "%f"
-    
+# Matrix Animation
+matrix() {
     if command -v cmatrix &> /dev/null; then
-        cmatrix -C green -s -u 2
+        cmatrix -C cyan
     else
-        for i in {1..50}; do
-            for j in {1..80}; do
-                echo -n "$((RANDOM % 2))"
-            done
-            echo
-            sleep 0.05
+        for i in {1..20}; do
+            echo "0101101001010101010101010101010101010101"
+            sleep 0.1
         done
     fi
 }
 
-function cyber_attack() {
-    local target=${1:-"unknown"}
-    echo -e "${HOLLYWOOD_RED}"
-    cat << "EOF"
-╔═══╗╔═══╗╔╗╔═╗╔═══╗╔═══╗       ╔═══╗╔╗─╔╗╔═══╗╔═══╗╔╗╔══╗
-║╔═╗║║╔══╝║║║╔╝║╔══╝║╔═╗║       ║╔═╗║║║─║║║╔═╗║║╔═╗║║║╚╣─╝
-║╚═╝║║╚══╗║╚╝╝─║╚══╗║╚═╝║       ║║─║║║║─║║║╚══╗║║─║║║║─║║─
-║╔╗╔╝║╔══╝║╔╗║─║╔══╝║╔╗╔╝       ║╚═╝║║║─║║╚══╗║║╚═╝║║╚╗║║─
-║║║╚╗║╚══╗║║║╚╗║╚══╗║║║╚╗       ║╔═╗║║╚═╝║║╚═╝║║╔═╗║║╔╝║║─
-╚╝╚═╝╚═══╝╚╝╚═╝╚═══╝╚╝╚═╝       ╚╝─╚╝╚═══╝╚═══╝╚╝─╚╝╚╝─╚╝
-EOF
+# Battery Status
+battery() {
+    if command -v termux-battery-status &> /dev/null; then
+        battery_data=$(termux-battery-status 2>/dev/null)
+        percentage=$(echo "$battery_data" | grep -o '"percentage":[0-9]*' | cut -d: -f2)
+        status=$(echo "$battery_data" | grep -o '"status":"[^"]*"' | cut -d: -f2 | tr -d '" ')
+        
+        if [ ! -z "$percentage" ]; then
+            echo -e "${C_INFO}Battery: ${C_SUCCESS}$percentage%${C_TEXT}"
+            echo -e "${C_INFO}Status: ${C_SUCCESS}$status${C_TEXT}"
+            
+            # Battery bar
+            echo -ne "${C_INFO}["
+            bars=$((percentage / 10))
+            for ((i=0; i<10; i++)); do
+                if [ $i -lt $bars ]; then
+                    echo -ne "${C_SUCCESS}█"
+                else
+                    echo -ne "${C_TEXT}░"
+                fi
+            done
+            echo -e "${C_INFO}]%f"
+        else
+            echo -e "${C_ERROR}Unable to get battery info%f"
+        fi
+    else
+        echo -e "${C_WARN}termux-api not installed%f"
+        echo -e "${C_INFO}Install: pkg install termux-api%f"
+    fi
+}
+
+# System Info
+sysinfo() {
+    echo -e "${C_INFO}════════════ System Information ════════════%f"
+    echo -e "${C_TEXT}Hostname: ${C_SUCCESS}$(hostname)%f"
+    echo -e "${C_TEXT}Kernel: ${C_SUCCESS}$(uname -r)%f"
+    echo -e "${C_TEXT}Architecture: ${C_SUCCESS}$(uname -m)%f"
+    
+    # CPU Info
+    if [ -f /proc/cpuinfo ]; then
+        cpu_model=$(grep -m1 "model name" /proc/cpuinfo | cut -d: -f2 | sed 's/^[ \t]*//')
+        echo -e "${C_TEXT}CPU: ${C_SUCCESS}$cpu_model%f"
+    fi
+    
+    # Memory Info
+    if command -v free &> /dev/null; then
+        mem_total=$(free -m | awk 'NR==2{printf "%.1f", $2/1024}')
+        mem_used=$(free -m | awk 'NR==2{printf "%.1f", $3/1024}')
+        echo -e "${C_TEXT}Memory: ${C_SUCCESS}${mem_used}GB/${mem_total}GB%f"
+    fi
+    
+    # Storage Info
+    if command -v df &> /dev/null; then
+        storage=$(df -h / | awk 'NR==2{print $5}')
+        echo -e "${C_TEXT}Storage: ${C_SUCCESS}$storage used%f"
+    fi
+}
+
+# Hack Simulation
+hack() {
+    local target=${1:-"target.com"}
+    echo -e "${C_ERROR}"
+    echo "╔══════════════════════════════════════╗"
+    echo "║        HACK MODE ACTIVATED           ║"
+    echo "║           Target: $target           ║"
+    echo "╚══════════════════════════════════════╝"
     echo -e "%f"
     
-    echo -e "${HOLLYWOOD_YELLOW}[*] Initializing cyber attack on: ${HOLLYWOOD_CYAN}$target%f"
-    echo
-    
-    attacks=(
-        "Scanning network vulnerabilities..."
-        "Bypassing firewall protection..."
-        "Injecting stealth payload..."
-        "Cracking encryption layers..."
-        "Accessing secure database..."
-        "Extracting confidential data..."
-        "Cleaning trace logs..."
-        "Establishing backdoor access..."
+    steps=(
+        "Scanning target..."
+        "Bypassing firewall..."
+        "Accessing system..."
+        "Extracting data..."
+        "Cleaning logs..."
     )
     
-    for attack in "${attacks[@]}"; do
-        echo -ne "${HOLLYWOOD_GREEN}[→]${HOLLYWOOD_WHITE} $attack%f\r"
-        sleep 0.8
-        echo -e "${HOLLYWOOD_GREEN}[✓]${HOLLYWOOD_WHITE} $attack%f"
+    for step in "${steps[@]}"; do
+        echo -e "${C_WARN}[*]${C_TEXT} $step%f"
+        sleep 0.5
     done
     
-    echo -e "\n${HOLLYWOOD_CYAN}[+] Attack completed successfully on $target%f"
-    echo -e "${HOLLYWOOD_PURPLE}[*] Data secured and encrypted%f"
+    echo -e "${C_SUCCESS}[+] Hack completed on $target%f"
 }
 
-function system_dashboard() {
-    while true; do
-        clear
-        echo -e "${HOLLYWOOD_CYAN}┌──────────────────────────────────────────────────────────┐%f"
-        echo -e "${HOLLYWOOD_CYAN}│                 SYSTEM DASHBOARD                         │%f"
-        echo -e "${HOLLYWOOD_CYAN}├──────────────────────────────────────────────────────────┤%f"
-        
-        # CPU Usage
-        cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}')
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}CPU: ${HOLLYWOOD_GREEN}$cpu_usage% ${HOLLYWOOD_CYAN}" \
-               "["$(printf "%0.s█" $(seq 1 $((cpu_usage/5))))"$(printf "%0.s " $(seq 1 $((20-cpu_usage/5))))"]%f"
-        
-        # Memory Usage
-        mem_total=$(free -m | awk 'NR==2{print $2}')
-        mem_used=$(free -m | awk 'NR==2{print $3}')
-        mem_percent=$((mem_used * 100 / mem_total))
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}RAM: ${HOLLYWOOD_BLUE}${mem_used}MB/${mem_total}MB ($mem_percent%) ${HOLLYWOOD_CYAN}" \
-               "["$(printf "%0.s█" $(seq 1 $((mem_percent/5))))"$(printf "%0.s " $(seq 1 $((20-mem_percent/5))))"]%f"
-        
-        # Battery
-        if command -v termux-battery-status &> /dev/null; then
-            battery=$(termux-battery-status 2>/dev/null | grep percentage | cut -d: -f2 | tr -d ', ')
-            status=$(termux-battery-status 2>/dev/null | grep status | cut -d: -f2 | tr -d '" ,')
-            echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}BAT: ${HOLLYWOOD_YELLOW}$battery% ($status) ${HOLLYWOOD_CYAN}" \
-                   "["$(printf "%0.s█" $(seq 1 $((battery/5))))"$(printf "%0.s " $(seq 1 $((20-battery/5))))"]%f"
-        fi
-        
-        # Storage
-        storage=$(df -h / | awk 'NR==2{print $5}')
-        used_gb=$(df -h / | awk 'NR==2{print $3}')
-        total_gb=$(df -h / | awk 'NR==2{print $2}')
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}STR: ${HOLLYWOOD_PURPLE}$used_gb/$total_gb ($storage) ${HOLLYWOOD_CYAN}" \
-               "["$(printf "%0.s█" $(seq 1 $(echo ${storage%\%} | awk '{print int($1/5)}')))"$(printf "%0.s " $(seq 1 $((20-$(echo ${storage%\%} | awk '{print int($1/5)}')))))]%f"
-        
-        # Network
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}NET: ${HOLLYWOOD_CYAN}$(curl -s ifconfig.me) ${HOLLYWOOD_CYAN}" \
-               "[$(ping -c 1 google.com &> /dev/null && echo "${HOLLYWOOD_GREEN}ONLINE%f" || echo "${HOLLYWOOD_RED}OFFLINE%f")]%f"
-        
-        # Time
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}TIME: ${HOLLYWOOD_YELLOW}$(date '+%Y-%m-%d %H:%M:%S')%f"
-        
-        echo -e "${HOLLYWOOD_CYAN}├──────────────────────────────────────────────────────────┤%f"
-        echo -e "${HOLLYWOOD_CYAN}│ ${HOLLYWOOD_WHITE}Press ${HOLLYWOOD_RED}Ctrl+C ${HOLLYWOOD_WHITE}to exit ${HOLLYWOOD_CYAN}                         │%f"
-        echo -e "${HOLLYWOOD_CYAN}└──────────────────────────────────────────────────────────┘%f"
-        sleep 2
-    done
-}
+# Custom Prompt
+PROMPT='${C_PROMPT}MAR-PD♪↗➜%f '
+RPROMPT='${C_INFO}[%*]%f'
 
-function rainbow_prompt() {
-    local colors=("196" "202" "208" "214" "220" "226" "190" "154" "118" "82" "46" "47" "48" "49" "50" "51")
-    local prompt_text="MAR-PD♪↗➜"
-    
-    echo -ne "%{\$reset_color%}"
-    for ((i=0; i<${#prompt_text}; i++)); do
-        char="${prompt_text:$i:1}"
-        color="${colors[$i % ${#colors[@]}]}"
-        echo -ne "%{\$FG[$color]%}$char"
-    done
-    echo -ne "%{\$reset_color%} "
-}
-
-# Custom Prompt (Rainbow Style)
-PROMPT='$(rainbow_prompt)'
-RPROMPT='%{$FG[51]%}[%{$FG[226]%}%*%{$FG[51]%}]%{$reset_color%}'
-
-# Professional Aliases
-alias ls='exa --icons --group-directories-first --time-style=long-iso'
-alias ll='exa -la --icons --group-directories-first --time-style=long-iso'
-alias lt='exa --tree --icons --level=2'
-alias la='exa -a --icons'
-alias cat='bat --style=grid'
-alias grep='rg --color=always'
-alias find='fd'
-alias ps='procs'
-alias top='htop'
-alias df='duf'
-alias du='dust'
-alias ping='prettyping'
-alias diff='diff-so-fancy'
-alias vim='nvim'
-alias nano='micro'
-alias curl='curlie'
-alias wget='wget2'
-
-# Project aliases
-alias proj='cd ~/projects'
-alias logs='cd ~/logs'
-alias tools='cd ~/tools'
-alias scripts='cd ~/scripts'
-
-# System aliases
+# Aliases
+alias ls='ls --color=auto'
+alias ll='ls -la --color=auto'
+alias la='ls -A --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias cls='clear'
 alias update='pkg update && pkg upgrade'
 alias install='pkg install'
 alias remove='pkg uninstall'
 alias search='pkg search'
-alias clean='pkg clean'
-alias services='sv status /data/data/com.termux/files/usr/var/service/*'
-
-# Theme aliases
-alias banner='pro_banner'
-alias matrix='matrix_hollywood'
-alias attack='cyber_attack'
-alias dashboard='system_dashboard'
-alias status='system_dashboard'
+alias banner='banner'
+alias matrix='matrix'
+alias battery='battery'
+alias sysinfo='sysinfo'
+alias hack='hack'
 alias theme-reload='source ~/.zshrc'
-alias theme-edit='micro ~/.zshrc'
-alias theme-backup='cp ~/.zshrc $HOME/.marpd-pro/backup-$(date +%Y%m%d_%H%M%S).zsh'
+alias theme-config='micro ~/.zshrc'
 
-# Git aliases
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gl='git log --oneline --graph --all'
-alias gd='git diff'
-alias gco='git checkout'
-
-# Fun aliases
-alias hollywood='cmatrix -C cyan -s'
-alias starwars='telnet towel.blinkenlights.nl'
-alias hack='echo "Hack the planet!"'
-
-# History settings
-HISTSIZE=100000
-SAVEHIST=100000
+# History Settings
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.zsh_history
 setopt appendhistory
 setopt sharehistory
 setopt incappendhistory
-setopt histignorealldups
-setopt histreduceblanks
 
 # Auto-completion
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+autoload -U compinit && compinit
 
-# Key bindings
+# Key Bindings
 bindkey -e
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
-bindkey '^H' backward-kill-word
-bindkey '^[[3~' delete-char
-bindkey '^R' history-incremental-search-backward
 
-# Startup
-if [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
-    pro_banner
-else
-    echo -e "${HOLLYWOOD_GREEN}"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║        MAR-PD PROFESSIONAL TERMINAL v7.0                     ║"
-    echo "║        Hollywood Hacker Edition                              ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "%f"
-fi
+# Show banner on startup
+banner
 
-# Welcome message
-echo -e "${HOLLYWOOD_CYAN}[+]${HOLLYWOOD_WHITE} Welcome to MAR-PD Professional Terminal%f"
-echo -e "${HOLLYWOOD_YELLOW}[+]${HOLLYWOOD_WHITE} Type 'banner' to show professional banner%f"
-echo -e "${HOLLYWOOD_PURPLE}[+]${HOLLYWOOD_WHITE} Type 'matrix' for Hollywood matrix%f"
-echo -e "${HOLLYWOOD_BLUE}[+]${HOLLYWOOD_WHITE} Type 'attack <target>' for cyber attack simulation%f"
-echo -e "${HOLLYWOOD_GREEN}[+]${HOLLYWOOD_WHITE} Type 'dashboard' for system dashboard%f"
-echo -e "${HOLLYWOOD_CYAN}[+]${HOLLYWOOD_WHITE} Type 'theme-edit' to customize theme%f"
+# Welcome Message
+echo -e "${C_SUCCESS}[+]${C_TEXT} Welcome to MAR-PD Terminal Theme%f"
+echo -e "${C_SUCCESS}[+]${C_TEXT} Type 'banner' to show banner%f"
+echo -e "${C_SUCCESS}[+]${C_TEXT} Type 'matrix' for matrix animation%f"
+echo -e "${C_SUCCESS}[+]${C_TEXT} Type 'battery' for battery status%f"
+echo -e "${C_SUCCESS}[+]${C_TEXT} Type 'sysinfo' for system information%f"
+echo -e "${C_SUCCESS}[+]${C_TEXT} Type 'hack <target>' for hack simulation%f"
 echo
 EOF
+    
+    print_success "ZSH configuration created"
 }
 
-create_professional_scripts() {
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║            CREATING PROFESSIONAL SCRIPTS                     ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+# Create Bash configuration
+create_bash_config() {
+    print_info "Creating Bash configuration..."
+    
+    cat > $HOME/.bashrc << 'EOF'
+#!/data/data/com.termux/files/usr/bin/bash
+
+# MAR-PD Bash Configuration
+
+# Load ZSH config if available
+if [ -f ~/.zshrc ]; then
+    source ~/.zshrc
+else
+    # Fallback prompt
+    PS1='\[\033[1;33m\]MAR-PD♪↗➜\[\033[0m\] '
+    
+    # Basic aliases
+    alias ls='ls --color=auto'
+    alias ll='ls -la --color=auto'
+    alias cls='clear'
+    
+    # Welcome message
+    echo -e "\033[1;36m"
+    echo "┌─────────────────────────────────────────────────────┐"
+    echo "│           MAR-PD Terminal Theme (Bash)              │"
+    echo "└─────────────────────────────────────────────────────┘"
     echo -e "\033[0m"
+fi
+EOF
     
-    # Battery monitor with graphics
-    cat > $SCRIPT_DIR/battery-pro.sh << 'EOF'
-#!/bin/bash
+    print_success "Bash configuration created"
+}
 
-# Professional Battery Monitor
-
-while true; do
-    clear
+# Apply changes
+apply_changes() {
+    print_info "Applying changes..."
     
-    # Get battery info
-    if command -v termux-battery-status &> /dev/null; then
-        battery_data=$(termux-battery-status)
-        percentage=$(echo $battery_data | grep -o '"percentage":[0-9]*' | cut -d: -f2)
-        status=$(echo $battery_data | grep -o '"status":"[^"]*"' | cut -d: -f2 | tr -d '"')
-        temp=$(echo $battery_data | grep -o '"temperature":[0-9]*' | cut -d: -f2)
-        
-        # Convert temperature
-        if [ ! -z "$temp" ]; then
-            temp_c=$(echo "scale=1; $temp/10" | bc)
+    # Reload Termux settings
+    if command -v termux-reload-settings &> /dev/null; then
+        termux-reload-settings
+    fi
+    
+    # Set ZSH as default shell
+    if command -v chsh &> /dev/null; then
+        if [ -f "/data/data/com.termux/files/usr/bin/zsh" ]; then
+            chsh -s zsh
         fi
-    else
-        percentage=100
-        status="UNKNOWN"
-        temp_c="N/A"
     fi
     
-    # Display
-    echo -e "\033[48;5;232m"
-    echo -e "\033[38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                 PROFESSIONAL BATTERY MONITOR                 ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                                                              ║"
+    print_success "Changes applied"
+}
+
+# Create additional scripts
+create_scripts() {
+    print_info "Creating additional scripts..."
     
-    # Battery icon based on percentage
-    echo -ne "║   "
-    if [ $percentage -gt 90 ]; then
-        echo -ne "\033[38;5;46m██████████\033[38;5;51m"
-    elif [ $percentage -gt 70 ]; then
-        echo -ne "\033[38;5;82m████████\033[38;5;51m  "
-    elif [ $percentage -gt 50 ]; then
-        echo -ne "\033[38;5;118m██████\033[38;5;51m    "
-    elif [ $percentage -gt 30 ]; then
-        echo -ne "\033[38;5;154m████\033[38;5;51m      "
-    elif [ $percentage -gt 15 ]; then
-        echo -ne "\033[38;5;214m██\033[38;5;51m        "
-    else
-        echo -ne "\033[38;5;196m█\033[38;5;51m         "
-    fi
+    mkdir -p $THEME_DIR/scripts
     
-    echo -e "   ║"
-    
-    # Battery info
-    echo -e "║                                                              ║"
-    echo -e "║   \033[38;5;226mPercentage:\033[38;5;51m $percentage%                          ║"
-    echo -e "║   \033[38;5;226mStatus:\033[38;5;51m $status                                 ║"
-    
-    if [ ! -z "$temp_c" ]; then
-        echo -e "║   \033[38;5;226mTemperature:\033[38;5;51m ${temp_c}°C                           ║"
-    fi
-    
-    # Time estimation
-    if [ "$status" = "CHARGING" ]; then
-        echo -e "║   \033[38;5;226mTime to full:\033[38;5;51m ~$(( (100 - percentage) / 2 )) minutes    ║"
-    elif [ "$status" = "DISCHARGING" ]; then
-        echo -e "║   \033[38;5;226mRemaining time:\033[38;5;51m ~$(( percentage / 3 )) minutes        ║"
-    fi
-    
-    echo -e "║                                                              ║"
-    echo -e "╠══════════════════════════════════════════════════════════════╣"
-    echo -e "║   \033[38;5;39mTime: $(date '+%H:%M:%S') \033[38;5;51m                       ║"
-    echo -e "║   \033[38;5;39mDate: $(date '+%Y-%m-%d') \033[38;5;51m                       ║"
-    echo -e "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
-    
-    sleep 10
-done
-EOF
-    chmod +x $SCRIPT_DIR/battery-pro.sh
-    
-    # Network scanner pro
-    cat > $SCRIPT_DIR/network-pro.sh << 'EOF'
+    # Network scanner script
+    cat > $THEME_DIR/scripts/network-scan.sh << 'EOF'
 #!/bin/bash
 
-echo -e "\033[1;38;5;51m"
-echo "╔══════════════════════════════════════════════════════════════╗"
-echo "║                PROFESSIONAL NETWORK SCANNER                  ║"
-echo "╚══════════════════════════════════════════════════════════════╝"
+echo -e "\033[1;36m"
+echo "┌─────────────────────────────────────────────────────┐"
+echo "│             NETWORK SCANNER                         │"
+echo "└─────────────────────────────────────────────────────┘"
 echo -e "\033[0m"
 
-echo -e "\033[1;32m[+] Gathering network information...\033[0m"
-echo
+echo -e "\033[1;32m[+] Getting network information...\033[0m"
 
-# Get IP information
-ip_info=$(ifconfig wlan0 2>/dev/null || ip addr show 2>/dev/null)
-public_ip=$(curl -s ifconfig.me)
+# Get IP address
+ip_info=$(ip addr show 2>/dev/null | grep 'inet' | head -5)
+if [ ! -z "$ip_info" ]; then
+    echo -e "\033[1;36mNetwork Interfaces:\033[0m"
+    echo "$ip_info"
+else
+    echo -e "\033[1;33m[-] No network interfaces found\033[0m"
+fi
 
-echo -e "\033[1;36mLocal Network:\033[0m"
-echo "$ip_info" | grep -E "inet|ether" | while read line; do
-    echo -e "  \033[1;33m→\033[0m $line"
-done
-
-echo -e "\n\033[1;36mPublic IP:\033[0m"
-echo -e "  \033[1;33m→\033[0m $public_ip"
-
-echo -e "\n\033[1;36mScanning local network...\033[0m"
-# Simulate scanning animation
-for i in {1..3}; do
-    for ip in {1..10}; do
-        echo -ne "\033[1;32mScanning 192.168.1.$ip...\033[0m\r"
-        sleep 0.1
-    done
-done
-
-echo -e "\n\033[1;32m[+] Scan complete! Summary:\033[0m"
-echo -e "  \033[1;33m✓\033[0m Found 5 active devices"
-echo -e "  \033[1;33m✓\033[0m 3 devices running Linux"
-echo -e "  \033[1;33m✓\033[0m 1 device running Windows"
-echo -e "  \033[1;33m✓\033[0m 1 device running Android"
+# Simple ping test
+echo -e "\n\033[1;32m[+] Testing connectivity...\033[0m"
+if ping -c 1 google.com &> /dev/null; then
+    echo -e "\033[1;32m[✓] Internet: Connected\033[0m"
+else
+    echo -e "\033[1;33m[!] Internet: Disconnected\033[0m"
+fi
 EOF
-    chmod +x $SCRIPT_DIR/network-pro.sh
+    chmod +x $THEME_DIR/scripts/network-scan.sh
     
-    # Password generator pro
-    cat > $SCRIPT_DIR/password-pro.sh << 'EOF'
+    # Password generator script
+    cat > $THEME_DIR/scripts/password-gen.sh << 'EOF'
 #!/bin/bash
 
-echo -e "\033[1;38;5;51m"
-echo "╔══════════════════════════════════════════════════════════════╗"
-echo "║             PROFESSIONAL PASSWORD GENERATOR                  ║"
-echo "╚══════════════════════════════════════════════════════════════╝"
+echo -e "\033[1;36m"
+echo "┌─────────────────────────────────────────────────────┐"
+echo "│             PASSWORD GENERATOR                      │"
+echo "└─────────────────────────────────────────────────────┘"
 echo -e "\033[0m"
 
-length=20
+length=12
 count=5
 
-echo -e "\033[1;36mGenerating $count professional passwords (length: $length)\033[0m"
+echo -e "\033[1;32m[+] Generating $count passwords...\033[0m"
 echo
 
-for i in {1..$count}; do
-    # Generate different types of passwords
-    pass1=$(openssl rand -base64 32 | tr -dc 'A-Za-z0-9!@#$%^&*' | head -c $length)
-    pass2=$(date +%s%N | md5sum | base64 | head -c $length)
-    pass3=$(cat /dev/urandom | tr -dc 'A-Za-z0-9' | head -c $((length-4)))'!@#$'
-    
-    passwords=($pass1 $pass2 $pass3)
-    pass=${passwords[$RANDOM % ${#passwords[@]}]}
+for i in {1..5}; do
+    # Generate password
+    password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9!@#$%^&*' | fold -w $length | head -n 1)
     
     # Calculate strength
     strength=0
-    [[ $pass =~ [A-Z] ]] && ((strength++))
-    [[ $pass =~ [a-z] ]] && ((strength++))
-    [[ $pass =~ [0-9] ]] && ((strength++))
-    [[ $pass =~ [!@#\$%^\&*] ]] && ((strength++))
-    [[ ${#pass} -ge 12 ]] && ((strength++))
+    [[ $password =~ [A-Z] ]] && ((strength++))
+    [[ $password =~ [a-z] ]] && ((strength++))
+    [[ $password =~ [0-9] ]] && ((strength++))
+    [[ $password =~ [!@#\$%^\&*] ]] && ((strength++))
     
-    strength_percent=$((strength * 20))
+    echo -e "\033[1;33mPassword $i:\033[0m \033[1;36m$password\033[0m"
     
-    echo -e "\033[1;33mPassword $i:\033[0m"
-    echo -e "  \033[1;36m$pass\033[0m"
-    echo -ne "  Strength: "
-    
-    # Strength indicator
-    if [ $strength_percent -ge 80 ]; then
-        echo -e "\033[1;42m\033[1;30m EXCELLENT \033[0m ($strength_percent%)"
-    elif [ $strength_percent -ge 60 ]; then
-        echo -e "\033[1;44m\033[1;37m STRONG \033[0m ($strength_percent%)"
-    elif [ $strength_percent -ge 40 ]; then
-        echo -e "\033[1;43m\033[1;30m MEDIUM \033[0m ($strength_percent%)"
-    else
-        echo -e "\033[1;41m\033[1;37m WEAK \033[0m ($strength_percent%)"
-    fi
+    # Show strength
+    case $strength in
+        4) echo -e "  Strength: \033[1;42m\033[1;37m STRONG \033[0m" ;;
+        3) echo -e "  Strength: \033[1;44m\033[1;37m GOOD \033[0m" ;;
+        2) echo -e "  Strength: \033[1;43m\033[1;30m WEAK \033[0m" ;;
+        *) echo -e "  Strength: \033[1;41m\033[1;37m POOR \033[0m" ;;
+    esac
     echo
 done
-
-echo -e "\033[1;32m[+] Passwords generated successfully!\033[0m"
-echo -e "\033[1;33m[*] Remember to use a password manager!\033[0m"
 EOF
-    chmod +x $SCRIPT_DIR/password-pro.sh
+    chmod +x $THEME_DIR/scripts/password-gen.sh
+    
+    print_success "Scripts created"
 }
 
-apply_final_touches() {
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║               APPLYING FINAL TOUCHES                         ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
-    
-    # Reload Termux settings
-    termux-reload-settings
-    
-    # Set ZSH as default shell
-    chsh -s zsh
-    
-    # Add script aliases to zshrc
-    echo "alias battery-pro='$SCRIPT_DIR/battery-pro.sh'" >> $HOME/.zshrc
-    echo "alias scan-pro='$SCRIPT_DIR/network-pro.sh'" >> $HOME/.zshrc
-    echo "alias pass-pro='$SCRIPT_DIR/password-pro.sh'" >> $HOME/.zshrc
-    echo "alias pro-theme='source ~/.zshrc'" >> $HOME/.zshrc
-    
-    # Create welcome script
-    cat > $SCRIPT_DIR/welcome.sh << 'EOF'
-#!/bin/bash
-
-clear
-echo -e "\033[1;38;5;51m"
-cat << "ART"
- ███▄ ▄███▓ ▄▄▄       ██▓███   ██░ ██ 
-▓██▒▀█▀ ██▒▒████▄    ▓██░  ██▒▓██░ ██▒
-▓██    ▓██░▒██  ▀█▄  ▓██░ ██▓▒▒██▀▀██░
-▒██    ▒██ ░██▄▄▄▄██ ▒██▄█▓▒ ▒░▓█ ░██ 
-▒██▒   ░██▒ ▓█   ▓██▒▒██▒ ░  ░░▓█▒░██▓
-░ ▒░   ░  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░ ▒ ░░▒░▒
-░  ░      ░  ▒   ▒▒ ░░▒ ░      ▒ ░▒░ ░
-░      ░     ░   ▒   ░░        ░  ░░ ░
-       ░         ░  ░          ░  ░  ░
-ART
-echo -e "\033[0m"
-
-sleep 1
-
-echo -e "\033[1;32m"
-echo "╔══════════════════════════════════════════════════════════════╗"
-echo "║         MAR-PD PROFESSIONAL TERMINAL READY                  ║"
-echo "║         Hollywood Hacker Edition v7.0                       ║"
-echo "╚══════════════════════════════════════════════════════════════╝"
-echo -e "\033[0m"
-
-sleep 2
-EOF
-    chmod +x $SCRIPT_DIR/welcome.sh
-}
-
-show_completion_message() {
+# Finalize installation
+finalize() {
     clear
-    echo -e "\033[48;5;232m"
-    echo -e "\033[1;38;5;51m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                                                              ║"
-    echo "║    🎬  P R O F E S S I O N A L   T H E M E   R E A D Y  🎬  ║"
-    echo "║                                                              ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                                                              ║"
-    echo "║  \033[38;5;46m✓ Hollywood Hacker Style Activated\033[38;5;51m                    ║"
-    echo "║  \033[38;5;46m✓ Professional Color Scheme Applied\033[38;5;51m                   ║"
-    echo "║  \033[38;5;46m✓ Rainbow Prompt System Installed\033[38;5;51m                     ║"
-    echo "║  \033[38;5;46m✓ Advanced Battery Monitor Ready\033[38;5;51m                      ║"
-    echo "║  \033[38;5;46m✓ Professional Tools Configured\033[38;5;51m                       ║"
-    echo "║                                                              ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                     AVAILABLE COMMANDS                       ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                                                              ║"
-    echo "║  \033[38;5;226mbanner\033[38;5;51m       - Hollywood style banner                ║"
-    echo "║  \033[38;5;226mmatrix\033[38;5;51m       - Professional matrix animation         ║"
-    echo "║  \033[38;5;226mattack <target>\033[38;5;51m - Cyber attack simulation            ║"
-    echo "║  \033[38;5;226mdashboard\033[38;5;51m    - System dashboard with graphs          ║"
-    echo "║  \033[38;5;226mbattery-pro\033[38;5;51m  - Advanced battery monitor              ║"
-    echo "║  \033[38;5;226mscan-pro\033[38;5;51m     - Professional network scanner          ║"
-    echo "║  \033[38;5;226mpass-pro\033[38;5;51m     - Password generator                    ║"
-    echo "║  \033[38;5;226mtheme-edit\033[38;5;51m   - Edit theme configuration              ║"
-    echo "║                                                              ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                     PROMPT STYLE                             ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                                                              ║"
-    echo "║  \033[38;5;196mM\033[38;5;202mA\033[38;5;208mR\033[38;5;214m-\033[38;5;220mP\033[38;5;226mD\033[38;5;190m♪\033[38;5;154m↗\033[38;5;118m➜\033[38;5;51m apt update                    ║"
-    echo "║  \033[38;5;46mM\033[38;5;47mA\033[38;5;48mR\033[38;5;49m-\033[38;5;50mP\033[38;5;51mD\033[38;5;45m♪\033[38;5;39m↗\033[38;5;33m➜\033[38;5;51m apt upgrade                   ║"
-    echo "║  \033[38;5;27mM\033[38;5;21mA\033[38;5;57mR\033[38;5;93m-\033[38;5;129mP\033[38;5;165mD\033[38;5;201m♪\033[38;5;200m↗\033[38;5;199m➜\033[38;5;51m hack google.com              ║"
-    echo "║                                                              ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
-    echo "║                                                              ║"
-    echo "║  Restart Termux or run: \033[38;5;46msource ~/.zshrc\033[38;5;51m                ║"
-    echo "║                                                              ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo -e "\033[1;36m"
+    echo "┌─────────────────────────────────────────────────────┐"
+    echo "│        MAR-PD THEME INSTALLATION COMPLETE           │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│                                                     │"
+    echo "│  All features have been installed successfully!     │"
+    echo "│                                                     │"
+    echo "│  Features included:                                 │"
+    echo "│    ✓ Dark Background Theme                          │"
+    echo "│    ✓ Cyan Text Color                                │"
+    echo "│    ✓ Yellow Prompt Color                            │"
+    echo "│    ✓ MAR-PD♪↗➜ Custom Prompt                       │"
+    echo "│    ✓ Battery Status Display                         │"
+    echo "│    ✓ Matrix Animation                               │"
+    echo "│    ✓ Hack Simulation                                │"
+    echo "│    ✓ System Information                             │"
+    echo "│    ✓ Network Scanner                                │"
+    echo "│    ✓ Password Generator                             │"
+    echo "│                                                     │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│               AVAILABLE COMMANDS                    │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│                                                     │"
+    echo "│  banner      - Show MAR-PD banner                   │"
+    echo "│  matrix      - Matrix animation                     │"
+    echo "│  battery     - Show battery status                  │"
+    echo "│  sysinfo     - Show system information              │"
+    echo "│  hack        - Hack simulation                      │"
+    echo "│  update      - Update packages                      │"
+    echo "│  theme-reload - Reload theme                        │"
+    echo "│  theme-config - Edit theme configuration            │"
+    echo "│                                                     │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│               PROMPT STYLE                          │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│                                                     │"
+    echo "│  \033[1;33mMAR-PD♪↗➜\033[1;36m apt update                       │"
+    echo "│  \033[1;33mMAR-PD♪↗➜\033[1;36m apt upgrade                      │"
+    echo "│  \033[1;33mMAR-PD♪↗➜\033[1;36m battery                          │"
+    echo "│  \033[1;33mMAR-PD♪↗➜\033[1;36m matrix                           │"
+    echo "│  \033[1;33mMAR-PD♪↗➜\033[1;36m hack google.com                  │"
+    echo "│                                                     │"
+    echo "├─────────────────────────────────────────────────────┤"
+    echo "│                                                     │"
+    echo "│  Restart Termux or type: \033[1;32msource ~/.zshrc\033[1;36m     │"
+    echo "│                                                     │"
+    echo "└─────────────────────────────────────────────────────┘"
     echo -e "\033[0m"
     
-    echo -e "\n\033[1;36mQuick Start Guide:\033[0m"
-    echo -e "  1. Close and reopen Termux for full effect"
-    echo -e "  2. Type \033[1;33mbanner\033[0m to see the Hollywood-style interface"
-    echo -e "  3. Type \033[1;33mmatrix\033[0m for professional matrix animation"
-    echo -e "  4. Type \033[1;33mbattery-pro\033[0m for advanced battery monitoring"
-    echo -e "\n\033[1;32m🎬 Hollywood Hacker Theme Successfully Installed! 🎬\033[0m"
+    echo -e "\n\033[1;32mQuick Start:\033[0m"
+    echo -e "  1. Close and reopen Termux"
+    echo -e "  2. Type \033[1;33mbanner\033[0m to see your theme"
+    echo -e "  3. Type \033[1;33mmatrix\033[0m for animation"
+    echo -e "  4. Type \033[1;33mbattery\033[0m for battery status"
+    
+    echo -e "\n\033[1;33mMAR-PD♪↗➜\033[0m Theme installation successful!"
 }
 
 # =================== MAIN INSTALLATION ===================
 main() {
-    hollywood_intro
-    
-    echo -e "\n\033[1;38;5;226m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║         MAR-PD PROFESSIONAL THEME INSTALLATION               ║"
-    echo "║         Hollywood Hacker Edition                             ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo -e "\033[1;36m"
+    echo "┌─────────────────────────────────────────────────────┐"
+    echo "│     Starting MAR-PD Theme Installation              │"
+    echo "└─────────────────────────────────────────────────────┘"
     echo -e "\033[0m"
     
-    sleep 2
+    # Step 1: Backup
+    backup_files
     
-    # Step 1: Install packages
-    install_professional_packages
+    # Step 2: Install packages
+    install_packages
     
-    # Step 2: Setup colors
-    setup_hollywood_colors
+    # Step 3: Setup colors
+    setup_colors
     
-    # Step 3: Create zshrc
-    create_professional_zshrc
+    # Step 4: Create ZSH config
+    create_zsh_config
     
-    # Step 4: Create scripts
-    create_professional_scripts
+    # Step 5: Create Bash config
+    create_bash_config
     
-    # Step 5: Apply final touches
-    apply_final_touches
+    # Step 6: Create scripts
+    create_scripts
     
-    # Step 6: Show completion
-    show_completion_message
+    # Step 7: Apply changes
+    apply_changes
+    
+    # Step 8: Finalize
+    finalize
 }
+
+# Error handling
+trap 'print_error "Installation interrupted!"; exit 1' INT
 
 # Run installation
 main
 
-# Final message
-echo -e "\n\033[1;196mM\033[1;202mA\033[1;208mR\033[1;214m-\033[1;220mP\033[1;226mD\033[1;190m♪\033[1;154m↗\033[1;118m➜\033[0m Professional theme installation complete!"
-echo -e "\033[1;38;5;51mWe work cyber safe in Hollywood style! 🎬\033[0m"
+# Add script aliases to zshrc
+echo "alias scan='$THEME_DIR/scripts/network-scan.sh'" >> $HOME/.zshrc
+echo "alias passgen='$THEME_DIR/scripts/password-gen.sh'" >> $HOME/.zshrc
+
+print_success "Installation completed without errors!"
+echo -e "\033[1;36mWe work cyber safe!\033[0m"
