@@ -1031,8 +1031,8 @@ main_installation() {
     echo -e "${BRIGHT_CYAN}"
     create_border $TERM_WIDTH "═"
     echo -e "╔══════════════════════════════════════════════════════════════╗"
-    echo -e "║              ${BRIGHT_GREEN}MAR-PD ADVANCED THEME INSTALLATION${BRIGHT_CYAN}             ║"
-    echo -e "║                     ${BRIGHT_YELLOW}Version: $VERSION${BRIGHT_CYAN}                     ║"
+    echo -e "║         ${BRIGHT_GREEN}MAR-PD ADVANCED THEME INSTALLATION${BRIGHT_CYAN} ║"
+    echo -e "║               ${BRIGHT_YELLOW}Version: $VERSION${BRIGHT_CYAN}           ║"
     echo -e "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${COLOR_RESET}"
     
@@ -1064,34 +1064,34 @@ main_installation() {
     
     echo -e "${BRIGHT_GREEN}"
     cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                 INSTALLATION COMPLETE!                       ║
-╠══════════════════════════════════════════════════════════════╣
-║  MAR-PD Advanced Theme has been successfully installed!      ║
-║                                                              ║
-║  Features Available:                                         ║
-║    • Professional hacker-style interface                     ║
-║    • Animated banners and effects                           ║
-║    • System monitoring tools                                ║
-║    • Network scanning utilities                             ║
-║    • Password generator                                     ║
-║    • Custom color schemes                                   ║
-║    • Multiple themes                                        ║
-║    • Advanced ZSH configuration                             ║
-║    • Powerlevel10k prompt                                  ║
-║                                                              ║
-║  Commands:                                                  ║
-║    • banner    - Show MAR-PD banner                         ║
-║    • matrix    - Matrix animation                           ║
-║    • hack      - Hack simulation                            ║
-║    • monitor   - System monitor                             ║
-║    • scan      - Network scanner                            ║
-║    • passgen   - Password generator                         ║
-║    • sysinfo   - System information                         ║
-║    • theme-config - Edit configuration                      ║
-║                                                              ║
-║  Restart Termux for full experience!                        ║
-╚══════════════════════════════════════════════════════════════╝
+╔════════════════════+!+-&-+!+════════════════════╗
+║                 INSTALLATION COMPLETE!                 ║
+╠════════════════════════ ═══════════════════════╣
+║  MAR-PD Advanced Theme has been successfully installed!║
+║                                                        ║
+║  Features Available:                                   ║
+║    • Professional hacker-style interface               ║
+║    • Animated banners and effects                      ║
+║    • System monitoring tools                           ║
+║    • Network scanning utilities                        ║
+║    • Password generator                                ║
+║    • Custom color schemes                              ║
+║    • Multiple themes                                   ║
+║    • Advanced ZSH configuration                        ║
+║    • Powerlevel10k prompt                              ║
+║                                                        ║
+║  Commands:                                             ║
+║    • banner    - Show MAR-PD banner                    ║
+║    • matrix    - Matrix animation                      ║
+║    • hack      - Hack simulation                       ║
+║    • monitor   - System monitor                        ║
+║    • scan      - Network scanner                       ║
+║    • passgen   - Password generator                    ║
+║    • sysinfo   - System information                    ║
+║    • theme-config - Edit configuration                 ║
+║                                                        ║
+║  Restart Termux for full experience!                   ║
+╚═══════════════════+══════+═════════════════════╝
 EOF
     echo -e "${COLOR_RESET}"
     
@@ -1152,14 +1152,14 @@ restore_theme() {
 uninstall_theme() {
     echo -e "${BRIGHT_RED}"
     cat << "WARNING"
-╔══════════════════════════════════════════════════════════════╗
-║                     WARNING!                                 ║
-╠══════════════════════════════════════════════════════════════╣
+╔════════════════════════════════════════════════════╗
+║                     WARNING!                                ║
+╠════════════════════════════════════════════════════╣
 ║  This will remove MAR-PD Theme configuration.               ║
 ║  Your original files will be backed up.                     ║
-║                                                              ║
+║                                                             ║
 ║  Are you sure you want to continue?                         ║
-╚══════════════════════════════════════════════════════════════╝
+╚════════════════════════════════════════════════════╝
 WARNING
     echo -e "${COLOR_RESET}"
     
@@ -1209,11 +1209,11 @@ update_theme() {
 show_help() {
     echo -e "${BRIGHT_CYAN}"
     cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                   MAR-PD THEME HELP                          ║
-╠══════════════════════════════════════════════════════════════╣
+╔════════════════════════════════════════════════════╗
+║                   MAR-PD THEME HELP                         ║
+╠════════════════════════════════════════════════════╣
 ║  Usage: ./pro-theme.sh [OPTION]                             ║
-║                                                              ║
+║                                                             ║
 ║  Options:                                                   ║
 ║    install    - Install/Setup MAR-PD theme                  ║
 ║    update     - Update to latest version                    ║
@@ -1222,15 +1222,15 @@ show_help() {
 ║    uninstall  - Remove MAR-PD theme                         ║
 ║    help       - Show this help message                      ║
 ║    demo       - Show theme demonstration                    ║
-║                                                              ║
+║                                                             ║
 ║  Examples:                                                  ║
 ║    ./pro-theme.sh install                                   ║
 ║    ./pro-theme.sh backup                                    ║
 ║    ./pro-theme.sh restore 20240120_143022                   ║
-║                                                              ║
+║                                                             ║
 ║  Contact: https://t.me/master_spamming                      ║
 ║  Team: MAR-PD | We Work Cyber Safe                          ║
-╚══════════════════════════════════════════════════════════════╝
+╚══════════════════════════════════ ═════════════════╝
 EOF
     echo -e "${COLOR_RESET}"
 }
@@ -1242,7 +1242,7 @@ theme_demo() {
     echo -e "${BRIGHT_CYAN}"
     cat << "EOF"
 ╔══════════════════════════════════════════════════════════════╗
-║                   MAR-PD THEME DEMONSTRATION                 ║
+║                   MAR-PD THEME DEMONSTRATION                            ║
 ╚══════════════════════════════════════════════════════════════╝
 EOF
     echo -e "${COLOR_RESET}"
@@ -1250,16 +1250,16 @@ EOF
     # Show banner
     echo -e "\n${BRIGHT_YELLOW}1. Banner Display:${COLOR_RESET}"
     echo -e "${BRIGHT_CYAN}"
-    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "╔═════════════════════════════════════════════════════╗"
     echo "║                     MAR-PD PRO TERMINAL                      ║"
-    echo "╠══════════════════════════════════════════════════════════════╣"
+    echo "╠═════════════════════════════════════════════════════╣"
     echo "║  USER    : Anonymous                                         ║"
     echo "║  ALIAS   : Ghost                                             ║"
     echo "║  RANK    : Expert                                            ║"
     echo "║  TEAM    : MAR-PD                                            ║"
     echo "║  MOTTO   : WE WORK CYBER SAFE                                ║"
-    echo "║  SESSION : $(echo $SESSION_ID)                                ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo "║  SESSION : $(echo $SESSION_ID)                               ║"
+    echo "╚═════════════════════════════════════════════════════╝"
     echo -e "${COLOR_RESET}"
     
     # Show prompt
@@ -1279,14 +1279,14 @@ EOF
     
     # Show system monitor
     echo -e "\n${BRIGHT_YELLOW}4. System Monitor:${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}╔══════════════════════════════════════╗${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}║        SYSTEM MONITOR                ║${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}╠══════════════════════════════════════╣${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} CPU: 25% ${BRIGHT_BLUE}                          ║${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} RAM: 1.2/3.8GB (32%) ${BRIGHT_BLUE}             ║${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} DISK: 45% ${BRIGHT_BLUE}                         ║${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} BATTERY: 85% ${BRIGHT_BLUE}                      ║${COLOR_RESET}"
-    echo -e "${BRIGHT_BLUE}╚══════════════════════════════════════╝${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}╔════════════════════════════════════╗${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}║        SYSTEM MONITOR                    ║${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}╠═══════════════════════ ════════════╣${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} CPU: 25% ${BRIGHT_BLUE}    ║${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} RAM: 1.2/3.8GB (32%) ${BRIGHT_BLUE}   ║${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} DISK: 45% ${BRIGHT_BLUE}    ║${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}║${COLOR_RESET} BATTERY: 85% ${BRIGHT_BLUE} ║${COLOR_RESET}"
+    echo -e "${BRIGHT_BLUE}╚════════════════════════════════════╝${COLOR_RESET}"
     
     # Show commands
     echo -e "\n${BRIGHT_YELLOW}5. Available Commands:${COLOR_RESET}"
