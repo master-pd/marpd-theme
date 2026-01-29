@@ -421,8 +421,8 @@ if [ -z "$MARPD_WELCOME_SHOWN" ]; then
     echo -e "\033[38;5;45m"
     echo "╔══════════════════════════════════════════════════════════╗"
     echo "║                                                          ║"
-    echo "║                  MAR-PD THEME v3                         ║"
-    echo "║               Ultimate Pro Edition                       ║"
+    echo "║                  MAR-PD  v3                              ║"
+    echo "║            MAR-PD Professional Theme                     ║"
     echo "║                                                          ║"
     echo "╚══════════════════════════════════════════════════════════╝"
     echo -e "\033[0m"
@@ -652,7 +652,7 @@ EOF
     chmod +x "$MARPD_DIR/backup.sh"
     chmod +x "$MARPD_DIR/restore.sh"
     
-    marpd_log "SUCCESS" "Utilities configured")
+    marpd_log "SUCCESS" "Utilities configured"
 }
 
 # ============================================
