@@ -754,7 +754,7 @@ EOF
         echo "source $NEXUS_CORE/nexus_commands.sh" >> "$HOME/.bashrc"
     fi
     
-    nexus_log "ATOMIC" "Nexus command matrix initialized")
+    nexus_log "ATOMIC" "Nexus command matrix initialized"
 }
 
 # ============================================
@@ -762,7 +762,7 @@ EOF
 # ============================================
 
 setup_nexus_features() {
-    nexus_log("NEURAL", "Activating nexus feature matrix")
+    nexus_log("NEURAL", "Activating nexus feature matrix"
     
     # Nexus Auto-completion
     cat > "$NEXUS_CORE/nexus_completion.sh" << 'EOF'
@@ -921,7 +921,7 @@ alias cls="clear"
 alias update="pkg update && pkg upgrade"
 EOF
     
-    nexus_log "SYNC", "Nexus feature matrix activated")
+    nexus_log "SYNC", "Nexus feature matrix activated"
 }
 
 # ============================================
@@ -929,7 +929,7 @@ EOF
 # ============================================
 
 nexus_cleanup() {
-    nexus_log "MATRIX", "Executing nexus cleanup protocol")
+    nexus_log "MATRIX", "Executing nexus cleanup protocol"
     
     # Remove default themes
     rm -f "$HOME/.termux/colors.properties.bak" 2>/dev/null
@@ -943,7 +943,7 @@ nexus_cleanup() {
     # Remove temporary files
     rm -f /tmp/*.marpd.* 2>/dev/null
     
-    nexus_log "ATOMIC", "Nexus cleanup protocol completed")
+    nexus_log "ATOMIC", "Nexus cleanup protocol completed"
 }
 
 # ============================================
@@ -951,7 +951,7 @@ nexus_cleanup() {
 # ============================================
 
 verify_nexus() {
-    nexus_log "NEXUS", "Executing nexus verification suite")
+    nexus_log "NEXUS", "Executing nexus verification suite"
     
     local nexus_files=(
         "$HOME/.termux/colors.properties"
@@ -976,7 +976,7 @@ verify_nexus() {
         return 1
     fi
     
-    nexus_log "SYNC", "Nexus verification suite successful")
+    nexus_log "SYNC", "Nexus verification suite successful"
     return 0
 }
 
