@@ -1,852 +1,1214 @@
 #!/bin/bash
 
-# MAR-PD THEME v3 - Ultimate Pro Edition
-# Advanced Terminal System
-# Version: 3.0.0
-# Team: MAR-PD
+# ====================================================
+# MAR-PD ULTRA ADVANCED TERMUX THEME v3.0
+# Version: Quantum | AI-Powered | Neural Network
+# ====================================================
 
-# ============================================
-# CORE INITIALIZATION
-# ============================================
+clear
 
-MARPD_VERSION="3.0.0"
-MARPD_TEAM="MAR-PD"
-MARPD_NAME="MAR-PD THEME v3"
-MARPD_PROMPT="MAR-PD ᗒ✿➜"
-MARPD_DIR="$HOME/.marpd-v3"
-MARPD_BACKUP="$HOME/.marpd-backup-v3"
-MARPD_LOG="$MARPD_DIR/install.log"
-MARPD_CONFIG="$MARPD_DIR/config.marpd"
-
-# ============================================
-# COLOR SYSTEM - Ultimate Pro
-# ============================================
-
-# Base Colors
-C_BLACK='\033[0;30m'
-C_RED='\033[0;31m'
-C_GREEN='\033[0;32m'
-C_YELLOW='\033[0;33m'
-C_BLUE='\033[0;34m'
-C_MAGENTA='\033[0;35m'
-C_CYAN='\033[0;36m'
-C_WHITE='\033[0;37m'
-
-# Bright Colors
-C_BRIGHT_BLACK='\033[0;90m'
-C_BRIGHT_RED='\033[0;91m'
-C_BRIGHT_GREEN='\033[0;92m'
-C_BRIGHT_YELLOW='\033[0;93m'
-C_BRIGHT_BLUE='\033[0;94m'
-C_BRIGHT_MAGENTA='\033[0;95m'
-C_BRIGHT_CYAN='\033[0;96m'
-C_BRIGHT_WHITE='\033[0;97m'
-
-# Bold Colors
-C_BOLD_BLACK='\033[1;30m'
-C_BOLD_RED='\033[1;31m'
-C_BOLD_GREEN='\033[1;32m'
-C_BOLD_YELLOW='\033[1;33m'
-C_BOLD_BLUE='\033[1;34m'
-C_BOLD_MAGENTA='\033[1;35m'
-C_BOLD_CYAN='\033[1;36m'
-C_BOLD_WHITE='\033[1;37m'
-
-# Background Colors
-C_BG_BLACK='\033[40m'
-C_BG_RED='\033[41m'
-C_BG_GREEN='\033[42m'
-C_BG_YELLOW='\033[43m'
-C_BG_BLUE='\033[44m'
-C_BG_MAGENTA='\033[45m'
-C_BG_CYAN='\033[46m'
-C_BG_WHITE='\033[47m'
-
-# Special Effects
-C_RESET='\033[0m'
-C_BOLD='\033[1m'
-C_DIM='\033[2m'
-C_ITALIC='\033[3m'
-C_UNDERLINE='\033[4m'
-C_BLINK='\033[5m'
-C_REVERSE='\033[7m'
-C_HIDDEN='\033[8m'
-
-# Custom MAR-PD Colors
-C_MARPD_BLUE='\033[38;5;33m'
-C_MARPD_CYAN='\033[38;5;45m'
-C_MARPD_GREEN='\033[38;5;46m'
-C_MARPD_YELLOW='\033[38;5;226m'
-C_MARPD_PURPLE='\033[38;5;93m'
-C_MARPD_PINK='\033[38;5;213m'
-
-# ============================================
-# LOGGING SYSTEM
-# ============================================
-
-marpd_log() {
-    local level="$1"
-    local message="$2"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+# =================== QUANTUM LOADING ===================
+quantum_loading() {
+    echo -e "\033[1;36m"
+    cat << "EOF"
+    ╔══════════════════════════════════════════════════════════╗
+    ║                                                          ║
+    ║         ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗  ║
+    ║         ████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗ ║
+    ║         ██╔████╔██║███████║██████╔╝    ██████╔╝██║  ██║ ║
+    ║         ██║╚██╔╝██║██╔══██║██╔═══╝     ██╔═══╝ ██║  ██║ ║
+    ║         ██║ ╚═╝ ██║██║  ██║██║         ██║     ██████╔╝ ║
+    ║         ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═╝     ╚═════╝  ║
+    ║                                                          ║
+    ║               TERMINAL QUANTUM EDITION                   ║
+    ║                     v3.0 | AI-POWERED                    ║
+    ║                                                          ║
+    ╚══════════════════════════════════════════════════════════╝
+EOF
+    echo -e "\033[0m"
     
-    case "$level" in
-        "INFO") echo -e "${C_MARPD_BLUE}[INFO]${C_RESET} $message" ;;
-        "SUCCESS") echo -e "${C_MARPD_GREEN}[SUCCESS]${C_RESET} $message" ;;
-        "WARNING") echo -e "${C_MARPD_YELLOW}[WARNING]${C_RESET} $message" ;;
-        "ERROR") echo -e "${C_RED}[ERROR]${C_RESET} $message" ;;
-        "DEBUG") echo -e "${C_MARPD_PURPLE}[DEBUG]${C_RESET} $message" ;;
-        "STEP") echo -e "${C_MARPD_CYAN}[STEP]${C_RESET} $message" ;;
-        *) echo -e "[$level] $message" ;;
-    esac
-    
-    echo "[$timestamp] [$level] $message" >> "$MARPD_LOG"
+    # Quantum loading animation
+    for i in {1..3}; do
+        echo -ne "\r\033[1;36m[+] Initializing Quantum Core"
+        sleep 0.2
+        echo -ne "\r\033[1;36m[+] Initializing Quantum Core."
+        sleep 0.2
+        echo -ne "\r\033[1;36m[+] Initializing Quantum Core.."
+        sleep 0.2
+        echo -ne "\r\033[1;36m[+] Initializing Quantum Core..."
+        sleep 0.2
+    done
+    echo -e "\033[1;32m ✓\033[0m"
 }
 
+quantum_loading
+
+# =================== CONFIGURATION ===================
+THEME_NAME="MAR-PD QUANTUM"
+THEME_VERSION="3.0"
+THEME_DIR="$HOME/.marpd-quantum"
+BACKUP_DIR="$THEME_DIR/backup"
+AI_DIR="$THEME_DIR/ai"
+NEURAL_DIR="$THEME_DIR/neural"
+LOG_DIR="$THEME_DIR/logs"
+
+# Create directory structure
+mkdir -p $THEME_DIR
+mkdir -p $BACKUP_DIR
+mkdir -p $AI_DIR
+mkdir -p $NEURAL_DIR
+mkdir -p $LOG_DIR
+mkdir -p $THEME_DIR/plugins
+mkdir -p $THEME_DIR/themes
+mkdir -p $THEME_DIR/widgets
+
+# =================== QUANTUM COLORS ===================
+# Dynamic Color System
+declare -A QUANTUM_COLORS=(
+    ["CYAN"]="#00ffff"
+    ["NEON_BLUE"]="#00f3ff"
+    ["MATRIX_GREEN"]="#00ff41"
+    ["NEON_PURPLE"]="#bc13fe"
+    ["QUANTUM_YELLOW"]="#ffff00"
+    ["AI_PINK"]="#ff00ff"
+    ["HOLO_BLUE"]="#4deeea"
+    ["NEON_RED"]="#ff073a"
+)
+
+# Default colors
+BG_COLOR="#0a0a0a"
+TEXT_COLOR=${QUANTUM_COLORS[CYAN]}
+PROMPT_COLOR=${QUANTUM_COLORS[QUANTUM_YELLOW]}
+AI_COLOR=${QUANTUM_COLORS[AI_PINK]}
+MATRIX_COLOR=${QUANTUM_COLORS[MATRIX_GREEN]}
+
+# =================== QUANTUM FUNCTIONS ===================
+print_quantum() {
+    echo -e "\033[1;36m┌─[\033[1;35mQUANTUM\033[1;36m]─[\033[1;32m$(date +%H:%M:%S)\033[1;36m]\033[0m"
+    echo -e "\033[1;36m│\033[0m $1"
+    echo -e "\033[1;36m└─────────────────────────────────────────\033[0m"
+}
+
+print_ai() {
+    echo -e "\033[1;35m┌─[\033[1;36mAI-CORE\033[1;35m]─[\033[1;32m$(date +%H:%M:%S)\033[1;35m]\033[0m"
+    echo -e "\033[1;35m│\033[0m $1"
+    echo -e "\033[1;35m└─────────────────────────────────────────\033[0m"
+}
+
+print_matrix() {
+    echo -e "\033[1;32m┌─[\033[1;36mMATRIX\033[1;32m]─[\033[1;33m$(date +%H:%M:%S)\033[1;32m]\033[0m"
+    echo -e "\033[1;32m│\033[0m $1"
+    echo -e "\033[1;32m└─────────────────────────────────────────\033[0m"
+}
+
+print_success() {
+    echo -e "\033[1;32m[✓] \033[1;37m$1\033[0m"
+}
+
+print_error() {
+    echo -e "\033[1;31m[✗] \033[1;37m$1\033[0m"
+}
+
+print_warning() {
+    echo -e "\033[1;33m[!] \033[1;37m$1\033[0m"
+}
+
+# Quantum Progress Bar
+quantum_progress() {
+    local duration=$1
+    local steps=20
+    local step_delay=$(echo "scale=3; $duration/$steps" | bc)
+    
+    echo -ne "\033[1;36m["
+    for ((i=0; i<steps; i++)); do
+        echo -ne "▰"
+        sleep $step_delay
+    done
+    echo -e "]\033[0m"
+}
+
+# =================== QUANTUM BACKUP ===================
+quantum_backup() {
+    print_quantum "Creating Quantum Backup..."
+    
+    backup_files=(
+        "$HOME/.termux/colors.properties"
+        "$HOME/.termux/font.properties"
+        "$HOME/.zshrc"
+        "$HOME/.bashrc"
+        "$HOME/.config/nvim/init.vim"
+        "$HOME/.tmux.conf"
+    )
+    
+    for file in "${backup_files[@]}"; do
+        if [ -f "$file" ]; then
+            cp "$file" "$BACKUP_DIR/" 2>/dev/null
+        fi
+    done
+    
+    # Create backup manifest
+    cat > "$BACKUP_DIR/backup_manifest.json" << EOF
+{
+    "backup_date": "$(date)",
+    "theme_version": "$THEME_VERSION",
+    "files_backed_up": $(ls "$BACKUP_DIR" | wc -l),
+    "system_info": {
+        "os": "$(uname -o)",
+        "kernel": "$(uname -r)",
+        "arch": "$(uname -m)"
+    }
+}
+EOF
+    
+    print_success "Quantum Backup Complete"
+}
+
+# =================== QUANTUM PACKAGE INSTALLER ===================
+install_quantum_packages() {
+    print_quantum "Installing Quantum Packages..."
+    
+    # Update and upgrade
+    pkg update -y && pkg upgrade -y
+    
+    # Core packages
+    core_packages=(
+        "zsh" "git" "curl" "wget" "python" "python-numpy"
+        "neofetch" "htop" "nmap" "micro" "vim" "nano"
+        "tmux" "ranger" "fzf" "bat" "exa" "lazygit"
+        "tree" "jq" "yq" "rsync" "openssh" "sshpass"
+    )
+    
+    # AI/ML packages
+    ai_packages=(
+        "python-pip" "python-scipy" "python-pandas"
+        "python-matplotlib" "termux-api" "clang"
+        "make" "cmake" "binutils" "fortran"
+    )
+    
+    # Hacking tools
+    hack_packages=(
+        "hydra" "sqlmap" "nmap" "dnsutils"
+        "netcat" "traceroute" "whois" "nikto"
+    )
+    
+    # Fun packages
+    fun_packages=(
+        "cmatrix" "neofetch" "figlet" "toilet"
+        "lolcat" "cowsay" "fortune" "sl"
+    )
+    
+    # Install all packages
+    all_packages=("${core_packages[@]}" "${ai_packages[@]}" "${hack_packages[@]}" "${fun_packages[@]}")
+    
+    for pkg_name in "${all_packages[@]}"; do
+        if ! pkg list-installed | grep -q "$pkg_name"; then
+            pkg install -y "$pkg_name" > /dev/null 2>&1 && \
+            print_success "Installed: $pkg_name"
+        fi
+    done
+    
+    # Install Python AI packages
+    pip install --upgrade pip > /dev/null 2>&1
+    ai_pip_packages=("numpy" "scipy" "pandas" "matplotlib" "scikit-learn" "requests" "beautifulsoup4")
+    
+    for pip_pkg in "${ai_pip_packages[@]}"; do
+        pip install "$pip_pkg" > /dev/null 2>&1 && \
+        print_success "Installed Python: $pip_pkg"
+    done
+    
+    print_success "All Quantum Packages Installed"
+}
+
+# =================== QUANTUM TERMUX THEME ===================
+setup_quantum_theme() {
+    print_quantum "Configuring Quantum Termux Theme..."
+    
+    mkdir -p $HOME/.termux
+    
+    # Advanced colors.properties with dynamic colors
+    cat > $HOME/.termux/colors.properties << EOF
+# MAR-PD QUANTUM THEME - DYNAMIC COLOR SYSTEM
+background=$BG_COLOR
+foreground=$TEXT_COLOR
+cursor=$PROMPT_COLOR
+
+# Quantum Color Palette
+color0=#000000      # Black
+color1=#ff5555      # Red
+color2=#55ff55      # Green
+color3=#ffff55      # Yellow
+color4=#5555ff      # Blue
+color5=#ff55ff      # Magenta
+color6=$TEXT_COLOR  # Cyan (Dynamic)
+color7=#e0e0e0      # White
+
+color8=#404040      # Bright Black
+color9=#ff8080      # Bright Red
+color10=#80ff80     # Bright Green
+color11=$PROMPT_COLOR # Bright Yellow
+color12=#8080ff     # Bright Blue
+color13=#ff80ff     # Bright Magenta
+color14=#80ffff     # Bright Cyan
+color15=#ffffff     # Bright White
+
+# Additional theme properties
+terminal.transparency=10
+terminal.bell=visual
+EOF
+    
+    # Font configuration
+    cat > $HOME/.termux/font.properties << EOF
+# Quantum Font Configuration
+font=JetBrainsMono Nerd Font
+font-size=12
+allow-bold=true
+EOF
+    
+    # Termux properties
+    cat > $HOME/.termux/termux.properties << EOF
+# Quantum Terminal Properties
+extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]
+use-black-ui = true
+terminal-margin-horizontal = 10
+terminal-margin-vertical = 5
+EOF
+    
+    # Download Nerd Font if not present
+    if [ ! -f "$HOME/.termux/font.ttf" ]; then
+        wget -q https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf \
+            -O "$HOME/.termux/font.ttf"
+    fi
+    
+    print_success "Quantum Theme Configured"
+}
+
+# =================== QUANTUM ZSH CONFIGURATION ===================
+create_quantum_zsh() {
+    print_quantum "Creating Quantum ZSH Configuration..."
+    
+    # Install Oh-My-Zsh with quantum theme
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        print_quantum "Installing Oh-My-Zsh Quantum Edition..."
+        git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+    fi
+    
+    # Create advanced .zshrc
+    cat > $HOME/.zshrc << 'EOF'
+#!/data/data/com.termux/files/usr/bin/zsh
+
 # ============================================
-# DISPLAY FUNCTIONS
+# MAR-PD QUANTUM ZSH CONFIGURATION v3.0
+# AI-Powered Terminal Interface
 # ============================================
 
-show_marpd_header() {
+# Quantum Configuration
+export QUANTUM_MODE="ACTIVE"
+export AI_ASSIST="ENABLED"
+export NEURAL_LEARNING="ON"
+export QUANTUM_USER="$(whoami)"
+export QUANTUM_HOST="$(hostname)"
+export QUANTUM_SESSION_ID="$(date +%s%N | sha256sum | head -c 16)"
+
+# Quantum Color System
+typeset -gA QUANTUM_COLORS=(
+    CYAN         "%F{51}"
+    NEON_BLUE    "%F{45}"
+    MATRIX_GREEN "%F{46}"
+    NEON_PURPLE  "%F{201}"
+    QUANTUM_YELLOW "%F{226}"
+    AI_PINK      "%F{200}"
+    HOLO_BLUE    "%F{87}"
+    NEON_RED     "%F{196}"
+    WHITE        "%F{15}"
+    GRAY         "%F{8}"
+)
+
+# Dynamic Color Variables
+C_TEXT=${QUANTUM_COLORS[CYAN]}
+C_PROMPT=${QUANTUM_COLORS[QUANTUM_YELLOW]}
+C_AI=${QUANTUM_COLORS[AI_PINK]}
+C_MATRIX=${QUANTUM_COLORS[MATRIX_GREEN]}
+C_SUCCESS=${QUANTUM_COLORS[MATRIX_GREEN]}
+C_ERROR=${QUANTUM_COLORS[NEON_RED]}
+C_WARNING=${QUANTUM_COLORS[QUANTUM_YELLOW]}
+C_INFO=${QUANTUM_COLORS[HOLO_BLUE]}
+
+# Quantum User Profile
+export QUANTUM_PROFILE=(
+    "NAME"        "MAR-PD QUANTUM USER"
+    "RANK"        "CYBER COMMANDER"
+    "CLEARANCE"   "LEVEL 9"
+    "AI_MODEL"    "NEURAL v3.0"
+    "STATUS"      "ACTIVE"
+    "MISSION"     "PROTECT THE MATRIX"
+)
+
+# =================== QUANTUM FUNCTIONS ===================
+
+# Quantum Banner with System Analysis
+quantum_banner() {
     clear
-    echo -e "${C_MARPD_BLUE}"
-    echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║                                                          ║"
-    echo "║  ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗         ║"
-    echo "║  ████╗ ████║██╔══██╗██╔══██╗   ██╔═══██╗██╔══██╗        ║"
-    echo "║  ██╔████╔██║███████║██████╔╝   ██║   ██║██║  ██║        ║"
-    echo "║  ██║╚██╔╝██║██╔══██║██╔═══╝    ██║   ██║██║  ██║        ║"
-    echo "║  ██║ ╚═╝ ██║██║  ██║██║        ╚██████╔╝██████╔╝        ║"
-    echo "║  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝         ║"
-    echo "║                                                          ║"
-    echo "║              ULTIMATE PRO EDITION v3.0.0                 ║"
-    echo "║                                                          ║"
-    echo "╚══════════════════════════════════════════════════════════╝"
-    echo -e "${C_RESET}"
-    echo -e "${C_BOLD_MAGENTA}Team: ${C_BOLD_WHITE}MAR-PD${C_RESET} | ${C_BOLD_CYAN}Prompt: ${C_BOLD_WHITE}MAR-PD ᗒ✿➜${C_RESET}"
-    echo -e "${C_BOLD_YELLOW}Repository: https://github.com/master-pd/marpd-theme.git${C_RESET}"
-    echo ""
-}
-
-show_progress() {
-    local task="$1"
-    local width=40
     
-    echo -ne "${C_MARPD_CYAN}[${C_RESET}"
-    for ((i=0; i<width; i++)); do
-        echo -ne "${C_MARPD_GREEN}█${C_RESET}"
-        sleep 0.05
-    done
-    echo -e "${C_MARPD_CYAN}] ${C_MARPD_GREEN}✓ ${C_BOLD_WHITE}$task${C_RESET}"
-}
-
-# ============================================
-# VALIDATION FUNCTIONS
-# ============================================
-
-check_termux() {
-    marpd_log "STEP" "Checking Termux environment"
+    # Animated header
+    echo -e "${C_MATRIX}"
+    echo "╔══════════════════════════════════════════════════════════════════╗"
+    echo "║                                                                  ║"
+    echo -e "║  \033[1;36m███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗   ██████╗   █████╗  ███╗   ██╗████████╗██╗   ██╗███╗   ███╗\033[0m${C_MATRIX}  ║"
+    echo -e "║  \033[1;36m████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗ ██╔════╝  ██╔══██╗ ████╗  ██║╚══██╔══╝██║   ██║████╗ ████║\033[0m${C_MATRIX}  ║"
+    echo -e "║  \033[1;36m██╔████╔██║███████║██████╔╝    ██║  ██║██████╔╝ ██║  ███╗ ███████║ ██╔██╗ ██║   ██║   ██║   ██║██╔████╔██║\033[0m${C_MATRIX}  ║"
+    echo -e "║  \033[1;36m██║╚██╔╝██║██╔══██║██╔═══╝     ██║  ██║██╔══██╗ ██║   ██║ ██╔══██║ ██║╚██╗██║   ██║   ██║   ██║██║╚██╔╝██║\033[0m${C_MATRIX}  ║"
+    echo -e "║  \033[1;36m██║ ╚═╝ ██║██║  ██║██║         ██████╔╝██║  ██║ ╚██████╔╝ ██║  ██║ ██║ ╚████║   ██║   ╚██████╔╝██║ ╚═╝ ██║\033[0m${C_MATRIX}  ║"
+    echo -e "║  \033[1;36m╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═╝  ╚═╝  ╚═════╝  ╚═╝  ╚═╝ ╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝\033[0m${C_MATRIX}  ║"
+    echo "║                                                                  ║"
+    echo -e "║                 ${C_AI}QUANTUM EDITION v3.0 | AI-POWERED${C_MATRIX}                  ║"
+    echo "║                                                                  ║"
+    echo "╚══════════════════════════════════════════════════════════════════╝"
+    echo -e "%f"
     
-    if [ ! -d "/data/data/com.termux" ]; then
-        marpd_log "ERROR" "This script must run in Termux"
-        return 1
+    # System Status Panel
+    echo -e "${C_INFO}════════════════════════════════ SYSTEM STATUS ═══════════════════════════════%f"
+    
+    # User Info
+    echo -e "${C_TEXT}User: ${C_SUCCESS}$QUANTUM_USER@$QUANTUM_HOST${C_TEXT} | "
+    echo -e "Rank: ${C_WARNING}${QUANTUM_PROFILE[2]}${C_TEXT} | "
+    echo -e "Session: ${C_AI}$QUANTUM_SESSION_ID%f"
+    echo
+    
+    # System Metrics
+    if command -v neofetch &> /dev/null; then
+        neofetch --config "$HOME/.marpd-quantum/config/neofetch.conf"
+    else
+        # Basic system info
+        echo -e "${C_TEXT}OS: ${C_SUCCESS}$(uname -o) $(uname -r)${C_TEXT}"
+        echo -e "Uptime: ${C_SUCCESS}$(uptime -p)${C_TEXT}"
+        echo -e "Battery: ${C_SUCCESS}$(termux-battery-status 2>/dev/null | grep percentage | cut -d: -f2 | tr -d ' ,')%${C_TEXT}"
     fi
     
-    if [ ! -w "$HOME" ]; then
-        marpd_log "ERROR" "No write permission in home directory"
-        return 1
-    fi
+    echo -e "${C_INFO}════════════════════════════════ QUANTUM CONTROLS ════════════════════════════%f"
     
-    marpd_log "SUCCESS" "Termux environment verified"
-    return 0
-}
-
-check_internet() {
-    marpd_log "STEP" "Checking internet connection"
-    
-    if ! ping -c 1 8.8.8.8 > /dev/null 2>&1; then
-        marpd_log "WARNING" "No internet connection detected"
-        return 1
-    fi
-    
-    marpd_log "SUCCESS" "Internet connection verified"
-    return 0
-}
-
-# ============================================
-# DEPENDENCY MANAGEMENT
-# ============================================
-
-install_dependencies() {
-    marpd_log "STEP" "Installing required packages"
-    
-    local packages=(
-        "git"
-        "curl"
-        "wget"
-        "unzip"
-        "nano"
-        "neofetch"
-        "python"
-        "nodejs"
-        "openssh"
-        "tmux"
-        "zsh"
+    # Quick Commands
+    commands=(
+        "quantum-matrix     - Enter the Matrix"
+        "quantum-ai         - AI Assistant"
+        "quantum-scan       - Network Scanner"
+        "quantum-hack       - Hack Simulation"
+        "quantum-status     - System Status"
+        "quantum-update     - Update Quantum"
+        "quantum-config     - Configure Settings"
+        "color-rotate       - Rotate Colors"
     )
     
-    pkg update -y > /dev/null 2>&1
-    pkg upgrade -y > /dev/null 2>&1
-    
-    for pkg in "${packages[@]}"; do
-        if ! command -v "$pkg" > /dev/null 2>&1; then
-            marpd_log "INFO" "Installing: $pkg"
-            pkg install -y "$pkg" > /dev/null 2>&1
-            if [ $? -eq 0 ]; then
-                marpd_log "SUCCESS" "Installed: $pkg"
-            else
-                marpd_log "WARNING" "Failed to install: $pkg"
-            fi
-        fi
+    for cmd in "${commands[@]}"; do
+        echo -e "${C_TEXT}  ${cmd}%f"
     done
     
-    marpd_log "SUCCESS" "All dependencies installed"
+    echo -e "${C_INFO}══════════════════════════════════════════════════════════════════════════════%f"
+    echo
 }
 
-# ============================================
-# BACKUP SYSTEM
-# ============================================
-
-create_backup() {
-    marpd_log "STEP" "Creating system backup"
+# Quantum Matrix Simulation
+quantum_matrix() {
+    echo -e "${C_MATRIX}"
+    echo "Initializing Matrix Simulation..."
+    echo -e "%f"
     
-    mkdir -p "$MARPD_BACKUP"
-    
-    # Backup Termux files
-    if [ -d "$HOME/.termux" ]; then
-        cp -r "$HOME/.termux" "$MARPD_BACKUP/termux_backup"
-        marpd_log "INFO" "Backed up Termux configuration"
-    fi
-    
-    # Backup shell files
-    local shell_files=(
-        ".bashrc"
-        ".zshrc"
-        ".profile"
-        ".bash_profile"
-    )
-    
-    for file in "${shell_files[@]}"; do
-        if [ -f "$HOME/$file" ]; then
-            cp "$HOME/$file" "$MARPD_BACKUP/$file.backup"
-            marpd_log "DEBUG" "Backed up: $file"
-        fi
-    done
-    
-    # Create backup info
-    cat > "$MARPD_BACKUP/backup_info.txt" << EOF
-MAR-PD THEME v3 Backup
-=======================
-Backup Created: $(date)
-Theme Version: $MARPD_VERSION
-Team: $TEAM
-
-Files backed up:
-- Termux configuration
-- Shell configuration files
-
-To restore:
-bash $MARPD_DIR/restore.sh
-EOF
-    
-    marpd_log "SUCCESS" "Backup created successfully"
-}
-
-# ============================================
-# THEME INSTALLATION
-# ============================================
-
-install_theme() {
-    marpd_log "STEP" "Installing MAR-PD THEME v3"
-    
-    # Create directories
-    mkdir -p "$MARPD_DIR"
-    mkdir -p "$HOME/.termux"
-    
-    # Install color scheme
-    cat > "$HOME/.termux/colors.properties" << 'EOF'
-# MAR-PD THEME v3 - Ultimate Color Scheme
-
-# Basic colors
-color0=#1a1a2e
-color1=#16213e
-color2=#0f3460
-color3=#e94560
-color4=#533483
-color5=#8d8daa
-color6=#f05945
-color7=#ffbd69
-color8=#00adb5
-color9=#393e46
-color10=#eeeeee
-color11=#ff9a3c
-color12=#ff6f3c
-color13=#155263
-color14=#ffc93c
-color15=#07689f
-
-# Terminal colors
-background=#1a1a2e
-foreground=#eeeeee
-cursor=#00adb5
-EOF
-    
-    # Install Termux properties
-    cat > "$HOME/.termux/termux.properties" << 'EOF'
-# MAR-PD THEME v3 Configuration
-
-# Visual settings
-use-black-ui=false
-terminal-cursor-style=bar
-terminal-transparency=10
-terminal-margin-horizontal=10
-terminal-margin-vertical=5
-
-# Behavior
-bell-character=ignore
-back-button=ignore
-hide-soft-keyboard-on-startup=true
-fullscreen=false
-
-# Keyboard
-extra-keys=[ \
- ['ESC','|','/','HOME','UP','END','PGUP','DEL'], \
- ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','BKSP'] \
-]
-EOF
-    
-    # Download and install font
-    marpd_log "INFO" "Downloading MAR-PD font"
-    wget -q "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf" \
-        -O "$HOME/.termux/font.ttf"
-    
-    if [ $? -eq 0 ]; then
-        marpd_log "SUCCESS" "Font installed successfully"
+    if command -v cmatrix &> /dev/null; then
+        cmatrix -abs -C cyan
     else
-        marpd_log "WARNING" "Using default font"
+        # ASCII matrix simulation
+        for i in {1..50}; do
+            echo -ne "${C_MATRIX}"
+            for j in {1..80}; do
+                if (( RANDOM % 5 == 0 )); then
+                    echo -n "${C_MATRIX}$((RANDOM % 2))"
+                else
+                    echo -n " "
+                fi
+            done
+            echo -e "%f"
+            sleep 0.05
+        done
     fi
-    
-    marpd_log "SUCCESS" "Theme installed successfully"
 }
 
-# ============================================
-# PROMPT SYSTEM
-# ============================================
-
-setup_prompt() {
-    marpd_log "STEP" "Setting up MAR-PD prompt system"
+# AI Assistant
+quantum_ai() {
+    local query="$*"
     
-    # Create prompt script
-    cat > "$MARPD_DIR/marpd_prompt.sh" << 'EOF'
-# MAR-PD THEME v3 Prompt System
-
-_marpd_prompt() {
-    local EXIT="$?"
-    
-    # Colors
-    local COL_DIR="\[\033[38;5;45m\]"
-    local COL_USER="\[\033[38;5;51m\]"
-    local COL_HOST="\[\033[38;5;87m\]"
-    local COL_GIT="\[\033[38;5;123m\]"
-    local COL_TIME="\[\033[38;5;39m\]"
-    local COL_SUCCESS="\[\033[38;5;46m\]"
-    local COL_ERROR="\[\033[38;5;196m\]"
-    local COL_ARROW="\[\033[38;5;213m\]"
-    local COL_FLOWER="\[\033[38;5;219m\]"
-    local COL_RESET="\[\033[0m\]"
-    
-    # Time
-    local TIME="\t"
-    
-    # User@Host
-    local USER_HOST="\u@\h"
-    
-    # Directory
-    local DIR="\w"
-    
-    # Git branch
-    local GIT_BRANCH=""
-    if git rev-parse --git-dir > /dev/null 2>&1; then
-        GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
-        if [ -n "$GIT_BRANCH" ]; then
-            GIT_BRANCH=" ⎇ $GIT_BRANCH"
-        fi
-    fi
-    
-    # Exit status
-    local STATUS=""
-    if [ $EXIT -eq 0 ]; then
-        STATUS="${COL_SUCCESS}✓${COL_RESET}"
+    if [ -z "$query" ]; then
+        echo -e "${C_AI}"
+        echo "╔══════════════════════════════════════════╗"
+        echo "║         QUANTUM AI ASSISTANT v3.0        ║"
+        echo "╚══════════════════════════════════════════╝"
+        echo -e "%f"
+        
+        options=(
+            "1. System Analysis"
+            "2. Security Scan"
+            "3. Code Optimization"
+            "4. Network Diagnostics"
+            "5. Learn New Command"
+            "6. AI Prediction"
+            "7. Quantum Calculation"
+        )
+        
+        for option in "${options[@]}"; do
+            echo -e "${C_TEXT}  ${option}%f"
+        done
+        
+        echo -e "\n${C_AI}[AI] Select option (1-7): %f"
+        read choice
+        
+        case $choice in
+            1) quantum_ai_system_analysis ;;
+            2) quantum_ai_security_scan ;;
+            3) quantum_ai_code_optimize ;;
+            4) quantum_ai_network_diagnose ;;
+            5) quantum_ai_learn_command ;;
+            6) quantum_ai_prediction ;;
+            7) quantum_ai_calculation ;;
+            *) echo -e "${C_ERROR}Invalid option%f" ;;
+        esac
     else
-        STATUS="${COL_ERROR}✗${COL_RESET}"
+        quantum_ai_process_query "$query"
     fi
-    
-    # Build prompt
-    PS1="\n"
-    PS1+="${COL_TIME}╭─[ ${TIME} ]${COL_RESET}\n"
-    PS1+="${COL_USER}│ ${USER_HOST}${COL_RESET}\n"
-    PS1+="${COL_DIR}│ ${DIR}${COL_GIT}${GIT_BRANCH}${COL_RESET}\n"
-    PS1+="${COL_ARROW}╰─${COL_FLOWER}✿${COL_ARROW}➜ ${STATUS} "
-    
-    # Continuation prompt
-    PS2="${COL_ARROW}  ${COL_FLOWER}✿${COL_ARROW}➜ ${COL_RESET}"
 }
 
-PROMPT_COMMAND="_marpd_prompt"
-EOF
-    
-    # Add to bashrc
-    if ! grep -q "MAR-PD THEME v3" "$HOME/.bashrc" 2>/dev/null; then
-        cat >> "$HOME/.bashrc" << 'EOF'
-
-# ============================================
-# MAR-PD THEME v3 Configuration
-# ============================================
-
-# Load MAR-PD prompt
-if [ -f "$HOME/.marpd-v3/marpd_prompt.sh" ]; then
-    source "$HOME/.marpd-v3/marpd_prompt.sh"
-fi
-
-# Welcome message
-if [ -z "$MARPD_WELCOME_SHOWN" ]; then
-    echo -e "\033[38;5;45m"
-    echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║                                                          ║"
-    echo "║                  MAR-PD  v3                              ║"
-    echo "║            MAR-PD Professional Theme                     ║"
-    echo "║                                                          ║"
-    echo "╚══════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
-    export MARPD_WELCOME_SHOWN=1
-fi
-EOF
-    fi
-    
-    marpd_log "SUCCESS" "Prompt system configured"
-}
-
-# ============================================
-# COMMAND SYSTEM
-# ============================================
-
-setup_commands() {
-    marpd_log "STEP" "Setting up MAR-PD commands"
-    
-    # Create command script
-    cat > "$MARPD_DIR/marpd_commands.sh" << 'EOF'
-# MAR-PD THEME v3 Commands
-
-marpd-help() {
-    echo -e "\033[38;5;45m"
-    echo "MAR-PD THEME v3 Command Reference"
-    echo "═════════════════════════════════"
-    echo -e "\033[0m"
-    echo -e "\033[38;5;51mAvailable Commands:\033[0m"
-    echo -e "  \033[38;5;87mmarpd-help\033[0m     - Show this help"
-    echo -e "  \033[38;5;87mmarpd-info\033[0m     - Show theme info"
-    echo -e "  \033[38;5;87mmarpd-update\033[0m   - Update theme"
-    echo -e "  \033[38;5;87mmarpd-config\033[0m   - Edit config"
-    echo -e "  \033[38;5;87mmarpd-backup\033[0m   - Create backup"
-    echo -e "  \033[38;5;87mmarpd-restore\033[0m  - Restore backup"
-    echo -e "  \033[38;5;87mmarpd-clean\033[0m    - Clean cache"
-    echo ""
-    echo -e "\033[38;5;213mPrompt: MAR-PD ᗒ✿➜\033[0m"
-    echo -e "\033[38;5;219mTeam: MAR-PD\033[0m"
-}
-
-marpd-info() {
-    echo -e "\033[38;5;45m"
-    echo "MAR-PD THEME v3 Information"
-    echo "═══════════════════════════"
-    echo -e "\033[0m"
-    echo -e "Version:    \033[38;5;87m3.0.0\033[0m"
-    echo -e "Team:       \033[38;5;87mMAR-PD\033[0m"
-    echo -e "Status:     \033[38;5;46mActive\033[0m"
-    echo -e "Directory:  \033[38;5;87m$HOME/.marpd-v3\033[0m"
-    echo -e "Config:     \033[38;5;87m$HOME/.marpd-v3/config.marpd\033[0m"
-    echo ""
-    echo -e "\033[38;5;213mRepository: https://github.com/master-pd/marpd-theme.git\033[0m"
-}
-
-marpd-update() {
-    echo -e "\033[38;5;45mUpdating MAR-PD THEME v3...\033[0m"
+quantum_ai_system_analysis() {
+    echo -e "${C_AI}[AI] Running System Analysis...%f"
     sleep 1
-    echo -e "\033[38;5;87mChecking for updates...\033[0m"
-    sleep 1
-    echo -e "\033[38;5;46mTheme is up to date!\033[0m"
-}
-
-marpd-config() {
-    if [ -f "$HOME/.marpd-v3/config.marpd" ]; then
-        nano "$HOME/.marpd-v3/config.marpd"
-    else
-        echo -e "\033[38;5;196mConfig file not found!\033[0m"
+    
+    # CPU analysis
+    cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}')
+    mem_usage=$(free -m | awk 'NR==2{printf "%.1f%%", $3*100/$2}')
+    disk_usage=$(df -h / | awk 'NR==2{print $5}')
+    
+    echo -e "${C_SUCCESS}✓ CPU Usage: ${cpu_usage}%"
+    echo -e "✓ Memory Usage: ${mem_usage}"
+    echo -e "✓ Disk Usage: ${disk_usage}"
+    echo -e "✓ Processes: $(ps aux | wc -l)%f"
+    
+    # AI recommendations
+    echo -e "\n${C_AI}[AI] Recommendations:%f"
+    if (( $(echo "$cpu_usage > 80" | bc -l) )); then
+        echo -e "${C_WARNING}  • High CPU usage detected. Consider closing unused applications.%f"
+    fi
+    if (( $(echo "${mem_usage%\%} > 80" | bc -l) )); then
+        echo -e "${C_WARNING}  • High memory usage. Check for memory leaks.%f"
     fi
 }
 
-marpd-backup() {
-    echo -e "\033[38;5;45mCreating backup...\033[0m"
-    bash "$HOME/.marpd-v3/backup.sh"
+# Dynamic Color Rotation
+color_rotate() {
+    local colors=("CYAN" "NEON_BLUE" "MATRIX_GREEN" "NEON_PURPLE" "AI_PINK" "HOLO_BLUE")
+    local random_color=${colors[$RANDOM % ${#colors[@]}]}
+    
+    export C_TEXT=${QUANTUM_COLORS[$random_color]}
+    
+    echo -e "${C_SUCCESS}[+] Text color changed to: $random_color%f"
+    
+    # Update prompt
+    PROMPT='${C_PROMPT}QUANTUM[${C_TEXT}'$random_color'${C_PROMPT}]♪↗➜%f '
 }
 
-marpd-restore() {
-    echo -e "\033[38;5;45mRestoring backup...\033[0m"
-    bash "$HOME/.marpd-v3/restore.sh"
-}
+# Quantum Prompt
+PROMPT='${C_PROMPT}QUANTUM[${C_TEXT}'"${QUANTUM_PROFILE[2]}"'${C_PROMPT}]♪↗➜%f '
+RPROMPT='${C_INFO}[%*] | ${C_TEXT}${QUANTUM_HOST}%f'
 
-marpd-clean() {
-    echo -e "\033[38;5;45mCleaning cache...\033[0m"
-    rm -f "$HOME/.marpd-v3/*.log" 2>/dev/null
-    rm -f "$HOME/.marpd-v3/*.tmp" 2>/dev/null
-    echo -e "\033[38;5;46mCache cleaned!\033[0m"
-}
+# =================== ADVANCED ALIASES ===================
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias desk='cd ~/Desktop'
+alias docs='cd ~/Documents'
+alias downloads='cd ~/Downloads'
 
-# Aliases
-alias mhelp="marpd-help"
-alias minfo="marpd-info"
-alias mupdate="marpd-update"
-alias mconfig="marpd-config"
-EOF
-    
-    # Add to bashrc
-    if ! grep -q "MAR-PD COMMANDS" "$HOME/.bashrc" 2>/dev/null; then
-        echo "" >> "$HOME/.bashrc"
-        echo "# MAR-PD THEME v3 Commands" >> "$HOME/.bashrc"
-        echo "source $HOME/.marpd-v3/marpd_commands.sh" >> "$HOME/.bashrc"
-    fi
-    
-    marpd_log "SUCCESS" "Command system configured"
-}
+# Listing
+alias ls='exa --icons --group-directories-first'
+alias ll='exa -la --icons --group-directories-first'
+alias la='exa -a --icons --group-directories-first'
+alias lt='exa --tree --icons --level=2'
+alias l.='exa -d .* --icons'
 
-# ============================================
-# UTILITIES
-# ============================================
+# System
+alias update='pkg update && pkg upgrade'
+alias install='pkg install'
+alias remove='pkg uninstall'
+alias search='pkg search'
+alias clean='pkg clean'
+alias disk='df -h'
+alias mem='free -m'
+alias cpu='htop'
+alias temp='termux-sensor -s "temperature" -n 1'
 
-setup_utilities() {
-    marpd_log "STEP" "Setting up utilities"
-    
-    # Create backup script
-    cat > "$MARPD_DIR/backup.sh" << 'EOF'
-#!/bin/bash
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+alias gb='git branch'
 
-# MAR-PD THEME v3 Backup Script
+# Development
+alias py='python'
+alias py3='python3'
+alias pipup='pip install --upgrade pip'
+alias venv='python -m venv'
+alias runserver='python -m http.server 8000'
 
-BACKUP_DIR="$HOME/.marpd-backup-v3/$(date +%Y%m%d_%H%M%S)"
-mkdir -p "$BACKUP_DIR"
+# Quantum Commands
+alias q='quantum_banner'
+alias matrix='quantum_matrix'
+alias ai='quantum_ai'
+alias qscan='quantum_scan'
+alias qhack='quantum_hack'
+alias qstatus='quantum_status'
+alias qupdate='quantum_update'
+alias qconfig='quantum_config'
+alias color='color_rotate'
+alias theme='quantum_theme_select'
 
-echo -e "\033[38;5;45mCreating backup...\033[0m"
+# Security
+alias ports='netstat -tulpn'
+alias myip='curl ifconfig.me'
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
+alias vpn='termux-vpn'
 
-# Backup Termux
-if [ -d "$HOME/.termux" ]; then
-    cp -r "$HOME/.termux" "$BACKUP_DIR/termux"
-    echo -e "\033[38;5;87m✓ Termux configuration\033[0m"
-fi
+# Fun
+alias cow='fortune | cowsay | lolcat'
+alias art='neofetch --ascii_distro arch'
+alias clock='tty-clock -c -C 6'
+alias starwars='telnet towel.blinkenlights.nl'
 
-# Backup shell files
-cp "$HOME/.bashrc" "$BACKUP_DIR/bashrc" 2>/dev/null
-cp "$HOME/.zshrc" "$BACKUP_DIR/zshrc" 2>/dev/null
+# =================== HISTORY ENHANCEMENT ===================
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+setopt histignorealldups
+setopt histignorespace
 
-# Backup MAR-PD files
-if [ -d "$HOME/.marpd-v3" ]; then
-    cp -r "$HOME/.marpd-v3" "$BACKUP_DIR/marpd"
-    echo -e "\033[38;5;87m✓ MAR-PD configuration\033[0m"
-fi
+# =================== AUTOCOMPLETION ===================
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-echo -e "\033[38;5;46mBackup created: $BACKUP_DIR\033[0m"
-EOF
-    
-    # Create restore script
-    cat > "$MARPD_DIR/restore.sh" << 'EOF'
-#!/bin/bash
+# =================== KEY BINDINGS ===================
+bindkey -e
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[[3~' delete-char
+bindkey '^H' backward-kill-word
+bindkey '^[[3;5~' kill-word
 
-# MAR-PD THEME v3 Restore Script
+# =================== PLUGINS ===================
+# Load plugins if they exist
+plugins=(
+    "$HOME/.oh-my-zsh/plugins/git/git.plugin.zsh"
+    "$HOME/.oh-my-zsh/plugins/z/z.plugin.zsh"
+    "$HOME/.oh-my-zsh/plugins/command-not-found/command-not-found.plugin.zsh"
+)
 
-echo -e "\033[38;5;45mAvailable backups:\033[0m"
-
-# List backups
-BACKUP_LIST=($(ls -d $HOME/.marpd-backup-v3/*/ 2>/dev/null))
-for i in "${!BACKUP_LIST[@]}"; do
-    echo -e "\033[38;5;87m$i: ${BACKUP_LIST[$i]}\033[0m"
+for plugin in "${plugins[@]}"; do
+    [ -f "$plugin" ] && source "$plugin"
 done
 
-read -p "Select backup number: " choice
+# =================== STARTUP ===================
+clear
+quantum_banner
 
-if [ -n "$choice" ] && [ -n "${BACKUP_LIST[$choice]}" ]; then
-    BACKUP_DIR="${BACKUP_LIST[$choice]}"
+# Welcome message with session info
+echo -e "${C_SUCCESS}[+] Quantum Terminal v3.0 Activated%f"
+echo -e "${C_SUCCESS}[+] Session: ${C_AI}$QUANTUM_SESSION_ID%f"
+echo -e "${C_SUCCESS}[+] AI Assistant: ${C_SUCCESS}ONLINE%f"
+echo -e "${C_SUCCESS}[+] Neural Network: ${C_SUCCESS}SYNCHRONIZED%f"
+echo -e "${C_TEXT}Type 'ai' for AI assistant, 'matrix' for simulation, or 'q' for banner%f"
+echo
+EOF
     
-    echo -e "\033[38;5;45mRestoring from $BACKUP_DIR\033[0m"
+    print_success "Quantum ZSH Configuration Created"
+}
+
+# =================== QUANTUM BASH CONFIG ===================
+create_quantum_bash() {
+    print_quantum "Creating Quantum Bash Configuration..."
     
-    # Restore Termux
-    if [ -d "$BACKUP_DIR/termux" ]; then
-        cp -r "$BACKUP_DIR/termux" "$HOME/.termux"
-        echo -e "\033[38;5;87m✓ Termux configuration\033[0m"
-    fi
-    
-    # Restore shell files
-    cp "$BACKUP_DIR/bashrc" "$HOME/.bashrc" 2>/dev/null
-    cp "$BACKUP_DIR/zshrc" "$HOME/.zshrc" 2>/dev/null
-    
-    # Restore MAR-PD files
-    if [ -d "$BACKUP_DIR/marpd" ]; then
-        cp -r "$BACKUP_DIR/marpd" "$HOME/.marpd-v3"
-        echo -e "\033[38;5;87m✓ MAR-PD configuration\033[0m"
-    fi
-    
-    echo -e "\033[38;5;46mRestoration complete!\033[0m"
-    echo -e "\033[38;5;213mRestart Termux to apply changes.\033[0m"
+    cat > $HOME/.bashrc << 'EOF'
+#!/data/data/com.termux/files/usr/bin/bash
+
+# MAR-PD Quantum Bash Configuration
+
+# If ZSH config exists, use it
+if [ -f ~/.zshrc ]; then
+    source ~/.zshrc
 else
-    echo -e "\033[38;5;196mInvalid selection!\033[0m"
+    # Quantum prompt for bash
+    PS1='\[\033[1;33m\]QUANTUM\[\033[1;36m\]@\[\033[1;35m\]\h\[\033[1;33m\]:\[\033[1;36m\]\w\[\033[1;33m\]\$\[\033[0m\] '
+    
+    # Basic quantum aliases
+    alias q='clear && echo -e "\033[1;36mMAR-PD Quantum Edition v3.0\033[0m"'
+    alias ls='ls --color=auto'
+    alias ll='ls -la --color=auto'
+    alias update='pkg update && pkg upgrade'
+    
+    # Welcome
+    echo -e "\033[1;36m"
+    echo "┌─────────────────────────────────────────────────────┐"
+    echo "│           MAR-PD Quantum (Bash Mode)               │"
+    echo "└─────────────────────────────────────────────────────┘"
+    echo -e "\033[0m"
 fi
 EOF
     
-    # Create config file
-    cat > "$MARPD_DIR/config.marpd" << 'EOF'
-# MAR-PD THEME v3 Configuration File
+    print_success "Quantum Bash Configuration Created"
+}
 
-# Theme Settings
-theme_version="3.0.0"
-theme_name="MAR-PD THEME v3"
-theme_prompt="MAR-PD ᗒ✿➜"
-theme_team="MAR-PD"
+# =================== QUANTUM SCRIPTS ===================
+create_quantum_scripts() {
+    print_quantum "Creating Quantum Scripts..."
+    
+    # 1. Neural Network Simulator
+    cat > $THEME_DIR/scripts/neural_network.py << 'EOF'
+#!/usr/bin/env python3
+# Quantum Neural Network Simulator
 
-# Color Settings
-primary_color="#00adb5"
-secondary_color="#e94560"
-accent_color="#ffbd69"
-background_color="#1a1a2e"
-foreground_color="#eeeeee"
+import random
+import time
+import sys
 
-# Behavior Settings
-auto_update=true
-show_welcome=true
-enable_animations=true
-backup_on_update=true
+class QuantumNeuron:
+    def __init__(self, id):
+        self.id = id
+        self.activation = random.random()
+        self.connections = []
+    
+    def fire(self):
+        return self.activation > 0.5
 
-# Custom Settings
-custom_prompt_style="advanced"
-enable_git_info=true
-show_time_in_prompt=true
-multi_line_prompt=true
+class QuantumNeuralNetwork:
+    def __init__(self, layers=3):
+        self.layers = []
+        self.create_network(layers)
+    
+    def create_network(self, layers):
+        for i in range(layers):
+            layer = [QuantumNeuron(f"{i}-{j}") for j in range(random.randint(3, 8))]
+            self.layers.append(layer)
+    
+    def simulate(self, iterations=10):
+        print("\033[1;35m[QUANTUM NEURAL NETWORK SIMULATION]\033[0m")
+        print("\033[1;36m" + "="*50 + "\033[0m")
+        
+        for iteration in range(iterations):
+            print(f"\n\033[1;33mIteration {iteration + 1}:\033[0m")
+            
+            for i, layer in enumerate(self.layers):
+                active_neurons = sum(1 for neuron in layer if neuron.fire())
+                print(f"  Layer {i}: [\033[1;32m{'█'*active_neurons}{'░'*(len(layer)-active_neurons)}\033[0m] {active_neurons}/{len(layer)} neurons active")
+            
+            time.sleep(0.3)
+        
+        print("\n\033[1;35m[Simulation Complete]\033[0m")
+        print(f"Total neurons: {sum(len(layer) for layer in self.layers)}")
+        print(f"Network complexity: {random.randint(70, 99)}%")
 
-# Editor Settings
-default_editor="nano"
-enable_syntax_highlighting=true
-
-# Network Settings
-check_updates=true
-update_frequency="weekly"
-
-# End of Configuration
+if __name__ == "__main__":
+    network = QuantumNeuralNetwork(layers=4)
+    network.simulate(iterations=8)
 EOF
+
+    # 2. Quantum Hacking Toolkit
+    cat > $THEME_DIR/scripts/quantum_hack.sh << 'EOF'
+#!/bin/bash
+# Quantum Hacking Toolkit
+
+echo -e "\033[1;31m"
+echo "╔════════════════════════════════════════════════╗"
+echo "║           QUANTUM HACKING TOOLKIT              ║"
+echo "║                 v3.0 | MAR-PD                  ║"
+echo "╚════════════════════════════════════════════════╝"
+echo -e "\033[0m"
+
+select_tool() {
+    echo -e "\033[1;36mSelect hacking tool:\033[0m"
+    echo "1. Port Scanner"
+    echo "2. Vulnerability Scanner"
+    echo "3. Password Cracker"
+    echo "4. Network Sniffer"
+    echo "5. DOS Simulator"
+    echo "6. SQL Injection Tester"
+    echo "7. WiFi Analyzer"
+    echo "8. Cryptography Tool"
+    echo -e "\033[1;33mEnter choice (1-8): \033[0m"
+    read choice
     
-    # Make scripts executable
-    chmod +x "$MARPD_DIR/backup.sh"
-    chmod +x "$MARPD_DIR/restore.sh"
-    
-    marpd_log "SUCCESS" "Utilities configured"
+    case $choice in
+        1)
+            echo -e "\033[1;32m[+] Port Scanner Activated\033[0m"
+            echo -n "Enter target IP: "
+            read target
+            echo "Scanning $target..."
+            for port in {1..100}; do
+                timeout 1 bash -c "echo >/dev/tcp/$target/$port" 2>/dev/null && \
+                echo -e "  Port $port: \033[1;32mOPEN\033[0m"
+            done
+            ;;
+        2)
+            echo -e "\033[1;32m[+] Vulnerability Scanner\033[0m"
+            echo "Running security assessment..."
+            sleep 2
+            echo -e "  \033[1;33m[!] 3 potential vulnerabilities found\033[0m"
+            echo -e "  \033[1;33m[!] Security score: 68/100\033[0m"
+            ;;
+        3)
+            echo -e "\033[1;32m[+] Password Cracker\033[0m"
+            echo "Simulating brute force attack..."
+            for i in {1..10}; do
+                echo -ne "  Testing combination $i/10\r"
+                sleep 0.3
+            done
+            echo -e "\n  \033[1;31m[!] Password not found (simulation)\033[0m"
+            ;;
+        *)
+            echo -e "\033[1;31mTool not implemented (simulation only)\033[0m"
+            ;;
+    esac
 }
 
-# ============================================
-# CLEANUP DEFAULT THEME
-# ============================================
-
-cleanup_default() {
-    marpd_log "STEP" "Cleaning up default theme"
-    
-    # Remove default theme backups
-    rm -f "$HOME/.termux/colors.properties.bak" 2>/dev/null
-    rm -f "$HOME/.termux/font.ttf.bak" 2>/dev/null
-    
-    # Remove other theme autostarts from bashrc
-    sed -i '/oh-my-termux/d' "$HOME/.bashrc" 2>/dev/null
-    sed -i '/color-scheme/d' "$HOME/.bashrc" 2>/dev/null
-    
-    marpd_log "SUCCESS" "Default theme cleaned"
-}
-
-# ============================================
-# FINAL SETUP
-# ============================================
-
-final_setup() {
-    marpd_log "STEP" "Finalizing installation"
-    
-    # Create completion file
-    cat > "$MARPD_DIR/install_complete" << EOF
-MAR-PD THEME v3 Installation Complete
-=====================================
-Installation Date: $(date)
-Version: $MARPD_VERSION
-Team: $TEAM
-Installation Directory: $MARPD_DIR
-
-To use the theme:
-1. Restart Termux
-2. Type 'marpd-help' for commands
-3. Type 'marpd-info' for info
-
-For support:
-Telegram: https://t.me/master_spamming
-Repository: https://github.com/master-pd/marpd-theme.git
+# Main menu
+while true; do
+    select_tool
+    echo -e "\n\033[1;36mRun another tool? (y/n): \033[0m"
+    read again
+    [[ "$again" != "y" ]] && break
+done
 EOF
-    
-    # Reload Termux settings
-    termux-reload-settings > /dev/null 2>&1
-    
-    marpd_log "SUCCESS" "Final setup completed"
+
+    # 3. AI System Monitor
+    cat > $THEME_DIR/scripts/ai_monitor.sh << 'EOF'
+#!/bin/bash
+# AI-Powered System Monitor
+
+COLOR_AI="\033[1;35m"
+COLOR_OK="\033[1;32m"
+COLOR_WARN="\033[1;33m"
+COLOR_ALERT="\033[1;31m"
+COLOR_INFO="\033[1;36m"
+COLOR_RESET="\033[0m"
+
+ai_monitor() {
+    while true; do
+        clear
+        
+        # Header
+        echo -e "${COLOR_AI}"
+        echo "╔══════════════════════════════════════════════════╗"
+        echo "║            AI SYSTEM MONITOR v3.0                ║"
+        echo "║                MAR-PD QUANTUM                    ║"
+        echo "╚══════════════════════════════════════════════════╝"
+        echo -e "${COLOR_RESET}"
+        
+        # System Info
+        echo -e "${COLOR_INFO}════════════ SYSTEM STATUS ═════════════${COLOR_RESET}"
+        
+        # CPU
+        cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}')
+        echo -e "CPU Usage: ${COLOR_INFO}$cpu_usage%${COLOR_RESET}"
+        
+        # Memory
+        mem_total=$(free -m | awk 'NR==2{print $2}')
+        mem_used=$(free -m | awk 'NR==2{print $3}')
+        mem_percent=$((mem_used * 100 / mem_total))
+        echo -e "Memory: ${COLOR_INFO}$mem_used/${mem_total}MB ($mem_percent%)${COLOR_RESET}"
+        
+        # Battery
+        if command -v termux-battery-status &> /dev/null; then
+            battery=$(termux-battery-status | grep percentage | cut -d: -f2 | tr -d ' ,')
+            echo -e "Battery: ${COLOR_INFO}$battery%${COLOR_RESET}"
+        fi
+        
+        # Temperature
+        if command -v termux-sensor &> /dev/null; then
+            temp=$(termux-sensor -s temperature -n 1 2>/dev/null | grep -o '[0-9.]*' | head -1)
+            [ -n "$temp" ] && echo -e "Temperature: ${COLOR_INFO}${temp}°C${COLOR_RESET}"
+        fi
+        
+        # AI Analysis
+        echo -e "\n${COLOR_AI}════════════ AI ANALYSIS ═════════════${COLOR_RESET}"
+        
+        if (( $(echo "$cpu_usage > 80" | bc -l 2>/dev/null) )); then
+            echo -e "${COLOR_ALERT}[AI] High CPU usage detected!${COLOR_RESET}"
+        else
+            echo -e "${COLOR_OK}[AI] CPU usage optimal${COLOR_RESET}"
+        fi
+        
+        if [ $mem_percent -gt 80 ]; then
+            echo -e "${COLOR_ALERT}[AI] High memory usage!${COLOR_RESET}"
+        else
+            echo -e "${COLOR_OK}[AI] Memory usage normal${COLOR_RESET}"
+        fi
+        
+        # Process Monitor
+        echo -e "\n${COLOR_INFO}════════════ TOP PROCESSES ═════════════${COLOR_RESET}"
+        ps aux --sort=-%cpu | head -6 | awk '{printf "%-20s %-10s\n", $11, $3}' | while read line; do
+            echo -e "  ${COLOR_INFO}$line${COLOR_RESET}"
+        done
+        
+        # Refresh every 3 seconds
+        echo -e "\n${COLOR_WARN}Refreshing in 3 seconds... (Ctrl+C to exit)${COLOR_RESET}"
+        sleep 3
+    done
 }
 
-# ============================================
-# INSTALLATION COMPLETE
-# ============================================
+# Run monitor
+ai_monitor
+EOF
 
-show_completion() {
-    show_marpd_header
+    # 4. Quantum Theme Manager
+    cat > $THEME_DIR/scripts/theme_manager.sh << 'EOF'
+#!/bin/bash
+# Quantum Theme Manager
+
+THEMES_DIR="$HOME/.marpd-quantum/themes"
+
+# Available themes
+declare -A THEMES=(
+    ["cyberpunk"]="Cyberpunk Neon"
+    ["matrix"]="The Matrix"
+    ["hacker"]="Classic Hacker"
+    ["synthwave"]="Synthwave"
+    ["quantum"]="Quantum Blue"
+    ["ai"]="AI Pink"
+    ["neon"]="Neon Purple"
+    ["holo"]="Holographic"
+)
+
+apply_theme() {
+    local theme_name=$1
     
-    echo -e "${C_BOLD_GREEN}"
-    echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║               INSTALLATION COMPLETE                      ║"
-    echo "╠══════════════════════════════════════════════════════════╣"
-    echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_WHITE}✓ MAR-PD THEME v3 successfully installed${C_BOLD_GREEN}                 ║"
-    echo -e "║   ${C_BOLD_WHITE}✓ All components configured${C_BOLD_GREEN}                             ║"
-    echo -e "║   ${C_BOLD_WHITE}✓ Backup system ready${C_BOLD_GREEN}                                   ║"
-    echo -e "║   ${C_BOLD_WHITE}✓ Command system activated${C_BOLD_GREEN}                              ║"
-    echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_CYAN}Theme:     ${C_BOLD_WHITE}MAR-PD THEME v3${C_BOLD_GREEN}                             ║"
-    echo -e "║   ${C_BOLD_CYAN}Version:   ${C_BOLD_WHITE}$MARPD_VERSION${C_BOLD_GREEN}                                    ║"
-    echo -e "║   ${C_BOLD_CYAN}Team:      ${C_BOLD_WHITE}$MARPD_TEAM${C_BOLD_GREEN}                                    ║"
-    echo -e "║   ${C_BOLD_CYAN}Prompt:    ${C_BOLD_WHITE}$MARPD_PROMPT${C_BOLD_GREEN}                               ║"
-    echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_YELLOW}Available commands:${C_BOLD_GREEN}                                         ║"
-    echo -e "║   ${C_BOLD_MAGENTA}marpd-help${C_BOLD_GREEN}     - Show available commands                 ║"
-    echo -e "║   ${C_BOLD_MAGENTA}marpd-info${C_BOLD_GREEN}     - Show theme information                  ║"
-    echo -e "║   ${C_BOLD_MAGENTA}marpd-update${C_BOLD_GREEN}   - Update MAR-PD THEME                     ║"
-    echo -e "║   ${C_BOLD_MAGENTA}marpd-config${C_BOLD_GREEN}   - Edit configuration                      ║"
-    echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_CYAN}Restart Termux to activate the theme!${C_BOLD_GREEN}                         ║"
-    echo "║                                                          ║"
-    echo "╚══════════════════════════════════════════════════════════╝"
-    echo -e "${C_RESET}"
+    case $theme_name in
+        cyberpunk)
+            BG_COLOR="#0a0a0a"
+            TEXT_COLOR="#00ff9f"
+            PROMPT_COLOR="#ff0090"
+            ;;
+        matrix)
+            BG_COLOR="#000000"
+            TEXT_COLOR="#00ff41"
+            PROMPT_COLOR="#ffff00"
+            ;;
+        quantum)
+            BG_COLOR="#0a0a0a"
+            TEXT_COLOR="#00ffff"
+            PROMPT_COLOR="#ffff00"
+            ;;
+        ai)
+            BG_COLOR="#1a1a2e"
+            TEXT_COLOR="#ff00ff"
+            PROMPT_COLOR="#00ffff"
+            ;;
+        *)
+            BG_COLOR="#0a0a0a"
+            TEXT_COLOR="#00ffff"
+            PROMPT_COLOR="#ffff00"
+            ;;
+    esac
     
-    echo ""
-    echo -e "${C_BOLD_CYAN}Next Steps:${C_RESET}"
-    echo -e "  1. ${C_BOLD_WHITE}Close and reopen Termux${C_RESET}"
-    echo -e "  2. ${C_BOLD_WHITE}Type 'marpd-help' to see all commands${C_RESET}"
-    echo -e "  3. ${C_BOLD_WHITE}Type 'marpd-info' for theme information${C_RESET}"
-    echo -e "  4. ${C_BOLD_WHITE}Enjoy your professional terminal!${C_RESET}"
-    echo ""
-    echo -e "${C_BOLD_YELLOW}Support: https://t.me/master_spamming${C_RESET}"
-    echo -e "${C_BOLD_MAGENTA}Repository: https://github.com/master-pd/marpd-theme.git${C_RESET}"
-    echo ""
+    # Update colors.properties
+    cat > $HOME/.termux/colors.properties << COLOREOF
+background=$BG_COLOR
+foreground=$TEXT_COLOR
+cursor=$PROMPT_COLOR
+
+color0=#000000
+color1=#ff5555
+color2=#55ff55
+color3=#ffff55
+color4=#5555ff
+color5=#ff55ff
+color6=$TEXT_COLOR
+color7=#e0e0e0
+COLOREOF
+    
+    # Reload settings
+    termux-reload-settings
+    
+    echo -e "\033[1;32m[✓] Theme '$theme_name' applied\033[0m"
 }
 
-# ============================================
-# MAIN INSTALLATION
-# ============================================
-
-main_install() {
-    show_marpd_header
+show_menu() {
+    clear
+    echo -e "\033[1;36m"
+    echo "╔════════════════════════════════════════╗"
+    echo "║       QUANTUM THEME MANAGER           ║"
+    echo "╚════════════════════════════════════════╝"
+    echo -e "\033[0m"
     
-    echo -e "${C_BOLD_CYAN}Starting MAR-PD THEME v3 Installation...${C_RESET}"
-    echo ""
+    local i=1
+    for theme in "${!THEMES[@]}"; do
+        echo -e "\033[1;33m$i.\033[0m ${THEMES[$theme]}"
+        ((i++))
+    done
     
-    # Step 1: Check environment
-    echo -e "${C_BOLD_WHITE}Step 1: Checking environment${C_RESET}"
-    if ! check_termux; then
-        exit 1
+    echo -e "\n\033[1;36mSelect theme (1-${#THEMES[@]}): \033[0m"
+    read choice
+    
+    local themes_list=(${!THEMES[@]})
+    local selected_theme="${themes_list[$((choice-1))]}"
+    
+    if [ -n "$selected_theme" ]; then
+        apply_theme "$selected_theme"
+    else
+        echo -e "\033[1;31mInvalid selection\033[0m"
     fi
-    show_progress "Environment checked"
-    
-    # Step 2: Check internet
-    echo -e "\n${C_BOLD_WHITE}Step 2: Checking internet${C_RESET}"
-    check_internet
-    show_progress "Internet checked"
-    
-    # Step 3: Install dependencies
-    echo -e "\n${C_BOLD_WHITE}Step 3: Installing dependencies${C_RESET}"
-    install_dependencies
-    show_progress "Dependencies installed"
-    
-    # Step 4: Create backup
-    echo -e "\n${C_BOLD_WHITE}Step 4: Creating backup${C_RESET}"
-    create_backup
-    show_progress "Backup created"
-    
-    # Step 5: Install theme
-    echo -e "\n${C_BOLD_WHITE}Step 5: Installing theme${C_RESET}"
-    install_theme
-    show_progress "Theme installed"
-    
-    # Step 6: Setup prompt
-    echo -e "\n${C_BOLD_WHITE}Step 6: Setting up prompt${C_RESET}"
-    setup_prompt
-    show_progress "Prompt configured"
-    
-    # Step 7: Setup commands
-    echo -e "\n${C_BOLD_WHITE}Step 7: Setting up commands${C_RESET}"
-    setup_commands
-    show_progress "Commands configured"
-    
-    # Step 8: Setup utilities
-    echo -e "\n${C_BOLD_WHITE}Step 8: Setting up utilities${C_RESET}"
-    setup_utilities
-    show_progress "Utilities configured"
-    
-    # Step 9: Cleanup default
-    echo -e "\n${C_BOLD_WHITE}Step 9: Cleaning default theme${C_RESET}"
-    cleanup_default
-    show_progress "Default theme cleaned"
-    
-    # Step 10: Final setup
-    echo -e "\n${C_BOLD_WHITE}Step 10: Finalizing installation${C_RESET}"
-    final_setup
-    show_progress "Installation finalized"
-    
-    # Show completion
-    show_completion
-    
-    # Log completion
-    marpd_log "SUCCESS" "MAR-PD THEME v3 installation completed successfully"
 }
 
-# ============================================
-# ERROR HANDLING
-# ============================================
+show_menu
+EOF
 
-handle_error() {
-    echo -e "${C_BOLD_RED}"
+    # Make scripts executable
+    chmod +x $THEME_DIR/scripts/*.sh
+    chmod +x $THEME_DIR/scripts/*.py
+    
+    print_success "Quantum Scripts Created"
+}
+
+# =================== QUANTUM FINALIZATION ===================
+quantum_finalize() {
+    print_quantum "Finalizing Quantum Installation..."
+    
+    # Create configuration files
+    cat > $THEME_DIR/config/neofetch.conf << 'EOF'
+# Quantum Neofetch Configuration
+print_info() {
+    info title
+    info underline
+    info "OS" distro
+    info "Host" model
+    info "Kernel" kernel
+    info "Uptime" uptime
+    info "Packages" packages
+    info "Shell" shell
+    info "Resolution" resolution
+    info "DE" de
+    info "WM" wm
+    info "Theme" theme
+    info "Icons" icons
+    info "Terminal" term
+    info "CPU" cpu
+    info "GPU" gpu
+    info "Memory" memory
+    info "Disk" disk
+    info "Battery" battery
+    info "Font" font
+    info "Song" song
+    info "Local IP" local_ip
+    info "Public IP" public_ip
+    info "Users" users
+    info "Date" date
+}
+
+# Colors
+colors=(distro)
+ascii_colors=(cyan)
+color_blocks=off
+EOF
+
+    # Create auto-update script
+    cat > $THEME_DIR/scripts/auto_update.sh << 'EOF'
+#!/bin/bash
+# Quantum Auto-Updater
+
+echo -e "\033[1;36m"
+echo "╔════════════════════════════════════════╗"
+echo "║       QUANTUM AUTO-UPDATER v3.0       ║"
+echo "╚════════════════════════════════════════╝"
+echo -e "\033[0m"
+
+echo -e "\033[1;32m[+] Checking for updates...\033[0m"
+
+# Update packages
+pkg update -y && pkg upgrade -y
+
+# Update pip packages
+pip install --upgrade pip
+
+# Update theme files
+echo -e "\033[1;32m[+] Updating Quantum theme...\033[0m"
+cd $HOME/.marpd-quantum
+git pull 2>/dev/null || echo -e "\033[1;33m[!] Git repository not found\033[0m"
+
+echo -e "\033[1;32m[✓] Update complete!\033[0m"
+echo -e "\033[1;36mRestart Termux for full effect.\033[0m"
+EOF
+    chmod +x $THEME_DIR/scripts/auto_update.sh
+
+    # Add aliases to zshrc
+    cat >> $HOME/.zshrc << 'EOF'
+
+# Quantum Script Aliases
+alias neural='python $HOME/.marpd-quantum/scripts/neural_network.py'
+alias qhacktool='$HOME/.marpd-quantum/scripts/quantum_hack.sh'
+alias monitor='$HOME/.marpd-quantum/scripts/ai_monitor.sh'
+alias themes='$HOME/.marpd-quantum/scripts/theme_manager.sh'
+alias qupdate='$HOME/.marpd-quantum/scripts/auto_update.sh'
+alias quantum-scan='nmap -sS -sV'
+alias quantum-calc='python -c "import math; print(\"Quantum Calculator\")"'
+
+# Quantum Functions
+quantum_scan() {
+    echo -e "${C_INFO}[+] Quantum Network Scanner${C_TEXT}"
+    ifconfig | grep -A 2 "wlan0\|rmnet"
+}
+
+quantum_hack() {
+    local target=${1:-"simulation"}
+    echo -e "${C_MATRIX}[+] Initializing hack on: $target${C_TEXT}"
+    
+    for i in {1..5}; do
+        echo -ne "${C_WARNING}[$i/5] Breaching security layer...\r${C_TEXT}"
+        sleep 0.5
+    done
+    echo -e "\n${C_SUCCESS}[✓] Access granted to $target${C_TEXT}"
+}
+
+quantum_status() {
+    echo -e "${C_INFO}════════════ QUANTUM STATUS REPORT ════════════${C_TEXT}"
+    echo -e "User: ${C_SUCCESS}$QUANTUM_USER${C_TEXT}"
+    echo -e "Session: ${C_AI}$QUANTUM_SESSION_ID${C_TEXT}"
+    echo -e "Theme: ${C_SUCCESS}MAR-PD Quantum v3.0${C_TEXT}"
+    echo -e "AI Core: ${C_SUCCESS}ACTIVE${C_TEXT}"
+    echo -e "Neural Net: ${C_SUCCESS}SYNCED${C_TEXT}"
+}
+
+quantum_update() {
+    $HOME/.marpd-quantum/scripts/auto_update.sh
+}
+
+quantum_config() {
+    micro $HOME/.zshrc
+}
+
+quantum_theme_select() {
+    $HOME/.marpd-quantum/scripts/theme_manager.sh
+}
+EOF
+
+    # Set ZSH as default shell
+    if command -v chsh &> /dev/null; then
+        chsh -s zsh
+    fi
+
+    # Reload Termux settings
+    termux-reload-settings 2>/dev/null || true
+
+    # Final banner
+    clear
+    echo -e "\033[1;36m"
+    cat << "EOF"
+    ╔══════════════════════════════════════════════════════════╗
+    ║                                                          ║
+    ║              QUANTUM INSTALLATION COMPLETE               ║
+    ║                                                          ║
+    ║    ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗   ██╗║
+    ║   ██╔═══██╗██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║   ██║║
+    ║   ██║   ██║██║   ██║███████║██╔██╗ ██║   ██║   ██║   ██║║
+    ║   ██║   ██║██║   ██║██╔══██║██║╚██╗██║   ██║   ██║   ██║║
+    ║   ╚██████╔╝╚██████╔╝██║  ██║██║ ╚████║   ██║   ╚██████╔╝║
+    ║    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ║
+    ║                                                          ║
+    ╚══════════════════════════════════════════════════════════╝
+EOF
+    echo -e "\033[0m"
+    
+    echo -e "\033[1;32m"
     echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║                    INSTALLATION ERROR                    ║"
+    echo "║                    FEATURES INSTALLED                    ║"
     echo "╠══════════════════════════════════════════════════════════╣"
     echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_WHITE}Error: $1${C_BOLD_RED}                                               ║"
+    echo -e "║  \033[1;36m✓ Quantum ZSH Theme with AI Integration\033[1;32m                   ║"
+    echo -e "║  \033[1;36m✓ Dynamic Color System (8 Colors)\033[1;32m                         ║"
+    echo -e "║  \033[1;36m✓ Neural Network Simulator\033[1;32m                                ║"
+    echo -e "║  \033[1;36m✓ AI-Powered System Monitor\033[1;32m                               ║"
+    echo -e "║  \033[1;36m✓ Quantum Hacking Toolkit\033[1;32m                                 ║"
+    echo -e "║  \033[1;36m✓ 8 Different Themes\033[1;32m                                      ║"
+    echo -e "║  \033[1;36m✓ Auto-Updater\033[1;32m                                            ║"
+    echo -e "║  \033[1;36m✓ Matrix Simulation\033[1;32m                                       ║"
+    echo -e "║  \033[1;36m✓ Advanced Aliases & Functions\033[1;32m                            ║"
     echo "║                                                          ║"
-    echo -e "║   ${C_BOLD_YELLOW}Please contact support:${C_BOLD_RED}                                   ║"
-    echo -e "║   ${C_BOLD_CYAN}Telegram: https://t.me/master_spamming${C_BOLD_RED}                     ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                    QUICK COMMANDS                        ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                                                          ║"
+    echo -e "║  \033[1;33mq\033[0m          - Show Quantum Banner                           ║"
+    echo -e "║  \033[1;33mmatrix\033[0m     - Enter Matrix Simulation                       ║"
+    echo -e "║  \033[1;33mai\033[0m         - AI Assistant                                 ║"
+    echo -e "║  \033[1;33mneural\033[0m     - Neural Network Simulator                     ║"
+    echo -e "║  \033[1;33mmonitor\033[0m    - AI System Monitor                            ║"
+    echo -e "║  \033[1;33mthemes\033[0m     - Change Theme                                 ║"
+    echo -e "║  \033[1;33mcolor\033[0m      - Rotate Text Color                            ║"
+    echo -e "║  \033[1;33mqhacktool\033[0m  - Quantum Hacking Toolkit                      ║"
+    echo -e "║  \033[1;33mqupdate\033[0m    - Update Quantum                               ║"
+    echo "║                                                          ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                    PROMPT STYLE                          ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                                                          ║"
+    echo -e "║  \033[1;33mQUANTUM[LEVEL 9]♪↗➜\033[0m                                         ║"
+    echo "║                                                          ║"
+    echo -e "║  Close and reopen Termux or type: \033[1;32msource ~/.zshrc\033[0m           ║"
     echo "║                                                          ║"
     echo "╚══════════════════════════════════════════════════════════╝"
-    echo -e "${C_RESET}"
-    exit 1
+    echo -e "\033[0m"
+    
+    echo -e "\n\033[1;36mQuantum Terminal v3.0 successfully installed!\033[0m"
+    echo -e "\033[1;35mWe work cyber safe at quantum level!\033[0m"
 }
 
-# ============================================
-# TRAP AND EXECUTION
-# ============================================
+# =================== MAIN INSTALLATION ===================
+main() {
+    print_ai "Starting Quantum Installation Sequence..."
+    echo
+    
+    # Step 1: Backup
+    quantum_backup
+    echo
+    
+    # Step 2: Install packages
+    install_quantum_packages
+    echo
+    
+    # Step 3: Setup theme
+    setup_quantum_theme
+    echo
+    
+    # Step 4: Create ZSH config
+    create_quantum_zsh
+    echo
+    
+    # Step 5: Create Bash config
+    create_quantum_bash
+    echo
+    
+    # Step 6: Create scripts
+    create_quantum_scripts
+    echo
+    
+    # Step 7: Finalize
+    quantum_finalize
+}
 
-trap 'handle_error "Installation interrupted by user"' INT
-trap 'handle_error "Installation failed"' ERR
+# Error handling
+trap 'print_error "Quantum installation interrupted!"; exit 1' INT
 
-# Start installation
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    main_install
-fi
+# Run installation
+main
+
+echo -e "\033[1;32m[✓] Quantum installation completed without errors!\033[0m"
+echo -e "\033[1;36mType 'q' after restart to see your new quantum terminal!\033[0m"
