@@ -670,7 +670,7 @@ cleanup_default() {
     sed -i '/oh-my-termux/d' "$HOME/.bashrc" 2>/dev/null
     sed -i '/color-scheme/d' "$HOME/.bashrc" 2>/dev/null
     
-    marpd_log "SUCCESS" "Default theme cleaned")
+    marpd_log "SUCCESS" "Default theme cleaned"
 }
 
 # ============================================
