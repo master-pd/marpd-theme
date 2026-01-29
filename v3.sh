@@ -584,7 +584,7 @@ EOF
 # ============================================
 
 setup_nexus_commands() {
-    nexus_log "NEURAL" "Initializing nexus command matrix")
+    nexus_log "NEURAL" "Initializing nexus command matrix"
     
     # Nexus Command Center
     cat > "$NEXUS_CORE/nexus_commands.sh" << 'EOF'
