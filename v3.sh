@@ -52,21 +52,21 @@ N_GRAD_03='\033[38;2;50;100;200m'    # Galactic Azure
 N_GRAD_04='\033[38;2;70;140;255m'    # Nebula Blue
 N_GRAD_05='\033[38;2;90;180;255m'    # Star Light
 N_GRAD_06='\033[38;2;120;220;255m'   # Quantum Cyan
-N_GRAD_07='\033[38;2;150;250;255m'   // Ice Blue
-N_GRAD_08='\033[38;2;200;255;255m'   // White Blue
+N_GRAD_07='\033[38;2;150;250;255m'   # Ice Blue
+N_GRAD_08='\033[38;2;200;255;255m'   # White Blue
 
 # Nexus Background Matrix
-N_BG_MATRIX_01='\033[48;2;5;10;20m'     // Deep Void
-N_BG_MATRIX_02='\033[48;2;15;30;60m'    // Space Navy
-N_BG_MATRIX_03='\033[48;2;25;50;100m'   // Cosmic Ocean
-N_BG_MATRIX_04='\033[48;2;35;70;140m'   // Galactic Sea
+N_BG_MATRIX_01='\033[48;2;5;10;20m'     # Deep Void
+N_BG_MATRIX_02='\033[48;2;15;30;60m'    # Space Navy
+N_BG_MATRIX_03='\033[48;2;25;50;100m'   # Cosmic Ocean
+N_BG_MATRIX_04='\033[48;2;35;70;140m'   # Galactic Sea
 
 # Nexus Pulse Colors
-N_PULSE_01='\033[38;2;255;0;100m'       // Quantum Pink
-N_PULSE_02='\033[38;2;255;100;0m'       // Nexus Orange
-N_PULSE_03='\033[38;2;255;200;0m'       // Solar Yellow
-N_PULSE_04='\033[38;2;0;255;100m'       // Matrix Green
-N_PULSE_05='\033[38;2;0;200;255m'       // Cyber Cyan
+N_PULSE_01='\033[38;2;255;0;100m'       # Quantum Pink
+N_PULSE_02='\033[38;2;255;100;0m'       # Nexus Orange
+N_PULSE_03='\033[38;2;255;200;0m'       # Solar Yellow
+N_PULSE_04='\033[38;2;0;255;100m'       # Matrix Green
+N_PULSE_05='\033[38;2;0;200;255m'       # Cyber Cyan
 
 # Nexus Effects
 N_RESET='\033[0m'
