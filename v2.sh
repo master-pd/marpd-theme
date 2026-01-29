@@ -698,7 +698,7 @@ export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S - "
 EOF
     
-    quantum_log "SYNC" "Quantum features activated")
+     quantum_log "SYNC" "Quantum features activated"
 }
 
 # ============================================
