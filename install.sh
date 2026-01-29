@@ -1,340 +1,335 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
-# MAR-PD ULTRA PRO MAX TERMUX THEME INSTALLER
-# Version: 5.0.0 (Quantum Edition)
-
-# ==================== CONFIGURATION ====================
-THEME_NAME="MAR-PD-ULTRA"
-THEME_VERSION="5.0.0"
-REPO_URL="https://github.com/master-pd/marpd-ultra-theme.git"
-TELEGRAM_CHANNEL="https://t.me/master_spamming"
-TEAM_NAME="MAR-PD"
-SLOGAN="WE WORK CYBER SAFE"
-# ======================================================
-
-# ---------- ADVANCED COLOR SYSTEM ----------
-BLACK="\e[0;30m"
-RED="\e[1;91m"
-GREEN="\e[1;92m"
-YELLOW="\e[1;93m"
-BLUE="\e[1;94m"
-PURPLE="\e[1;95m"
-CYAN="\e[1;96m"
-WHITE="\e[1;97m"
-BG_BLACK="\e[40m"
-BG_RED="\e[41m"
-BG_GREEN="\e[42m"
-BG_BLUE="\e[44m"
-RESET="\e[0m"
-BOLD="\e[1m"
-UNDERLINE="\e[4m"
-BLINK="\e[5m"
-REVERSE="\e[7m"
-HIDDEN="\e[8m"
-
-# ---------- ANIMATION FUNCTIONS ----------
-spinner() {
-    local pid=$1
-    local delay=0.1
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-}
-
-progress_bar() {
-    local duration=${1}
-    already_done() { for ((done=0; done<$elapsed; done++)); do printf "▇"; done }
-    remaining() { for ((remain=$elapsed; remain<$duration; remain++)); do printf " "; done }
-    percentage() { printf "| %s%%" $(( (($elapsed)*100)/($duration)*100/100 )); }
-    clean_line() { printf "\r"; }
-    for (( elapsed=1; elapsed<=$duration; elapsed++ )); do
-        clean_line
-        printf "${CYAN}["
-        already_done; remaining; percentage
-        printf "]${RESET}"
-        sleep 0.1
-    done
-    printf "\n"
-}
-
-# ---------- QUANTUM BANNER ----------
-show_banner() {
-    clear
-    cat << "EOF"
-    
-    ${BLUE}╔══════════════════════════════════════════════════════════╗
-    ║${RED}   ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗        ${BLUE}║
-    ║${GREEN}   ████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗       ${BLUE}║
-    ║${YELLOW}   ██╔████╔██║███████║██████╔╝    ██║  ██║██║  ██║       ${BLUE}║
-    ║${PURPLE}   ██║╚██╔╝██║██╔══██║██╔═══╝     ██║  ██║██║  ██║       ${BLUE}║
-    ║${CYAN}   ██║ ╚═╝ ██║██║  ██║██║         ██████╔╝██████╔╝       ${BLUE}║
-    ║${WHITE}   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝        ${BLUE}║
-    ╠══════════════════════════════════════════════════════════╣
-    ║${GREEN}        🚀 ULTRA PRO MAX TERMUX THEME v5.0.0            ${BLUE}║
-    ║${YELLOW}          🔐 WE WORK CYBER SAFE                         ${BLUE}║
-    ║${CYAN}          📞 Contact: https://t.me/master_spamming        ${BLUE}║
-    ╚══════════════════════════════════════════════════════════╝${RESET}
-    
-EOF
-}
-
-# ---------- SYSTEM CHECK ----------
-check_system() {
-    printf "${CYAN}[*] Checking system requirements...${RESET}\n"
-    
-    # Check Termux
-    if [ ! -d /data/data/com.termux ]; then
-        printf "${RED}[!] This script must run in Termux${RESET}\n"
-        exit 1
-    fi
-    
-    # Check storage permission
-    if [ ! -w /data/data/com.termux/files/home ]; then
-        termux-setup-storage
-    fi
-    
-    # Check Internet
-    if ! ping -c 1 google.com &> /dev/null; then
-        printf "${RED}[!] Internet connection required${RESET}\n"
-        exit 1
-    fi
-}
-
-# ---------- DEPENDENCIES INSTALLATION ----------
-install_dependencies() {
-    printf "${CYAN}[*] Installing quantum dependencies...${RESET}\n"
-    progress_bar 20
-    
-    pkg update -y && pkg upgrade -y
-    
-    # Core packages
-    pkg install -y git wget curl python python-pip nodejs ruby \
-        cmatrix figlet toilet neofetch nano vim ncurses-utils \
-        jq proot-distro fish zsh
-    
-    # Python modules
-    pip install requests colorama rich pyfiglet cryptography \
-        numpy pandas pillow
-    
-    # Ruby gems
-    gem install lolcat paint pastel
-    
-    # Node modules
-    npm install -g chalk figlet-cli gradient-string
-    
-    printf "${GREEN}[✓] Dependencies installed successfully${RESET}\n"
-}
-
-# ---------- THEME ENGINE INSTALLATION ----------
-install_theme_engine() {
-    printf "${CYAN}[*] Installing MAR-PD Quantum Theme Engine...${RESET}\n"
-    
-    # Backup original files
-    mkdir -p ~/.marpd-backup
-    cp ~/.bashrc ~/.marpd-backup/bashrc.backup 2>/dev/null
-    cp ~/.zshrc ~/.marpd-backup/zshrc.backup 2>/dev/null
-    
-    # Create theme directory
-    THEME_DIR="$HOME/.marpd-theme"
-    mkdir -p $THEME_DIR/{core,modules,assets,data,logs}
-    
-    # Download theme files
-    git clone $REPO_URL $THEME_DIR/temp_repo
-    
-    # Copy core files
-    cp -r $THEME_DIR/temp_repo/core/* $THEME_DIR/core/
-    cp -r $THEME_DIR/temp_repo/modules/* $THEME_DIR/modules/
-    cp -r $THEME_DIR/temp_repo/assets/* $THEME_DIR/assets/
-    
-    # Set permissions
-    chmod +x $THEME_DIR/core/*.sh
-    chmod +x $THEME_DIR/modules/**/*.sh
-    
-    # Create launcher
-    cat > $THEME_DIR/launcher <<EOF
-#!/data/data/com.termux/files/usr/bin/bash
-# MAR-PD Theme Launcher - AUTO LOAD
-
-export MARPD_THEME_ENABLED=1
-export MARPD_VERSION="$THEME_VERSION"
-export MARPD_TEAM="$TEAM_NAME"
-
-# Load theme engine
-source \$HOME/.marpd-theme/core/theme-engine.sh
-
-# Show banner
-marpd_banner
-
-# Load prompt
-marpd_prompt
-
-# Start background services
-marpd_start_services
-EOF
-    
-    chmod +x $THEME_DIR/launcher
-    
-    # Replace bashrc
-    cat > ~/.bashrc <<EOF
-#!/data/data/com.termux/files/usr/bin/bash
-# MAR-PD ULTRA PRO MAX THEME - AUTO LOAD
-
-# Clear default termux welcome
 clear
 
-# Load MAR-PD Theme
-if [ -f ~/.marpd-theme/launcher ]; then
-    source ~/.marpd-theme/launcher
-else
-    # If theme not found, install it
-    echo -e "\e[1;31m[!] MAR-PD Theme not found! Installing...\e[0m"
-    git clone https://github.com/master-pd/marpd-ultra-theme.git ~/.marpd-install
-    bash ~/.marpd-install/scripts/install.sh
-fi
+# Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+PURPLE='\033[1;35m'
+CYAN='\033[1;36m'
+WHITE='\033[1;37m'
+MAGENTA='\033[1;95m'
+ORANGE='\033[1;38;5;208m'
+RESET='\033[0m'
+
+# ASCII Banner with animation
+show_banner() {
+    echo -e "${CYAN}"
+    cat << "EOF"
+    ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗ 
+    ████╗ ████║██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗
+    ██╔████╔██║███████║██████╔╝    ██║  ██║██║  ██║
+    ██║╚██╔╝██║██╔══██║██╔═══╝     ██║  ██║██║  ██║
+    ██║ ╚═╝ ██║██║  ██║██║         ██████╔╝██████╔╝
+    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝ 
+EOF
+    echo -e "${RESET}"
+}
+
+# Matrix animation
+matrix_animation() {
+    echo -e "${GREEN}"
+    for i in {1..10}; do
+        echo -n "0101010101010101010101010101010101010101"
+        sleep 0.1
+        echo -e -n "\r"
+    done
+    echo -e "${RESET}"
+}
+
+# Loading animation
+loading_animation() {
+    echo -e "${CYAN}[${GREEN}+${CYAN}]${RESET} Setting up theme..."
+    local chars="/-\|"
+    for i in {1..20}; do
+        echo -ne "${CYAN}[${GREEN}${chars:i%4:1}${CYAN}]${RESET} Configuring...\r"
+        sleep 0.1
+    done
+    echo -e "\n${GREEN}[✓]${RESET} Configuration complete!"
+}
+
+# User info
+USER_NAME=""
+TEAM_NAME="MAR-PD"
+MOTTO="WE WORK CYBER SAFE"
+CONTACT="https://t.me/master_spamming"
+
+# Get user name
+get_user_info() {
+    echo -e "${CYAN}"
+    echo "╔══════════════════════════════════════╗"
+    echo "║      TERMUX THEME SETUP WIZARD       ║"
+    echo "╚══════════════════════════════════════╝${RESET}"
+    echo ""
+    echo -e "${YELLOW}[?]${RESET} Enter your name: "
+    read -p "    ➤ " USER_NAME
+    
+    if [ -z "$USER_NAME" ]; then
+        USER_NAME="Anonymous"
+    fi
+    
+    echo -e "\n${GREEN}[✓]${RESET} Welcome: ${CYAN}$USER_NAME${RESET}"
+    echo -e "${GREEN}[✓]${RESET} Team: ${RED}$TEAM_NAME${RESET}"
+    echo -e "${GREEN}[✓]${RESET} Motto: ${BLUE}$MOTTO${RESET}"
+    echo -e "${GREEN}[✓]${RESET} Contact: ${PURPLE}$CONTACT${RESET}"
+    echo ""
+}
+
+# Install requirements
+install_requirements() {
+    echo -e "\n${CYAN}[*]${RESET} Installing requirements..."
+    pkg update -y && pkg upgrade -y
+    pkg install -y nano curl wget git neofetch figlet toilet lolcat
+    
+    # Install zsh if not present
+    if ! command -v zsh &> /dev/null; then
+        pkg install -y zsh
+    fi
+}
+
+# Create custom prompt
+create_prompt() {
+    echo -e "\n${CYAN}[*]${RESET} Creating custom prompt..."
+    
+    cat > ~/.zshrc << EOL
+#!/data/data/com.termux/files/usr/bin/zsh
+
+# Clear screen
+clear
+
+# Colors
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+PURPLE='\033[1;35m'
+CYAN='\033[1;36m'
+WHITE='\033[1;37m'
+MAGENTA='\033[1;95m'
+ORANGE='\033[1;38;5;208m'
+RESET='\033[0m'
+
+# Banner function
+banner() {
+    clear
+    echo -e "\${CYAN}"
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "║                     \${RED}TERMUX PROFESSIONAL THEME\${CYAN}                 ║"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+    echo "║  \${GREEN}USER    \${RESET}: \${MAGENTA}$USER_NAME\${CYAN}                                   ║"
+    echo "║  \${GREEN}TEAM    \${RESET}: \${RED}$TEAM_NAME\${CYAN}                                        ║"
+    echo "║  \${GREEN}MOTTO   \${RESET}: \${BLUE}$MOTTO\${CYAN}                         ║"
+    echo "║  \${GREEN}CONTACT \${RESET}: \${PURPLE}$CONTACT\${CYAN}  ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo -e "\${RESET}"
+    
+    # Show system info
+    echo -e "\${YELLOW}══════════════════════════════════════════════════════════════\${RESET}"
+    neofetch --ascii_distro termux
+    echo -e "\${YELLOW}══════════════════════════════════════════════════════════════\${RESET}"
+    echo ""
+}
+
+# Matrix animation on command not found
+matrix_on_error() {
+    echo -e "\${GREEN}"
+    echo "01101000 01100001 01100011 01101011 00100000 01110100 01101000 01100101 00100000 01110000 01101100 01100001 01101110 01100101 01110100"
+    echo -e "\${RESET}"
+}
 
 # Custom prompt
-export PS1='\[\e[1;91m\]\u\[\e[1;97m\]@\[\e[1;92m\]MAR-PD\[\e[1;93m\]♪↗➜ \[\e[1;96m\]\w \[\e[1;95m\]\$ \[\e[0m\]'
+PROMPT='%{\$fg[red]%}\$TEAM_NAME%{\$reset_color%}%{\$fg[yellow]%}♪↗➜%{\$reset_color%} '
+RPROMPT='%{\$fg[green]%}[%{\$fg[cyan]%}%T%{\$fg[green]%}]%{\$reset_color%}'
 
-# Aliases
-alias update-theme='bash ~/.marpd-theme/scripts/update.sh'
-alias uninstall-theme='bash ~/.marpd-theme/scripts/uninstall.sh'
-alias marpd-matrix='bash ~/.marpd-theme/modules/matrix-module/matrix-3d.sh'
-alias marpd-hack='bash ~/.marpd-theme/modules/hacking-module/port-scan.sh'
-alias marpd-ai='bash ~/.marpd-theme/modules/ai-module/chat-gpt.sh'
-alias marpd-backup='bash ~/.marpd-theme/scripts/backup.sh'
+# Aliases for colors
+alias ls='ls --color=auto'
+alias ll='ls -la --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 
-# Environment variables
-export PATH="\$PATH:\$HOME/.marpd-theme/core"
-export MARPD_MODE="ULTRA_PRO_MAX"
-export TERMUX_STYLING="MARPD_QUANTUM"
-
-# Welcome message
-echo -e "\e[1;36m┌─────────────────────────────────────────────┐"
-echo -e "│     \e[1;32mMAR-PD ULTRA PRO MAX THEME v5.0.0\e[1;36m     │"
-echo -e "│      \e[1;33mWE WORK CYBER SAFE\e[1;36m                  │"
-echo -e "└─────────────────────────────────────────────┘\e[0m"
-EOF
-    
-    # Also setup for zsh
-    cat > ~/.zshrc <<EOF
-# MAR-PD Theme for ZSH
-source ~/.bashrc
-autoload -Uz compinit && compinit
-EOF
+# Custom commands
+matrix() {
+    echo -e "\${GREEN}"
+    cmatrix -C blue
+    echo -e "\${RESET}"
 }
 
-# ---------- POST-INSTALLATION ----------
-post_install() {
-    printf "${CYAN}[*] Finalizing installation...${RESET}\n"
+hack() {
+    echo -e "\${RED}"
+    echo "Initializing hack sequence..."
+    sleep 1
+    echo "Bypassing firewall..."
+    sleep 1
+    echo "Access granted!"
+    echo -e "\${RESET}"
+}
+
+sysinfo() {
+    neofetch
+}
+
+update-system() {
+    echo -e "\${CYAN}[*]\${RESET} Updating system..."
+    pkg update && pkg upgrade
+}
+
+# Show banner on start
+banner
+
+# Welcome message
+echo -e "\${GREEN}[+]\${RESET} Welcome to Termux Pro \${RED}$TEAM_NAME\${RESET} Edition"
+echo -e "\${GREEN}[+]\${RESET} Type 'matrix' for matrix animation"
+echo -e "\${GREEN}[+]\${RESET} Type 'hack' for fun hack animation"
+echo -e "\${GREEN}[+]\${RESET} Type 'sysinfo' for system information"
+echo ""
+EOL
+}
+
+# Create bashrc backup
+create_bashrc() {
+    echo -e "\n${CYAN}[*]${RESET} Creating .bashrc..."
     
-    # Create update script
-    cat > ~/.marpd-theme/scripts/update.sh <<EOF
+    cat > ~/.bashrc << EOL
 #!/data/data/com.termux/files/usr/bin/bash
-# Auto-update script
 
-cd ~/.marpd-theme
-git pull origin main
-
-if [ \$? -eq 0 ]; then
-    echo -e "\e[1;32m[✓] Theme updated successfully!\e[0m"
-    echo -e "\e[1;36m[*] Restart Termux to apply changes\e[0m"
+# Show banner
+if [ -f ~/.zshrc ]; then
+    zsh -c "source ~/.zshrc; banner"
 else
-    echo -e "\e[1;31m[!] Update failed! Check internet connection\e[0m"
+    clear
+    echo -e "\033[1;36m"
+    echo "    MAR-PD Professional Terminal"
+    echo -e "\033[0m"
+fi
+
+# Custom PS1
+PS1='\[\033[1;31m\]$TEAM_NAME\[\033[1;33m\]♪↗➜\[\033[0m\] '
+EOL
+}
+
+# Create custom commands directory
+create_custom_commands() {
+    echo -e "\n${CYAN}[*]${RESET} Creating custom commands..."
+    
+    mkdir -p ~/.termux/commands
+    
+    # Create hack command
+    cat > ~/.termux/commands/hack.sh << 'EOF'
+#!/bin/bash
+echo -e "\033[1;31m"
+echo "╔══════════════════════════════════════╗"
+echo "║        HACK MODE ACTIVATED           ║"
+echo "╚══════════════════════════════════════╝"
+echo -e "\033[1;32m"
+for i in {1..5}; do
+    echo "[$i] Exploiting vulnerabilities..."
+    sleep 0.5
+done
+echo -e "\033[1;36m"
+echo "[+] System compromised successfully!"
+echo -e "\033[0m"
+EOF
+    
+    chmod +x ~/.termux/commands/hack.sh
+    
+    # Create matrix command
+    cat > ~/.termux/commands/matrix.sh << 'EOF'
+#!/bin/bash
+if command -v cmatrix &> /dev/null; then
+    cmatrix -C blue
+else
+    echo -e "\033[1;32m"
+    for i in {1..20}; do
+        echo "0101010101010101010101010101010101010101"
+        sleep 0.1
+    done
+    echo -e "\033[0m"
 fi
 EOF
     
-    chmod +x ~/.marpd-theme/scripts/update.sh
-    
-    # Create config file
-    cat > ~/.marpd-theme/data/config.ini <<EOF
-[theme]
-name = MAR-PD ULTRA PRO MAX
-version = 5.0.0
-install_date = $(date)
-team = MAR-PD
-contact = https://t.me/master_spamming
-slogan = WE WORK CYBER SAFE
-
-[settings]
-auto_update = true
-animation_level = ultra
-prompt_style = hacker
-color_scheme = quantum
-
-[modules]
-matrix = enabled
-hacking_tools = enabled
-ai_assistant = enabled
-cyber_tools = enabled
-EOF
-    
-    # Set up cron for auto-update
-    crontab -l > /tmp/marpd_cron 2>/dev/null
-    echo "0 12 * * * bash ~/.marpd-theme/scripts/update.sh >/dev/null 2>&1" >> /tmp/marpd_cron
-    crontab /tmp/marpd_cron
+    chmod +x ~/.termux/commands/matrix.sh
 }
 
-# ---------- INSTALLATION SUCCESS ----------
-show_success() {
-    show_banner
-    printf "${GREEN}"
-    figlet "INSTALLATION COMPLETE"
-    printf "${RESET}"
+# Change terminal colors
+change_terminal_colors() {
+    echo -e "\n${CYAN}[*]${RESET} Changing terminal colors..."
     
-    cat << EOF
+    # Create termux properties
+    cat > ~/.termux/colors.properties << EOL
+# Terminal Colors
+background=#0a0a0a
+foreground=#00ff00
+cursor=#00ff00
+color0=#000000
+color1=#ff0000
+color2=#00ff00
+color3=#ffff00
+color4=#0000ff
+color5=#ff00ff
+color6=#00ffff
+color7=#ffffff
+color8=#404040
+color9=#ff4040
+color10=#40ff40
+color11=#ffff40
+color12=#4040ff
+color13=#ff40ff
+color14=#40ffff
+color15=#ffffff
+EOL
     
-    ${YELLOW}══════════════════════════════════════════════════════════
-    ${GREEN}✅ MAR-PD ULTRA PRO MAX THEME INSTALLED SUCCESSFULLY!
-    ${YELLOW}══════════════════════════════════════════════════════════
-    
-    ${CYAN}🚀 Features Enabled:
-    ${WHITE}  • Quantum Theme Engine
-    ${WHITE}  • 3D Matrix Animations
-    ${WHITE}  • AI-Powered Assistant
-    ${WHITE}  • Hacking Tools Suite
-    ${WHITE}  • Auto-Update System
-    ${WHITE}  • Multi-Shell Support
-    
-    ${PURPLE}📟 Available Commands:
-    ${GREEN}  marpd-matrix   ${WHITE}- Launch 3D Matrix animation
-    ${GREEN}  marpd-hack     ${WHITE}- Ethical hacking tools
-    ${GREEN}  marpd-ai       ${WHITE}- AI Assistant
-    ${GREEN}  update-theme   ${WHITE}- Update theme
-    ${GREEN}  uninstall-theme${WHITE}- Remove theme
-    
-    ${BLUE}🔧 Technical Info:
-    ${WHITE}  Version:      ${THEME_VERSION}
-    ${WHITE}  Install Path: ~/.marpd-theme/
-    ${WHITE}  Config File:  ~/.marpd-theme/data/config.ini
-    ${WHITE}  Team:         ${TEAM_NAME}
-    ${WHITE}  Contact:      ${TELEGRAM_CHANNEL}
-    
-    ${RED}⚠️  IMPORTANT: Close and reopen Termux to activate theme!
-    ${YELLOW}══════════════════════════════════════════════════════════${RESET}
-EOF
+    # Create font properties
+    cat > ~/.termux/font.properties << EOL
+# Terminal Font
+font=monospace
+font-size=12
+EOL
 }
 
-# ---------- MAIN EXECUTION ----------
+# Apply changes
+apply_changes() {
+    echo -e "\n${CYAN}[*]${RESET} Applying changes..."
+    
+    # Reload termux properties
+    termux-reload-settings
+    
+    # Make zsh default shell
+    chsh -s zsh
+    
+    # Source the new configuration
+    source ~/.zshrc
+}
+
+# Main installation
 main() {
     show_banner
-    printf "${CYAN}[*] Starting MAR-PD Quantum Installation...${RESET}\n\n"
+    matrix_animation
+    get_user_info
+    loading_animation
+    install_requirements
+    create_prompt
+    create_bashrc
+    create_custom_commands
+    change_terminal_colors
+    apply_changes
     
-    check_system
-    install_dependencies
-    install_theme_engine
-    post_install
-    show_success
+    echo -e "\n${GREEN}╔══════════════════════════════════════════════════════╗"
+    echo -e "║          ${CYAN}THEME INSTALLATION COMPLETE!${GREEN}          ║"
+    echo -e "╠══════════════════════════════════════════════════════╣"
+    echo -e "║ ${YELLOW}Restart Termux or run:${RESET} ${WHITE}source ~/.zshrc${GREEN}     ║"
+    echo -e "║                                                      ║"
+    echo -e "║ ${CYAN}Available Commands:${GREEN}                              ║"
+    echo -e "║ ${WHITE}• matrix   ${RESET}- Matrix animation${GREEN}                  ║"
+    echo -e "║ ${WHITE}• hack     ${RESET}- Fun hack sequence${GREEN}                ║"
+    echo -e "║ ${WHITE}• sysinfo  ${RESET}- System information${GREEN}               ║"
+    echo -e "║ ${WHITE}• ls/ll    ${RESET}- Colorful listings${GREEN}                ║"
+    echo -e "╚══════════════════════════════════════════════════════╝${RESET}"
     
-    # Final message
-    printf "\n${BLINK}${GREEN}[*] Please restart Termux NOW to activate theme!${RESET}\n"
-    printf "${CYAN}[*] Press Enter to exit...${RESET}"
-    read
+    echo -e "\n${RED}$TEAM_NAME${YELLOW}♪↗➜${RESET} Theme installed successfully!"
+    echo -e "${BLUE}Enjoy your professional hacking terminal!${RESET}"
 }
 
 # Run main function
