@@ -660,7 +660,7 @@ EOF
 # ============================================
 
 cleanup_default() {
-    marpd_log "STEP" "Cleaning up default theme")
+    marpd_log "STEP" "Cleaning up default theme"
     
     # Remove default theme backups
     rm -f "$HOME/.termux/colors.properties.bak" 2>/dev/null
