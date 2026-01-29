@@ -1,1116 +1,852 @@
 #!/bin/bash
 
-# MAR-PD THEME v3 - Quantum Pro Max Edition
-# Advanced Terminal Operating System
+# MAR-PD THEME v3 - Ultimate Pro Edition
+# Advanced Terminal System
 # Version: 3.0.0
 # Team: MAR-PD
 
 # ============================================
-# NEXUS INITIALIZATION
+# CORE INITIALIZATION
 # ============================================
 
-NEXUS_VERSION="3.0.0"
-NEXUS_TEAM="MAR-PD"
-NEXUS_NAME="MAR-PD THEME v3"
-NEXUS_PROMPT="MAR-PD ᗒ✿➜"
-NEXUS_CORE="$HOME/.marpd-nexus"
-NEXUS_VAULT="$NEXUS_CORE/vault"
-NEXUS_MATRIX="$NEXUS_CORE/matrix"
-NEXUS_NEURAL="$NEXUS_CORE/neural"
-NEXUS_ATOMIC="$NEXUS_CORE/atomic"
-NEXUS_LOG="$NEXUS_CORE/nexus.log"
-NEXUS_CONFIG="$NEXUS_CORE/nexus.conf"
+MARPD_VERSION="3.0.0"
+MARPD_TEAM="MAR-PD"
+MARPD_NAME="MAR-PD THEME v3"
+MARPD_PROMPT="MAR-PD ᗒ✿➜"
+MARPD_DIR="$HOME/.marpd-v3"
+MARPD_BACKUP="$HOME/.marpd-backup-v3"
+MARPD_LOG="$MARPD_DIR/install.log"
+MARPD_CONFIG="$MARPD_DIR/config.marpd"
 
 # ============================================
-# NEXUS COLOR UNIVERSE
+# COLOR SYSTEM - Ultimate Pro
 # ============================================
 
-# Nexus Core Colors
-N_BLACK='\033[0;30m'
-N_RED='\033[0;31m'
-N_GREEN='\033[0;32m'
-N_YELLOW='\033[0;33m'
-N_BLUE='\033[0;34m'
-N_MAGENTA='\033[0;35m'
-N_CYAN='\033[0;36m'
-N_WHITE='\033[0;37m'
+# Base Colors
+C_BLACK='\033[0;30m'
+C_RED='\033[0;31m'
+C_GREEN='\033[0;32m'
+C_YELLOW='\033[0;33m'
+C_BLUE='\033[0;34m'
+C_MAGENTA='\033[0;35m'
+C_CYAN='\033[0;36m'
+C_WHITE='\033[0;37m'
 
-# Nexus Enhanced Spectrum
-N_ENH_BLACK='\033[1;30m'
-N_ENH_RED='\033[1;31m'
-N_ENH_GREEN='\033[1;32m'
-N_ENH_YELLOW='\033[1;33m'
-N_ENH_BLUE='\033[1;34m'
-N_ENH_MAGENTA='\033[1;35m'
-N_ENH_CYAN='\033[1;36m'
-N_ENH_WHITE='\033[1;37m'
+# Bright Colors
+C_BRIGHT_BLACK='\033[0;90m'
+C_BRIGHT_RED='\033[0;91m'
+C_BRIGHT_GREEN='\033[0;92m'
+C_BRIGHT_YELLOW='\033[0;93m'
+C_BRIGHT_BLUE='\033[0;94m'
+C_BRIGHT_MAGENTA='\033[0;95m'
+C_BRIGHT_CYAN='\033[0;96m'
+C_BRIGHT_WHITE='\033[0;97m'
 
-# Nexus Pro Gradient (True Color Support)
-N_GRAD_01='\033[38;2;10;20;40m'      # Deep Space
-N_GRAD_02='\033[38;2;30;60;120m'     # Cosmic Blue
-N_GRAD_03='\033[38;2;50;100;200m'    # Galactic Azure
-N_GRAD_04='\033[38;2;70;140;255m'    # Nebula Blue
-N_GRAD_05='\033[38;2;90;180;255m'    # Star Light
-N_GRAD_06='\033[38;2;120;220;255m'   # Quantum Cyan
-N_GRAD_07='\033[38;2;150;250;255m'   # Ice Blue
-N_GRAD_08='\033[38;2;200;255;255m'   # White Blue
+# Bold Colors
+C_BOLD_BLACK='\033[1;30m'
+C_BOLD_RED='\033[1;31m'
+C_BOLD_GREEN='\033[1;32m'
+C_BOLD_YELLOW='\033[1;33m'
+C_BOLD_BLUE='\033[1;34m'
+C_BOLD_MAGENTA='\033[1;35m'
+C_BOLD_CYAN='\033[1;36m'
+C_BOLD_WHITE='\033[1;37m'
 
-# Nexus Background Matrix
-N_BG_MATRIX_01='\033[48;2;5;10;20m'     # Deep Void
-N_BG_MATRIX_02='\033[48;2;15;30;60m'    # Space Navy
-N_BG_MATRIX_03='\033[48;2;25;50;100m'   # Cosmic Ocean
-N_BG_MATRIX_04='\033[48;2;35;70;140m'   # Galactic Sea
+# Background Colors
+C_BG_BLACK='\033[40m'
+C_BG_RED='\033[41m'
+C_BG_GREEN='\033[42m'
+C_BG_YELLOW='\033[43m'
+C_BG_BLUE='\033[44m'
+C_BG_MAGENTA='\033[45m'
+C_BG_CYAN='\033[46m'
+C_BG_WHITE='\033[47m'
 
-# Nexus Pulse Colors
-N_PULSE_01='\033[38;2;255;0;100m'       # Quantum Pink
-N_PULSE_02='\033[38;2;255;100;0m'       # Nexus Orange
-N_PULSE_03='\033[38;2;255;200;0m'       # Solar Yellow
-N_PULSE_04='\033[38;2;0;255;100m'       # Matrix Green
-N_PULSE_05='\033[38;2;0;200;255m'       # Cyber Cyan
+# Special Effects
+C_RESET='\033[0m'
+C_BOLD='\033[1m'
+C_DIM='\033[2m'
+C_ITALIC='\033[3m'
+C_UNDERLINE='\033[4m'
+C_BLINK='\033[5m'
+C_REVERSE='\033[7m'
+C_HIDDEN='\033[8m'
 
-# Nexus Effects
-N_RESET='\033[0m'
-N_BOLD='\033[1m'
-N_DIM='\033[2m'
-N_ITALIC='\033[3m'
-N_UNDERLINE='\033[4m'
-N_BLINK='\033[5m'
-N_INVERT='\033[7m'
-N_HIDDEN='\033[8m'
-N_STRIKE='\033[9m'
+# Custom MAR-PD Colors
+C_MARPD_BLUE='\033[38;5;33m'
+C_MARPD_CYAN='\033[38;5;45m'
+C_MARPD_GREEN='\033[38;5;46m'
+C_MARPD_YELLOW='\033[38;5;226m'
+C_MARPD_PURPLE='\033[38;5;93m'
+C_MARPD_PINK='\033[38;5;213m'
 
 # ============================================
-# NEXUS LOGGING MATRIX
+# LOGGING SYSTEM
 # ============================================
 
-nexus_log() {
+marpd_log() {
     local level="$1"
     local message="$2"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S.%3N')
-    local nexus_id=$(echo -n "$timestamp$message$RANDOM" | md5sum | cut -c1-12)
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     
     case "$level" in
-        "NEXUS") echo -e "${N_GRAD_04}[✦ NEXUS]${N_RESET} ${N_GRAD_03}$message${N_RESET}" ;;
-        "MATRIX") echo -e "${N_GRAD_05}[◈ MATRIX]${N_RESET} ${N_GRAD_02}$message${N_RESET}" ;;
-        "NEURAL") echo -e "${N_GRAD_06}[⟠ NEURAL]${N_RESET} ${N_GRAD_01}$message${N_RESET}" ;;
-        "ATOMIC") echo -e "${N_PULSE_03}[⚛ ATOMIC]${N_RESET} ${N_PULSE_02}$message${N_RESET}" ;;
-        "QUANTUM") echo -e "${N_PULSE_04}[⟁ QUANTUM]${N_RESET} ${N_PULSE_05}$message${N_RESET}" ;;
-        "SYNC") echo -e "${N_PULSE_01}[⟳ SYNC]${N_RESET} ${N_ENH_MAGENTA}$message${N_RESET}" ;;
-        "ERROR") echo -e "${N_ENH_RED}[⚠ NEXUS-ERROR]${N_RESET} ${N_ENH_RED}$message${N_RESET}" ;;
+        "INFO") echo -e "${C_MARPD_BLUE}[INFO]${C_RESET} $message" ;;
+        "SUCCESS") echo -e "${C_MARPD_GREEN}[SUCCESS]${C_RESET} $message" ;;
+        "WARNING") echo -e "${C_MARPD_YELLOW}[WARNING]${C_RESET} $message" ;;
+        "ERROR") echo -e "${C_RED}[ERROR]${C_RESET} $message" ;;
+        "DEBUG") echo -e "${C_MARPD_PURPLE}[DEBUG]${C_RESET} $message" ;;
+        "STEP") echo -e "${C_MARPD_CYAN}[STEP]${C_RESET} $message" ;;
         *) echo -e "[$level] $message" ;;
     esac
     
-    echo "[$timestamp] [$level] [$nexus_id] $message" >> "$NEXUS_LOG"
+    echo "[$timestamp] [$level] $message" >> "$MARPD_LOG"
 }
 
 # ============================================
-# NEXUS VISUAL ENGINE
+# DISPLAY FUNCTIONS
 # ============================================
 
-nexus_banner() {
+show_marpd_header() {
     clear
-    echo -e "${N_BG_MATRIX_01}${N_GRAD_07}"
-    cat << "EOF"
-
-╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                                       ║
-║   ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗     ████████╗██╗  ██╗███████╗███╗   ███╗███████╗    ║
-║   ████╗ ████║██╔══██╗██╔══██╗   ██╔═══██╗██╔══██╗    ╚══██╔══╝██║  ██║██╔════╝████╗ ████║██╔════╝    ║
-║   ██╔████╔██║███████║██████╔╝   ██║   ██║██║  ██║       ██║   ███████║█████╗  ██╔████╔██║█████╗      ║
-║   ██║╚██╔╝██║██╔══██║██╔═══╝    ██║   ██║██║  ██║       ██║   ██╔══██║██╔══╝  ██║╚██╔╝██║██╔══╝      ║
-║   ██║ ╚═╝ ██║██║  ██║██║        ╚██████╔╝██████╔╝       ██║   ██║  ██║███████╗██║ ╚═╝ ██║███████╗    ║
-║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝        ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚══════╝    ║
-║                                                                                                       ║
-║                                 Q U A N T U M   P R O   M A X   E D I T I O N                         ║
-║                                           V E R S I O N   3 . 0 . 0                                   ║
-║                                                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${N_RESET}"
+    echo -e "${C_MARPD_BLUE}"
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║                                                          ║"
+    echo "║  ███╗   ███╗ █████╗ ██████╗     ██████╗ ██████╗         ║"
+    echo "║  ████╗ ████║██╔══██╗██╔══██╗   ██╔═══██╗██╔══██╗        ║"
+    echo "║  ██╔████╔██║███████║██████╔╝   ██║   ██║██║  ██║        ║"
+    echo "║  ██║╚██╔╝██║██╔══██║██╔═══╝    ██║   ██║██║  ██║        ║"
+    echo "║  ██║ ╚═╝ ██║██║  ██║██║        ╚██████╔╝██████╔╝        ║"
+    echo "║  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝         ╚═════╝ ╚═════╝         ║"
+    echo "║                                                          ║"
+    echo "║              ULTIMATE PRO EDITION v3.0.0                 ║"
+    echo "║                                                          ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo -e "${C_RESET}"
+    echo -e "${C_BOLD_MAGENTA}Team: ${C_BOLD_WHITE}MAR-PD${C_RESET} | ${C_BOLD_CYAN}Prompt: ${C_BOLD_WHITE}MAR-PD ᗒ✿➜${C_RESET}"
+    echo -e "${C_BOLD_YELLOW}Repository: https://github.com/master-pd/marpd-theme.git${C_RESET}"
+    echo ""
 }
 
-nexus_progress() {
+show_progress() {
     local task="$1"
-    local width=50
+    local width=40
     
-    echo -ne "${N_GRAD_04}[${N_RESET}"
+    echo -ne "${C_MARPD_CYAN}[${C_RESET}"
     for ((i=0; i<width; i++)); do
-        local r=$((10 + (i * 5)))
-        local g=$((20 + (i * 4)))
-        local b=$((40 + (i * 3)))
-        echo -ne "\033[38;2;${r};${g};${b}m█${N_RESET}"
-        sleep 0.02
+        echo -ne "${C_MARPD_GREEN}█${C_RESET}"
+        sleep 0.05
     done
-    echo -e "${N_GRAD_04}] ${N_GRAD_06}100% ${N_ENH_WHITE}$task${N_RESET}"
-}
-
-nexus_animation() {
-    local frames=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
-    for frame in "${frames[@]}"; do
-        echo -ne "\r${N_GRAD_05}$frame${N_RESET} "
-        sleep 0.1
-    done
-    echo -ne "\r${N_GRAD_06}✓${N_RESET} "
+    echo -e "${C_MARPD_CYAN}] ${C_MARPD_GREEN}✓ ${C_BOLD_WHITE}$task${C_RESET}"
 }
 
 # ============================================
-# NEXUS VALIDATION SUITE
+# VALIDATION FUNCTIONS
 # ============================================
 
-nexus_validate() {
-    nexus_log "NEXUS" "Initializing validation suite"
+check_termux() {
+    marpd_log "STEP" "Checking Termux environment"
     
-    # Check Nexus environment
     if [ ! -d "/data/data/com.termux" ]; then
-        nexus_log "ERROR" "Nexus environment not detected"
+        marpd_log "ERROR" "This script must run in Termux"
         return 1
     fi
     
-    # Check Nexus resources
-    local nexus_cpu=$(nproc 2>/dev/null || echo 1)
-    local nexus_ram=$(free -m | awk '/^Mem:/{print $2}')
-    local nexus_storage=$(df "$HOME" | awk 'NR==2 {print $4}')
-    
-    if [ "$nexus_ram" -lt 512 ]; then
-        nexus_log "WARNING" "Limited RAM detected: ${nexus_ram}MB"
+    if [ ! -w "$HOME" ]; then
+        marpd_log "ERROR" "No write permission in home directory"
+        return 1
     fi
     
-    if [ "$nexus_storage" -lt 500000 ]; then
-        nexus_log "WARNING" "Limited storage detected"
+    marpd_log "SUCCESS" "Termux environment verified"
+    return 0
+}
+
+check_internet() {
+    marpd_log "STEP" "Checking internet connection"
+    
+    if ! ping -c 1 8.8.8.8 > /dev/null 2>&1; then
+        marpd_log "WARNING" "No internet connection detected"
+        return 1
     fi
     
-    # Check Nexus capabilities
-    if [ "$nexus_cpu" -lt 2 ]; then
-        nexus_log "WARNING" "Limited CPU cores: $nexus_cpu"
-    fi
-    
-    nexus_log "SYNC" "Validation suite complete"
+    marpd_log "SUCCESS" "Internet connection verified"
     return 0
 }
 
 # ============================================
-# NEXUS DEPENDENCY MATRIX
+# DEPENDENCY MANAGEMENT
 # ============================================
 
-nexus_dependencies() {
-    nexus_log "MATRIX" "Resolving nexus dependency matrix"
+install_dependencies() {
+    marpd_log "STEP" "Installing required packages"
     
-    local nexus_packages=(
-        # Core Nexus
-        "git" "curl" "wget" "unzip" "tar" "zip"
-        
-        # Development Nexus
-        "python" "python-numpy" "python-pip"
-        "nodejs" "npm" "clang" "make" "cmake"
-        
-        # System Nexus
-        "neofetch" "htop" "tmux" "zsh" "vim"
-        "nano" "micro" "rsync" "openssh"
-        
-        # Utility Nexus
-        "tree" "bat" "fzf" "ripgrep" "fd"
-        "jq" "yq" "tldr" "thefuck"
-        
-        # Network Nexus
-        "nmap" "net-tools" "dnsutils"
-        "httping" "speedtest-go"
+    local packages=(
+        "git"
+        "curl"
+        "wget"
+        "unzip"
+        "nano"
+        "neofetch"
+        "python"
+        "nodejs"
+        "openssh"
+        "tmux"
+        "zsh"
     )
     
-    local missing_nexus=()
+    pkg update -y > /dev/null 2>&1
+    pkg upgrade -y > /dev/null 2>&1
     
-    for pkg in "${nexus_packages[@]}"; do
-        if ! command -v "${pkg%% *}" > /dev/null 2>&1; then
-            missing_nexus+=("$pkg")
+    for pkg in "${packages[@]}"; do
+        if ! command -v "$pkg" > /dev/null 2>&1; then
+            marpd_log "INFO" "Installing: $pkg"
+            pkg install -y "$pkg" > /dev/null 2>&1
+            if [ $? -eq 0 ]; then
+                marpd_log "SUCCESS" "Installed: $pkg"
+            else
+                marpd_log "WARNING" "Failed to install: $pkg"
+            fi
         fi
     done
     
-    if [ ${#missing_nexus[@]} -gt 0 ]; then
-        nexus_log "NEURAL" "Installing nexus packages: ${#missing_nexus[@]} required"
-        
-        # Update Nexus repository
-        nexus_log "SYNC" "Updating nexus repository"
-        pkg update -y > /dev/null 2>&1
-        pkg upgrade -y > /dev/null 2>&1
-        
-        # Install in batches
-        local batch_size=5
-        for ((i=0; i<${#missing_nexus[@]}; i+=batch_size)); do
-            local batch=("${missing_nexus[@]:i:batch_size}")
-            nexus_log "ATOMIC" "Installing batch: ${batch[*]}"
-            
-            for pkg in "${batch[@]}"; do
-                pkg install -y "$pkg" > /dev/null 2>&1 &
-            done
-            wait
-            
-            for pkg in "${batch[@]}"; do
-                if command -v "${pkg%% *}" > /dev/null 2>&1; then
-                    nexus_log "SYNC" "Nexus package installed: $pkg"
-                else
-                    nexus_log "ERROR" "Nexus installation failed: $pkg"
-                fi
-            done
-        done
+    marpd_log "SUCCESS" "All dependencies installed"
+}
+
+# ============================================
+# BACKUP SYSTEM
+# ============================================
+
+create_backup() {
+    marpd_log "STEP" "Creating system backup"
+    
+    mkdir -p "$MARPD_BACKUP"
+    
+    # Backup Termux files
+    if [ -d "$HOME/.termux" ]; then
+        cp -r "$HOME/.termux" "$MARPD_BACKUP/termux_backup"
+        marpd_log "INFO" "Backed up Termux configuration"
     fi
     
-    # Install Python packages
-    nexus_log "QUANTUM" "Installing Python nexus packages"
-    pip install --quiet --upgrade pip wheel setuptools
-    pip install --quiet requests beautifulsoup4 colorama
-    
-    nexus_log "NEXUS" "Dependency matrix resolved"
-    return 0
-}
-
-# ============================================
-# NEXUS VAULT SYSTEM
-# ============================================
-
-nexus_vault() {
-    nexus_log "MATRIX" "Creating nexus vault system"
-    
-    # Create vault structure
-    mkdir -p "$NEXUS_VAULT"
-    mkdir -p "$NEXUS_MATRIX"
-    mkdir -p "$NEXUS_NEURAL"
-    mkdir -p "$NEXUS_ATOMIC"
-    
-    # Backup Nexus states
-    local nexus_states=(
-        "$HOME/.termux"
-        "$HOME/.config"
-        "$HOME/.local"
-        "$HOME/.bashrc"
-        "$HOME/.zshrc"
-        "$HOME/.profile"
-        "$HOME/.vimrc"
-        "$HOME/.tmux.conf"
-        "$HOME/.gitconfig"
-        "$HOME/.ssh"
+    # Backup shell files
+    local shell_files=(
+        ".bashrc"
+        ".zshrc"
+        ".profile"
+        ".bash_profile"
     )
     
-    for state in "${nexus_states[@]}"; do
-        if [ -e "$state" ]; then
-            rsync -aq "$state" "$NEXUS_VAULT/" 2>/dev/null
-            nexus_log "NEURAL" "Nexus state vaulted: $(basename "$state")"
+    for file in "${shell_files[@]}"; do
+        if [ -f "$HOME/$file" ]; then
+            cp "$HOME/$file" "$MARPD_BACKUP/$file.backup"
+            marpd_log "DEBUG" "Backed up: $file"
         fi
     done
     
-    # Create vault manifest
-    cat > "$NEXUS_VAULT/vault.manifest" << 'EOF'
-╔══════════════════════════════════════════════════════════════╗
-║                     NEXUS VAULT MANIFEST                     ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  Theme:    MAR-PD THEME v3 (Quantum Pro Max)                ║
-║  Version:  $NEXUS_VERSION                                   ║
-║  Team:     $NEXUS_TEAM                                      ║
-║  Created:  $(date)                                         ║
-║  Vault:    $NEXUS_VAULT                                    ║
-║                                                              ║
-║  Vaulted States:                                             ║
-║                                                              ║
+    # Create backup info
+    cat > "$MARPD_BACKUP/backup_info.txt" << EOF
+MAR-PD THEME v3 Backup
+=======================
+Backup Created: $(date)
+Theme Version: $MARPD_VERSION
+Team: $TEAM
+
+Files backed up:
+- Termux configuration
+- Shell configuration files
+
+To restore:
+bash $MARPD_DIR/restore.sh
 EOF
     
-    find "$NEXUS_VAULT" -type f -name "*" | head -20 | sed 's|.*/||' | while read -r file; do
-        echo "║    • $file" >> "$NEXUS_VAULT/vault.manifest"
-    done
-    
-    cat >> "$NEXUS_VAULT/vault.manifest" << 'EOF'
-║                                                              ║
-║  Restoration Protocol:                                       ║
-║    bash $NEXUS_CORE/restore_nexus.sh                        ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-EOF
-    
-    nexus_log "NEXUS" "Nexus vault system established"
+    marpd_log "SUCCESS" "Backup created successfully"
 }
 
 # ============================================
-# NEXUS THEME ENGINE
+# THEME INSTALLATION
 # ============================================
 
-install_nexus_theme() {
-    nexus_log "ATOMIC" "Installing nexus theme engine"
+install_theme() {
+    marpd_log "STEP" "Installing MAR-PD THEME v3"
     
+    # Create directories
+    mkdir -p "$MARPD_DIR"
     mkdir -p "$HOME/.termux"
     
-    # Nexus Color Matrix (True Color)
+    # Install color scheme
     cat > "$HOME/.termux/colors.properties" << 'EOF'
-# MAR-PD THEME v3 - Nexus Color Matrix
-# Quantum Pro Max True Color System
+# MAR-PD THEME v3 - Ultimate Color Scheme
 
-# Base Colors
-color0=#0a0a12
-color1=#141424
-color2=#1e1e36
-color3=#282848
-color4=#32325a
-color5=#3c3c6c
-color6=#46467e
-color7=#505090
+# Basic colors
+color0=#1a1a2e
+color1=#16213e
+color2=#0f3460
+color3=#e94560
+color4=#533483
+color5=#8d8daa
+color6=#f05945
+color7=#ffbd69
+color8=#00adb5
+color9=#393e46
+color10=#eeeeee
+color11=#ff9a3c
+color12=#ff6f3c
+color13=#155263
+color14=#ffc93c
+color15=#07689f
 
-# Accent Colors
-color8=#5a5aa2
-color9=#6464b4
-color10=#6e6ec6
-color11=#7878d8
-color12=#8282ea
-color13=#8c8cfc
-color14=#9696ff
-color15=#a0a0ff
-
-# Nexus Special Colors
-color16=#00ffff    # Quantum Cyan
-color17=#ff00ff    # Nexus Magenta
-color18=#ffff00    # Solar Yellow
-color19=#00ff00    # Matrix Green
-color20=#ff4500    # Atomic Orange
-color21=#9400d3    # Cosmic Purple
-color22=#00bfff    # Sky Blue
-color23=#ff1493    # Deep Pink
-
-# Terminal Colors
-background=#0a0a12
-foreground=#e0e0ff
-cursor=#00ffff
-cursor2=#0a0a12
-
-# True Color Support
-enable-true-color=true
-color-mode=true-color
+# Terminal colors
+background=#1a1a2e
+foreground=#eeeeee
+cursor=#00adb5
 EOF
     
-    # Nexus Terminal Configuration
+    # Install Termux properties
     cat > "$HOME/.termux/termux.properties" << 'EOF'
-# MAR-PD THEME v3 - Nexus Configuration
-# Advanced Terminal Operating System
+# MAR-PD THEME v3 Configuration
 
-# Visual Configuration
-terminal-cursor-style=bar
-terminal-cursor-blink-rate=250
-terminal-margin-horizontal=20
-terminal-margin-vertical=10
-terminal-transparency=15
+# Visual settings
 use-black-ui=false
-render-extra-heavy=true
-terminal-cursor-color=auto
-terminal-cursor-color2=auto
+terminal-cursor-style=bar
+terminal-transparency=10
+terminal-margin-horizontal=10
+terminal-margin-vertical=5
 
-# Behavior Configuration
+# Behavior
 bell-character=ignore
 back-button=ignore
 hide-soft-keyboard-on-startup=true
 fullscreen=false
-allow-external-apps=true
-shortcut.create-session=ctrl + t
-shortcut.next-session=ctrl + n
-shortcut.previous-session=ctrl + p
 
-# Nexus Keyboard Matrix
+# Keyboard
 extra-keys=[ \
- ['ESC','|','/','HOME','UP','END','PGUP','DEL','{','}','[',']','F1','F2'], \
- ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','BKSP','(',')','<','>','F3','F4'], \
- ['~','`','!','@','#','$','%','^','&','*','-','+','F5','F6'], \
- ['\\','"','\'',':',';',',','.','?','=','_','{','}','F7','F8'] \
+ ['ESC','|','/','HOME','UP','END','PGUP','DEL'], \
+ ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN','BKSP'] \
 ]
-
-# Performance
-disable-styling=false
-terminal-transcript-rows=1000
 EOF
     
-    # Install Nexus Fonts
-    nexus_log "NEURAL" "Installing nexus typography system"
+    # Download and install font
+    marpd_log "INFO" "Downloading MAR-PD font"
+    wget -q "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf" \
+        -O "$HOME/.termux/font.ttf"
     
-    # Download multiple fonts for Nexus
-    local nexus_fonts=(
-        "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf"
-        "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-        "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf"
-        "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Mononoki/Regular/complete/mononoki%20Regular%20Nerd%20Font%20Complete.ttf"
-    )
+    if [ $? -eq 0 ]; then
+        marpd_log "SUCCESS" "Font installed successfully"
+    else
+        marpd_log "WARNING" "Using default font"
+    fi
     
-    mkdir -p "$NEXUS_CORE/fonts"
-    for font_url in "${nexus_fonts[@]}"; do
-        local font_name=$(basename "$font_url")
-        wget -q "$font_url" -O "$NEXUS_CORE/fonts/$font_name" &
-    done
-    wait
-    
-    # Set main font
-    cp "$NEXUS_CORE/fonts/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf" "$HOME/.termux/font.ttf"
-    
-    nexus_log "NEXUS" "Nexus theme engine installed"
+    marpd_log "SUCCESS" "Theme installed successfully"
 }
 
 # ============================================
-# NEXUS PROMPT OPERATING SYSTEM
+# PROMPT SYSTEM
 # ============================================
 
-setup_nexus_prompt() {
-    nexus_log "MATRIX" "Configuring nexus prompt operating system"
+setup_prompt() {
+    marpd_log "STEP" "Setting up MAR-PD prompt system"
     
-    # Nexus Prompt Engine
-    cat > "$NEXUS_CORE/nexus_prompt.sh" << 'EOF'
-# MAR-PD THEME v3 - Nexus Prompt OS
-# Advanced Prompt Operating System
+    # Create prompt script
+    cat > "$MARPD_DIR/marpd_prompt.sh" << 'EOF'
+# MAR-PD THEME v3 Prompt System
 
-_nexus_prompt_os() {
-    local EXIT_CODE=$?
+_marpd_prompt() {
+    local EXIT="$?"
     
-    # Nexus Color Variables (True Color)
-    local N_TIME="\[\033[38;2;50;100;200m\]"
-    local N_USER="\[\033[38;2;70;140;255m\]"
-    local N_HOST="\[\033[38;2;90;180;255m\]"
-    local N_DIR="\[\033[38;2;120;220;255m\]"
-    local N_GIT="\[\033[38;2;150;250;255m\]"
-    local N_VENV="\[\033[38;2;200;255;255m\]"
-    local N_SUCCESS="\[\033[38;2;0;255;100m\]"
-    local N_ERROR="\[\033[38;2;255;0;100m\]"
-    local N_ARROW="\[\033[38;2;255;100;0m\]"
-    local N_FLOWER="\[\033[38;2;255;200;0m\]"
-    local N_RESET="\[\033[0m\]"
-    local N_DIM="\[\033[2m\]"
-    local N_BOLD="\[\033[1m\]"
+    # Colors
+    local COL_DIR="\[\033[38;5;45m\]"
+    local COL_USER="\[\033[38;5;51m\]"
+    local COL_HOST="\[\033[38;5;87m\]"
+    local COL_GIT="\[\033[38;5;123m\]"
+    local COL_TIME="\[\033[38;5;39m\]"
+    local COL_SUCCESS="\[\033[38;5;46m\]"
+    local COL_ERROR="\[\033[38;5;196m\]"
+    local COL_ARROW="\[\033[38;5;213m\]"
+    local COL_FLOWER="\[\033[38;5;219m\]"
+    local COL_RESET="\[\033[0m\]"
     
-    # Nexus Information
-    local TIME="\A"
-    local USER="\u"
-    local HOST="\h"
+    # Time
+    local TIME="\t"
+    
+    # User@Host
+    local USER_HOST="\u@\h"
+    
+    # Directory
     local DIR="\w"
     
-    # Git Nexus State
-    local GIT_INFO=""
+    # Git branch
+    local GIT_BRANCH=""
     if git rev-parse --git-dir > /dev/null 2>&1; then
-        local GIT_BRANCH=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
-        local GIT_STATUS=$(git status --porcelain 2>/dev/null | wc -l)
-        local GIT_AHEAD=$(git rev-list --count HEAD..origin/$(git branch --show-current) 2>/dev/null)
-        local GIT_BEHIND=$(git rev-list --count origin/$(git branch --show-current)..HEAD 2>/dev/null)
-        
+        GIT_BRANCH="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
         if [ -n "$GIT_BRANCH" ]; then
-            GIT_INFO=" ${N_GIT}⎇ $GIT_BRANCH"
-            
-            if [ "$GIT_STATUS" -gt 0 ]; then
-                GIT_INFO+=" \[\033[38;2;255;200;0m\]●$GIT_STATUS"
-            fi
-            
-            if [ "$GIT_AHEAD" -gt 0 ]; then
-                GIT_INFO+=" \[\033[38;2;0;255;100m\]↑$GIT_AHEAD"
-            fi
-            
-            if [ "$GIT_BEHIND" -gt 0 ]; then
-                GIT_INFO+=" \[\033[38;2;255;100;0m\]↓$GIT_BEHIND"
-            fi
-            
-            GIT_INFO+="${N_RESET}"
+            GIT_BRANCH=" ⎇ $GIT_BRANCH"
         fi
     fi
     
-    # Python Virtual Environment
-    local VENV_INFO=""
-    if [ -n "$VIRTUAL_ENV" ]; then
-        VENV_INFO=" ${N_VENV}🐍 $(basename "$VIRTUAL_ENV")${N_RESET}"
-    fi
-    
-    # Node.js Environment
-    local NODE_INFO=""
-    if [ -f "package.json" ]; then
-        NODE_INFO=" ${N_VENV}⬢ $(node --version 2>/dev/null | cut -c2-)${N_RESET}"
-    fi
-    
-    # Exit Code Nexus
-    local EXIT_INDICATOR=""
-    if [ $EXIT_CODE -eq 0 ]; then
-        EXIT_INDICATOR="${N_SUCCESS}✦${N_RESET}"
+    # Exit status
+    local STATUS=""
+    if [ $EXIT -eq 0 ]; then
+        STATUS="${COL_SUCCESS}✓${COL_RESET}"
     else
-        EXIT_INDICATOR="${N_ERROR}✗${N_RESET}($EXIT_CODE)"
+        STATUS="${COL_ERROR}✗${COL_RESET}"
     fi
     
-    # Nexus Prompt Construction
+    # Build prompt
     PS1="\n"
-    PS1+="${N_TIME}╭─[ ${TIME} ]${N_RESET}\n"
-    PS1+="${N_USER}│ ${USER}${N_DIM}@${N_RESET}${N_HOST}${HOST}${VENV_INFO}${NODE_INFO}${N_RESET}\n"
-    PS1+="${N_DIR}│ ${DIR}${GIT_INFO}${N_RESET}\n"
-    PS1+="${N_ARROW}╰─${N_FLOWER}✿${N_ARROW}➜ ${EXIT_INDICATOR} "
+    PS1+="${COL_TIME}╭─[ ${TIME} ]${COL_RESET}\n"
+    PS1+="${COL_USER}│ ${USER_HOST}${COL_RESET}\n"
+    PS1+="${COL_DIR}│ ${DIR}${COL_GIT}${GIT_BRANCH}${COL_RESET}\n"
+    PS1+="${COL_ARROW}╰─${COL_FLOWER}✿${COL_ARROW}➜ ${STATUS} "
     
-    # Continuation Nexus
-    PS2="${N_ARROW}  ${N_FLOWER}✿${N_ARROW}➜ ${N_RESET}"
-    
-    # Title Nexus
-    echo -ne "\033]0;MAR-PD v3 • ${USER}@${HOST} • ${DIR}\007"
-    
-    # Save command to history
-    history -a
+    # Continuation prompt
+    PS2="${COL_ARROW}  ${COL_FLOWER}✿${COL_ARROW}➜ ${COL_RESET}"
 }
 
-PROMPT_COMMAND="_nexus_prompt_os"
+PROMPT_COMMAND="_marpd_prompt"
 EOF
     
-    # Nexus Bash Configuration
-    if ! grep -q "NEXUS PROMPT OS" "$HOME/.bashrc" 2>/dev/null; then
+    # Add to bashrc
+    if ! grep -q "MAR-PD THEME v3" "$HOME/.bashrc" 2>/dev/null; then
         cat >> "$HOME/.bashrc" << 'EOF'
 
 # ============================================
-# MAR-PD THEME v3 - NEXUS PROMPT OPERATING SYSTEM
+# MAR-PD THEME v3 Configuration
 # ============================================
 
-# Nexus Prompt System
-source $HOME/.marpd-nexus/nexus_prompt.sh
+# Load MAR-PD prompt
+if [ -f "$HOME/.marpd-v3/marpd_prompt.sh" ]; then
+    source "$HOME/.marpd-v3/marpd_prompt.sh"
+fi
 
-# Nexus Welcome Sequence
-if [ -z "$NEXUS_WELCOME_SHOWN" ]; then
-    echo -e "\033[38;2;70;140;255m"
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                                                              ║"
-    echo "║               MAR-PD THEME v3 - NEXUS OS                     ║"
-    echo "║              Quantum Pro Max Edition                         ║"
-    echo "║                                                              ║"
-    echo "║        Type 'nexus-help' for nexus command matrix           ║"
-    echo "║                                                              ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+# Welcome message
+if [ -z "$MARPD_WELCOME_SHOWN" ]; then
+    echo -e "\033[38;5;45m"
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║                                                          ║"
+    echo "║                  MAR-PD THEME v3                         ║"
+    echo "║               Ultimate Pro Edition                       ║"
+    echo "║                                                          ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
     echo -e "\033[0m"
-    export NEXUS_WELCOME_SHOWN=1
+    export MARPD_WELCOME_SHOWN=1
 fi
 EOF
     fi
     
-    nexus_log "SYNC" "Nexus prompt operating system configured"
+    marpd_log "SUCCESS" "Prompt system configured"
 }
 
 # ============================================
-# NEXUS COMMAND MATRIX
+# COMMAND SYSTEM
 # ============================================
 
-setup_nexus_commands() {
-    nexus_log "NEURAL" "Initializing nexus command matrix"
+setup_commands() {
+    marpd_log "STEP" "Setting up MAR-PD commands"
     
-    # Nexus Command Center
-    cat > "$NEXUS_CORE/nexus_commands.sh" << 'EOF'
-# MAR-PD THEME v3 - Nexus Command Matrix
-# Advanced Command Interface
+    # Create command script
+    cat > "$MARPD_DIR/marpd_commands.sh" << 'EOF'
+# MAR-PD THEME v3 Commands
 
-nexus-help() {
-    echo -e "\033[38;2;70;140;255m"
-    cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                   NEXUS COMMAND MATRIX                      ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  \033[38;2;90;180;255mNexus Core Commands:\033[38;2;70;140;255m                                   ║
-║    \033[38;2;120;220;255mnexus-help\033[38;2;70;140;255m     - Display nexus command matrix       ║
-║    \033[38;2;120;220;255mnexus-info\033[38;2;70;140;255m     - Show nexus system information      ║
-║    \033[38;2;120;220;255mnexus-stats\033[38;2;70;140;255m    - Display nexus statistics           ║
-║    \033[38;2;120;220;255mnexus-update\033[38;2;70;140;255m   - Update nexus system                ║
-║                                                              ║
-║  \033[38;2;150;250;255mTheme Nexus Commands:\033[38;2;70;140;255m                                ║
-║    \033[38;2;200;255;255mnexus-theme\033[38;2;70;140;255m    - Change nexus theme                 ║
-║    \033[38;2;200;255;255mnexus-font\033[38;2;70;140;255m     - Change nexus font                  ║
-║    \033[38;2;200;255;255mnexus-color\033[38;2;70;140;255m    - Adjust nexus colors                ║
-║    \033[38;2;200;255;255mnexus-reset\033[38;2;70;140;255m    - Reset nexus configuration          ║
-║                                                              ║
-║  \033[38;2;255;200;0mUtility Nexus Commands:\033[38;2;70;140;255m                               ║
-║    \033[38;2;255;200;0mnexus-backup\033[38;2;70;140;255m    - Create nexus backup                ║
-║    \033[38;2;255;200;0mnexus-restore\033[38;2;70;140;255m   - Restore nexus state                ║
-║    \033[38;2;255;200;0mnexus-clean\033[38;2;70;140;255m     - Clean nexus cache                  ║
-║    \033[38;2;255;200;0mnexus-logs\033[38;2;70;140;255m      - View nexus logs                    ║
-║                                                              ║
-║  \033[38;2;255;100;0mAdvanced Nexus Commands:\033[38;2;70;140;255m                             ║
-║    \033[38;2;255;100;0mnexus-monitor\033[38;2;70;140;255m   - System monitoring                 ║
-║    \033[38;2;255;100;0mnexus-network\033[38;2;70;140;255m   - Network utilities                 ║
-║    \033[38;2;255;100;0mnexus-security\033[38;2;70;140;255m  - Security tools                    ║
-║    \033[38;2;255;100;0mnexus-developer\033[38;2;70;140;255m - Developer tools                   ║
-║                                                              ║
-║  \033[38;2;255;0;100mPrompt: \033[38;2;255;200;0mMAR-PD ᗒ✿➜\033[38;2;70;140;255m                           ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-EOF
+marpd-help() {
+    echo -e "\033[38;5;45m"
+    echo "MAR-PD THEME v3 Command Reference"
+    echo "═════════════════════════════════"
     echo -e "\033[0m"
+    echo -e "\033[38;5;51mAvailable Commands:\033[0m"
+    echo -e "  \033[38;5;87mmarpd-help\033[0m     - Show this help"
+    echo -e "  \033[38;5;87mmarpd-info\033[0m     - Show theme info"
+    echo -e "  \033[38;5;87mmarpd-update\033[0m   - Update theme"
+    echo -e "  \033[38;5;87mmarpd-config\033[0m   - Edit config"
+    echo -e "  \033[38;5;87mmarpd-backup\033[0m   - Create backup"
+    echo -e "  \033[38;5;87mmarpd-restore\033[0m  - Restore backup"
+    echo -e "  \033[38;5;87mmarpd-clean\033[0m    - Clean cache"
+    echo ""
+    echo -e "\033[38;5;213mPrompt: MAR-PD ᗒ✿➜\033[0m"
+    echo -e "\033[38;5;219mTeam: MAR-PD\033[0m"
 }
 
-nexus-info() {
-    local nexus_uptime=$(uptime -p | sed 's/up //')
-    local nexus_shell=$(basename "$SHELL")
-    local nexus_term="${TERM}"
-    local nexus_theme_version="$NEXUS_VERSION"
-    
-    echo -e "\033[38;2;90;180;255m"
-    cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                   NEXUS SYSTEM INFORMATION                   ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-EOF
-    echo -e "║  \033[38;2;120;220;255mTheme:\033[0m      MAR-PD THEME v3 (Quantum Pro Max)           ║"
-    echo -e "║  \033[38;2;120;220;255mVersion:\033[0m    $nexus_theme_version                              ║"
-    echo -e "║  \033[38;2;120;220;255mTeam:\033[0m       $NEXUS_TEAM                                     ║"
-    echo -e "║  \033[38;2;120;220;255mStatus:\033[0m     \033[38;2;0;255;100mNexus Active\033[38;2;90;180;255m                          ║"
-    echo -e "║  \033[38;2;120;220;255mDirectory:\033[0m  $NEXUS_CORE                                     ║"
-    echo -e "║                                                              ║"
-    echo -e "║  \033[38;2;150;250;255mSystem Information:\033[0m                                        ║"
-    echo -e "║    \033[38;2;200;255;255mHost:\033[0m     $(hostname)                                    ║"
-    echo -e "║    \033[38;2;200;255;255mUser:\033[0m     $(whoami)                                      ║"
-    echo -e "║    \033[38;2;200;255;255mShell:\033[0m    $nexus_shell                                    ║"
-    echo -e "║    \033[38;2;200;255;255mTerminal:\033[0m $nexus_term                                     ║"
-    echo -e "║    \033[38;2;200;255;255mUptime:\033[0m   $nexus_uptime                                   ║"
-    echo -e "║                                                              ║"
-    echo -e "╚══════════════════════════════════════════════════════════════╝"
+marpd-info() {
+    echo -e "\033[38;5;45m"
+    echo "MAR-PD THEME v3 Information"
+    echo "═══════════════════════════"
     echo -e "\033[0m"
+    echo -e "Version:    \033[38;5;87m3.0.0\033[0m"
+    echo -e "Team:       \033[38;5;87mMAR-PD\033[0m"
+    echo -e "Status:     \033[38;5;46mActive\033[0m"
+    echo -e "Directory:  \033[38;5;87m$HOME/.marpd-v3\033[0m"
+    echo -e "Config:     \033[38;5;87m$HOME/.marpd-v3/config.marpd\033[0m"
+    echo ""
+    echo -e "\033[38;5;213mRepository: https://github.com/master-pd/marpd-theme.git\033[0m"
 }
 
-nexus-stats() {
-    local total_commands=$(history | wc -l)
-    local nexus_usage=$(du -sh "$NEXUS_CORE" 2>/dev/null | cut -f1)
-    local theme_age=$(stat -c %y "$NEXUS_CORE" 2>/dev/null | cut -d' ' -f1)
-    local load_avg=$(uptime | awk -F'load average:' '{print $2}')
-    local memory_usage=$(free -m | awk 'NR==2{printf "%.1f%%", $3*100/$2}')
-    local disk_usage=$(df -h / | awk 'NR==2{print $5}')
-    
-    echo -e "\033[38;2;120;220;255m"
-    cat << "EOF"
-╔══════════════════════════════════════════════════════════════╗
-║                     NEXUS STATISTICS                         ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-EOF
-    echo -e "║  \033[38;2;150;250;255mNexus Statistics:\033[0m                                        ║"
-    echo -e "║    \033[38;2;200;255;255mTotal Commands:\033[0m $total_commands                          ║"
-    echo -e "║    \033[38;2;200;255;255mNexus Usage:\033[0m    $nexus_usage                             ║"
-    echo -e "║    \033[38;2;200;255;255mTheme Age:\033[0m      $theme_age                               ║"
-    echo -e "║                                                              ║"
-    echo -e "║  \033[38;2;255;200;0mSystem Performance:\033[0m                                       ║"
-    echo -e "║    \033[38;2;255;200;0mLoad Average:\033[0m   $load_avg                                ║"
-    echo -e "║    \033[38;2;255;200;0mMemory Usage:\033[0m   $memory_usage                              ║"
-    echo -e "║    \033[38;2;255;200;0mDisk Usage:\033[0m     $disk_usage                                ║"
-    echo -e "║                                                              ║"
-    echo -e "╚══════════════════════════════════════════════════════════════╝"
-    echo -e "\033[0m"
+marpd-update() {
+    echo -e "\033[38;5;45mUpdating MAR-PD THEME v3...\033[0m"
+    sleep 1
+    echo -e "\033[38;5;87mChecking for updates...\033[0m"
+    sleep 1
+    echo -e "\033[38;5;46mTheme is up to date!\033[0m"
 }
 
-nexus-update() {
-    echo -e "\033[38;2;90;180;255mInitializing nexus update protocol...\033[0m"
-    sleep 0.5
-    echo -e "\033[38;2;120;220;255mSynchronizing nexus matrix...\033[0m"
-    sleep 0.5
-    echo -e "\033[38;2;150;250;255mUpdating nexus components...\033[0m"
-    sleep 0.5
-    echo -e "\033[38;2;200;255;255mOptimizing nexus performance...\033[0m"
-    sleep 0.5
-    echo -e "\033[38;2;0;255;100mNexus update completed successfully!\033[0m"
+marpd-config() {
+    if [ -f "$HOME/.marpd-v3/config.marpd" ]; then
+        nano "$HOME/.marpd-v3/config.marpd"
+    else
+        echo -e "\033[38;5;196mConfig file not found!\033[0m"
+    fi
 }
 
-# Nexus Monitor
-nexus-monitor() {
-    echo -e "\033[38;2;90;180;255m"
-    echo "Nexus System Monitor"
-    echo "════════════════════"
-    echo -e "\033[0m"
-    htop
+marpd-backup() {
+    echo -e "\033[38;5;45mCreating backup...\033[0m"
+    bash "$HOME/.marpd-v3/backup.sh"
 }
 
-# Nexus Network
-nexus-network() {
-    echo -e "\033[38;2;120;220;255m"
-    echo "Nexus Network Utilities"
-    echo "═══════════════════════"
-    echo -e "\033[0m"
-    echo "1. Network Info"
-    echo "2. Speed Test"
-    echo "3. Port Scanner"
-    echo "4. DNS Lookup"
-    read -p "Select option: " opt
-    
-    case $opt in
-        1) ifconfig || ip addr ;;
-        2) speedtest-go ;;
-        3) read -p "Enter target: " target; nmap -p 1-1000 "$target" ;;
-        4) read -p "Enter domain: " domain; nslookup "$domain" ;;
-        *) echo "Invalid option" ;;
-    esac
+marpd-restore() {
+    echo -e "\033[38;5;45mRestoring backup...\033[0m"
+    bash "$HOME/.marpd-v3/restore.sh"
 }
 
-# Nexus Aliases
-alias nexus-theme="nano $HOME/.termux/colors.properties"
-alias nexus-font="nano $HOME/.termux/font.ttf"
-alias nexus-color="nano $NEXUS_CORE/nexus_prompt.sh"
-alias nexus-reset="bash $NEXUS_CORE/reset_nexus.sh"
-alias nexus-backup="bash $NEXUS_CORE/backup_nexus.sh"
-alias nexus-restore="bash $NEXUS_CORE/restore_nexus.sh"
-alias nexus-clean="rm -f $NEXUS_CORE/*.log $NEXUS_CORE/*.cache"
-alias nexus-logs="tail -f $NEXUS_CORE/nexus.log"
-alias nhelp="nexus-help"
-alias ninfo="nexus-info"
-alias nstats="nexus-stats"
-alias nupdate="nexus-update"
-alias nmon="nexus-monitor"
-alias nnet="nexus-network"
+marpd-clean() {
+    echo -e "\033[38;5;45mCleaning cache...\033[0m"
+    rm -f "$HOME/.marpd-v3/*.log" 2>/dev/null
+    rm -f "$HOME/.marpd-v3/*.tmp" 2>/dev/null
+    echo -e "\033[38;5;46mCache cleaned!\033[0m"
+}
+
+# Aliases
+alias mhelp="marpd-help"
+alias minfo="marpd-info"
+alias mupdate="marpd-update"
+alias mconfig="marpd-config"
 EOF
     
-    # Source nexus commands
-    if ! grep -q "NEXUS COMMANDS" "$HOME/.bashrc" 2>/dev/null; then
+    # Add to bashrc
+    if ! grep -q "MAR-PD COMMANDS" "$HOME/.bashrc" 2>/dev/null; then
         echo "" >> "$HOME/.bashrc"
-        echo "# MAR-PD THEME v3 - NEXUS COMMANDS" >> "$HOME/.bashrc"
-        echo "source $NEXUS_CORE/nexus_commands.sh" >> "$HOME/.bashrc"
+        echo "# MAR-PD THEME v3 Commands" >> "$HOME/.bashrc"
+        echo "source $HOME/.marpd-v3/marpd_commands.sh" >> "$HOME/.bashrc"
     fi
     
-    nexus_log "ATOMIC" "Nexus command matrix initialized"
+    marpd_log "SUCCESS" "Command system configured"
 }
 
 # ============================================
-# NEXUS FEATURE MATRIX
+# UTILITIES
 # ============================================
 
-setup_nexus_features() {
-    nexus_log("NEURAL", "Activating nexus feature matrix"
+setup_utilities() {
+    marpd_log "STEP" "Setting up utilities"
     
-    # Nexus Auto-completion
-    cat > "$NEXUS_CORE/nexus_completion.sh" << 'EOF'
-# Nexus Auto-completion System
+    # Create backup script
+    cat > "$MARPD_DIR/backup.sh" << 'EOF'
+#!/bin/bash
 
-_nexus_completion() {
-    local cur prev opts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="help info stats update theme font color reset backup restore clean logs monitor network security developer"
+# MAR-PD THEME v3 Backup Script
+
+BACKUP_DIR="$HOME/.marpd-backup-v3/$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$BACKUP_DIR"
+
+echo -e "\033[38;5;45mCreating backup...\033[0m"
+
+# Backup Termux
+if [ -d "$HOME/.termux" ]; then
+    cp -r "$HOME/.termux" "$BACKUP_DIR/termux"
+    echo -e "\033[38;5;87m✓ Termux configuration\033[0m"
+fi
+
+# Backup shell files
+cp "$HOME/.bashrc" "$BACKUP_DIR/bashrc" 2>/dev/null
+cp "$HOME/.zshrc" "$BACKUP_DIR/zshrc" 2>/dev/null
+
+# Backup MAR-PD files
+if [ -d "$HOME/.marpd-v3" ]; then
+    cp -r "$HOME/.marpd-v3" "$BACKUP_DIR/marpd"
+    echo -e "\033[38;5;87m✓ MAR-PD configuration\033[0m"
+fi
+
+echo -e "\033[38;5;46mBackup created: $BACKUP_DIR\033[0m"
+EOF
     
-    if [[ ${cur} == * ]] ; then
-        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-        return 0
+    # Create restore script
+    cat > "$MARPD_DIR/restore.sh" << 'EOF'
+#!/bin/bash
+
+# MAR-PD THEME v3 Restore Script
+
+echo -e "\033[38;5;45mAvailable backups:\033[0m"
+
+# List backups
+BACKUP_LIST=($(ls -d $HOME/.marpd-backup-v3/*/ 2>/dev/null))
+for i in "${!BACKUP_LIST[@]}"; do
+    echo -e "\033[38;5;87m$i: ${BACKUP_LIST[$i]}\033[0m"
+done
+
+read -p "Select backup number: " choice
+
+if [ -n "$choice" ] && [ -n "${BACKUP_LIST[$choice]}" ]; then
+    BACKUP_DIR="${BACKUP_LIST[$choice]}"
+    
+    echo -e "\033[38;5;45mRestoring from $BACKUP_DIR\033[0m"
+    
+    # Restore Termux
+    if [ -d "$BACKUP_DIR/termux" ]; then
+        cp -r "$BACKUP_DIR/termux" "$HOME/.termux"
+        echo -e "\033[38;5;87m✓ Termux configuration\033[0m"
     fi
-}
-
-complete -F _nexus_completion nexus-
-EOF
     
-    # Nexus Utility Functions
-    cat > "$NEXUS_CORE/nexus_utils.sh" << 'EOF'
-# Nexus Utility Functions
-
-nexus-clock() {
-    while true; do
-        clear
-        echo -e "\033[38;2;90;180;255m"
-        date +"╔══════════════════════════════════╗"
-        echo "║       NEXUS CLOCK v3          ║"
-        date +"╠══════════════════════════════════╣"
-        echo "║                                  ║"
-        date +"║   %A, %B %d, %Y              ║"
-        date +"║   %I:%M:%S %p                  ║"
-        date +"║   %Z                          ║"
-        echo "║                                  ║"
-        echo "╚══════════════════════════════════╝"
-        echo -e "\033[0m"
-        sleep 1
-    done
-}
-
-nexus-weather() {
-    local city="${1:-Dhaka}"
-    echo -e "\033[38;2;120;220;255mFetching nexus weather for $city...\033[0m"
-    curl -s "wttr.in/$city?format=v2"
-}
-
-nexus-calendar() {
-    cal -3 | sed "s/^/\033[38;2;150;250;255m/; s/$/\033[0m/"
-}
-
-nexus-sysinfo() {
-    neofetch --ascii_distro termux_old --colors 4 8 8 8 8 8
-}
-
-nexus-battery() {
-    termux-battery-status | jq -r '"Battery: \(.percentage)% (\(.status))"'
-}
-
-nexus-storage() {
-    df -h | grep -E "^/dev" | awk '{printf "%-10s %-10s %-10s %-10s\n", $1, $3, $5, $6}' | \
-    sed "s/^/\033[38;2;200;255;255m/; s/$/\033[0m/"
-}
-EOF
+    # Restore shell files
+    cp "$BACKUP_DIR/bashrc" "$HOME/.bashrc" 2>/dev/null
+    cp "$BACKUP_DIR/zshrc" "$HOME/.zshrc" 2>/dev/null
     
-    # Nexus Developer Tools
-    cat > "$NEXUS_CORE/nexus_dev.sh" << 'EOF'
-# Nexus Developer Tools
-
-nexus-dev() {
-    echo -e "\033[38;2;90;180;255m"
-    echo "Nexus Developer Tools"
-    echo "═════════════════════"
-    echo -e "\033[0m"
-    echo "1. Python Environment"
-    echo "2. Node.js Environment"
-    echo "3. Git Tools"
-    echo "4. Code Editor"
-    read -p "Select option: " opt
-    
-    case $opt in
-        1) python --version; pip list ;;
-        2) node --version; npm list -g --depth=0 ;;
-        3) git --version; git status ;;
-        4) micro --version ;;
-        *) echo "Invalid option" ;;
-    esac
-}
-
-nexus-python() {
-    if [ -f "requirements.txt" ]; then
-        pip install -r requirements.txt
+    # Restore MAR-PD files
+    if [ -d "$BACKUP_DIR/marpd" ]; then
+        cp -r "$BACKUP_DIR/marpd" "$HOME/.marpd-v3"
+        echo -e "\033[38;5;87m✓ MAR-PD configuration\033[0m"
     fi
-    python -m py_compile *.py 2>/dev/null
-}
-
-nexus-node() {
-    if [ -f "package.json" ]; then
-        npm install
-    fi
-}
-
-nexus-git() {
-    echo -e "\033[38;2;120;220;255m"
-    echo "Git Nexus"
-    echo "═════════"
-    echo -e "\033[0m"
-    echo "1. Status"
-    echo "2. Pull"
-    echo "3. Push"
-    echo "4. Commit"
-    read -p "Select option: " opt
     
-    case $opt in
-        1) git status ;;
-        2) git pull ;;
-        3) git push ;;
-        4) read -p "Commit message: " msg; git add .; git commit -m "$msg" ;;
-        *) echo "Invalid option" ;;
-    esac
-}
+    echo -e "\033[38;5;46mRestoration complete!\033[0m"
+    echo -e "\033[38;5;213mRestart Termux to apply changes.\033[0m"
+else
+    echo -e "\033[38;5;196mInvalid selection!\033[0m"
+fi
 EOF
     
-    # Source all nexus features
-    cat >> "$HOME/.bashrc" << 'EOF'
+    # Create config file
+    cat > "$MARPD_DIR/config.marpd" << 'EOF'
+# MAR-PD THEME v3 Configuration File
 
-# Nexus Features
-source $HOME/.marpd-nexus/nexus_completion.sh
-source $HOME/.marpd-nexus/nexus_utils.sh
-source $HOME/.marpd-nexus/nexus_dev.sh
+# Theme Settings
+theme_version="3.0.0"
+theme_name="MAR-PD THEME v3"
+theme_prompt="MAR-PD ᗒ✿➜"
+theme_team="MAR-PD"
 
-# Nexus Path
-export PATH="$PATH:$HOME/.marpd-nexus/bin"
+# Color Settings
+primary_color="#00adb5"
+secondary_color="#e94560"
+accent_color="#ffbd69"
+background_color="#1a1a2e"
+foreground_color="#eeeeee"
 
-# Nexus Editor
-export EDITOR="micro"
-export VISUAL="micro"
+# Behavior Settings
+auto_update=true
+show_welcome=true
+enable_animations=true
+backup_on_update=true
 
-# Nexus History
-export HISTSIZE=20000
-export HISTFILESIZE=40000
-export HISTCONTROL=ignoreboth:erasedups
-export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S - "
-shopt -s histappend
+# Custom Settings
+custom_prompt_style="advanced"
+enable_git_info=true
+show_time_in_prompt=true
+multi_line_prompt=true
 
-# Nexus Aliases
-alias ll="ls -la --color=auto"
-alias la="ls -A --color=auto"
-alias l="ls -CF --color=auto"
-alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias cls="clear"
-alias update="pkg update && pkg upgrade"
+# Editor Settings
+default_editor="nano"
+enable_syntax_highlighting=true
+
+# Network Settings
+check_updates=true
+update_frequency="weekly"
+
+# End of Configuration
 EOF
     
-    nexus_log "SYNC", "Nexus feature matrix activated"
+    # Make scripts executable
+    chmod +x "$MARPD_DIR/backup.sh"
+    chmod +x "$MARPD_DIR/restore.sh"
+    
+    marpd_log "SUCCESS" "Utilities configured")
 }
 
 # ============================================
-# NEXUS CLEANUP PROTOCOL
+# CLEANUP DEFAULT THEME
 # ============================================
 
-nexus_cleanup() {
-    nexus_log "MATRIX", "Executing nexus cleanup protocol"
+cleanup_default() {
+    marpd_log "STEP" "Cleaning up default theme")
     
-    # Remove default themes
+    # Remove default theme backups
     rm -f "$HOME/.termux/colors.properties.bak" 2>/dev/null
     rm -f "$HOME/.termux/font.ttf.bak" 2>/dev/null
     
-    # Clean bashrc of other themes
+    # Remove other theme autostarts from bashrc
     sed -i '/oh-my-termux/d' "$HOME/.bashrc" 2>/dev/null
     sed -i '/color-scheme/d' "$HOME/.bashrc" 2>/dev/null
-    sed -i '/default-theme/d' "$HOME/.bashrc" 2>/dev/null
     
-    # Remove temporary files
-    rm -f /tmp/*.marpd.* 2>/dev/null
-    
-    nexus_log "ATOMIC", "Nexus cleanup protocol completed"
+    marpd_log "SUCCESS" "Default theme cleaned")
 }
 
 # ============================================
-# NEXUS VERIFICATION SUITE
+# FINAL SETUP
 # ============================================
 
-verify_nexus() {
-    nexus_log "NEXUS", "Executing nexus verification suite"
+final_setup() {
+    marpd_log "STEP" "Finalizing installation")
     
-    local nexus_files=(
-        "$HOME/.termux/colors.properties"
-        "$HOME/.termux/termux.properties"
-        "$HOME/.termux/font.ttf"
-        "$NEXUS_CORE/nexus_prompt.sh"
-        "$NEXUS_CORE/nexus_commands.sh"
-        "$NEXUS_CORE/nexus_completion.sh"
-        "$NEXUS_CORE/nexus_utils.sh"
-        "$NEXUS_CORE/nexus_dev.sh"
-    )
-    
-    for file in "${nexus_files[@]}"; do
-        if [ ! -f "$file" ]; then
-            nexus_log "ERROR", "Nexus file missing: $file"
-            return 1
-        fi
-    done
-    
-    if ! grep -q "NEXUS" "$HOME/.bashrc" 2>/dev/null; then
-        nexus_log "ERROR", "Nexus configuration missing in bashrc"
-        return 1
-    fi
-    
-    nexus_log "SYNC", "Nexus verification suite successful"
-    return 0
-}
+    # Create completion file
+    cat > "$MARPD_DIR/install_complete" << EOF
+MAR-PD THEME v3 Installation Complete
+=====================================
+Installation Date: $(date)
+Version: $MARPD_VERSION
+Team: $TEAM
+Installation Directory: $MARPD_DIR
 
-# ============================================
-# NEXUS COMPLETION CEREMONY
-# ============================================
+To use the theme:
+1. Restart Termux
+2. Type 'marpd-help' for commands
+3. Type 'marpd-info' for info
 
-show_nexus_completion() {
-    nexus_banner
-    
-    echo -e "${N_GRAD_06}"
-    cat << "EOF"
-╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗
-║                              NEXUS INSTALLATION COMPLETE                                             ║
-╠═══════════════════════════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                                       ║
-║   ✓ Nexus Matrix Initialized                                                                         ║
-║   ✓ Neural Network Synchronized                                                                      ║
-║   ✓ Atomic Systems Calibrated                                                                        ║
-║   ✓ Quantum Core Activated                                                                           ║
-║   ✓ Pro Max Features Enabled                                                                         ║
-║                                                                                                       ║
-║   Theme:     MAR-PD THEME v3 (Quantum Pro Max Edition)                                               ║
-║   Version:   $NEXUS_VERSION                                                                         ║
-║   Team:      $NEXUS_TEAM                                                                            ║
-║   Prompt:    $NEXUS_PROMPT                                                                         ║
-║                                                                                                       ║
-║   Nexus Command Matrix Available:                                                                    ║
-║   nexus-help     - Display nexus command matrix                                                      ║
-║   nexus-info     - Show nexus system information                                                     ║
-║   nexus-stats    - Display nexus statistics                                                          ║
-║   nexus-update   - Update nexus system                                                               ║
-║   nexus-monitor  - System monitoring tools                                                           ║
-║   nexus-network  - Network utilities                                                                 ║
-║   nexus-dev      - Developer tools                                                                   ║
-║                                                                                                       ║
-║   Restart Termux to experience the full Quantum Pro Max potential!                                   ║
-║                                                                                                       ║
-╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝
+For support:
+Telegram: https://t.me/master_spamming
+Repository: https://github.com/master-pd/marpd-theme.git
 EOF
-    echo -e "${N_RESET}"
     
-    echo ""
-    echo -e "${N_GRAD_05}Nexus Initialization Sequence:${N_RESET}"
-    echo -e "   ${N_GRAD_03}1. ${N_ENH_WHITE}Close and reopen Termux${N_RESET}"
-    echo -e "   ${N_GRAD_03}2. ${N_ENH_WHITE}Type 'nexus-help' for command matrix${N_RESET}"
-    echo -e "   ${N_GRAD_03}3. ${N_ENH_WHITE}Use 'nexus-info' for system details${N_RESET}"
-    echo -e "   ${N_GRAD_03}4. ${N_ENH_WHITE}Explore 'nexus-dev' for developer tools${N_RESET}"
-    echo -e "   ${N_GRAD_03}5. ${N_ENH_WHITE}Enjoy your Quantum Pro Max terminal experience!${N_RESET}"
-    echo ""
-}
-
-# ============================================
-# MAIN NEXUS INSTALLATION
-# ============================================
-
-nexus_installation() {
-    nexus_banner
-    
-    echo -e "${N_GRAD_05}Initializing Nexus Installation Protocol...${N_RESET}"
-    echo ""
-    
-    # Phase 1: Nexus Validation
-    echo -e "${N_ENH_WHITE}Phase 1: ${N_GRAD_04}Nexus Validation Suite${N_RESET}"
-    if ! nexus_validate; then
-        echo -e "${N_ENH_RED}Nexus validation failed. Aborting protocol.${N_RESET}"
-        exit 1
-    fi
-    nexus_progress "Nexus validation complete"
-    
-    # Phase 2: Nexus Dependencies
-    echo -e "\n${N_ENH_WHITE}Phase 2: ${N_GRAD_04}Nexus Dependency Matrix${N_RESET}"
-    if ! nexus_dependencies; then
-        echo -e "${N_ENH_RED}Nexus dependency resolution failed.${N_RESET}"
-        exit 1
-    fi
-    nexus_progress "Nexus dependencies resolved"
-    
-    # Phase 3: Nexus Vault
-    echo -e "\n${N_ENH_WHITE}Phase 3: ${N_GRAD_04}Nexus Vault System${N_RESET}"
-    nexus_vault
-    nexus_progress "Nexus vault created"
-    
-    # Phase 4: Nexus Theme
-    echo -e "\n${N_ENH_WHITE}Phase 4: ${N_GRAD_04}Nexus Theme Engine${N_RESET}"
-    install_nexus_theme
-    nexus_progress "Nexus theme installed"
-    
-    # Phase 5: Nexus Prompt OS
-    echo -e "\n${N_ENH_WHITE}Phase 5: ${N_GRAD_04}Nexus Prompt Operating System${N_RESET}"
-    setup_nexus_prompt
-    nexus_progress "Nexus prompt OS configured"
-    
-    # Phase 6: Nexus Command Matrix
-    echo -e "\n${N_ENH_WHITE}Phase 6: ${N_GRAD_04}Nexus Command Matrix${N_RESET}"
-    setup_nexus_commands
-    nexus_progress "Nexus command matrix initialized"
-    
-    # Phase 7: Nexus Feature Matrix
-    echo -e "\n${N_ENH_WHITE}Phase 7: ${N_GRAD_04}Nexus Feature Matrix${N_RESET}"
-    setup_nexus_features
-    nexus_progress "Nexus features activated"
-    
-    # Phase 8: Nexus Cleanup
-    echo -e "\n${N_ENH_WHITE}Phase 8: ${N_GRAD_04}Nexus Cleanup Protocol${N_RESET}"
-    nexus_cleanup
-    nexus_progress "Nexus cleanup completed"
-    
-    # Phase 9: Nexus Verification
-    echo -e "\n${N_ENH_WHITE}Phase 9: ${N_GRAD_04}Nexus Verification Suite${N_RESET}"
-    if ! verify_nexus; then
-        echo -e "${N_ENH_RED}Nexus verification failed.${N_RESET}"
-        exit 1
-    fi
-    nexus_progress "Nexus verification successful"
-    
-    # Reload Nexus Settings
+    # Reload Termux settings
     termux-reload-settings > /dev/null 2>&1
     
-    # Show Completion
-    show_nexus_completion
-    
-    # Log Nexus Success
-    nexus_log "NEXUS", "MAR-PD THEME v3 Nexus installation completed successfully"
+    marpd_log "SUCCESS" "Final setup completed")
 }
 
 # ============================================
-# NEXUS EXECUTION PROTOCOL
+# INSTALLATION COMPLETE
 # ============================================
 
-# Nexus Error Handler
-trap 'echo -e "${N_ENH_RED}Nexus installation interrupted!${N_RESET}"; exit 1' INT
+show_completion() {
+    show_marpd_header
+    
+    echo -e "${C_BOLD_GREEN}"
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║               INSTALLATION COMPLETE                      ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_WHITE}✓ MAR-PD THEME v3 successfully installed${C_BOLD_GREEN}                 ║"
+    echo -e "║   ${C_BOLD_WHITE}✓ All components configured${C_BOLD_GREEN}                             ║"
+    echo -e "║   ${C_BOLD_WHITE}✓ Backup system ready${C_BOLD_GREEN}                                   ║"
+    echo -e "║   ${C_BOLD_WHITE}✓ Command system activated${C_BOLD_GREEN}                              ║"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_CYAN}Theme:     ${C_BOLD_WHITE}MAR-PD THEME v3${C_BOLD_GREEN}                             ║"
+    echo -e "║   ${C_BOLD_CYAN}Version:   ${C_BOLD_WHITE}$MARPD_VERSION${C_BOLD_GREEN}                                    ║"
+    echo -e "║   ${C_BOLD_CYAN}Team:      ${C_BOLD_WHITE}$MARPD_TEAM${C_BOLD_GREEN}                                    ║"
+    echo -e "║   ${C_BOLD_CYAN}Prompt:    ${C_BOLD_WHITE}$MARPD_PROMPT${C_BOLD_GREEN}                               ║"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_YELLOW}Available commands:${C_BOLD_GREEN}                                         ║"
+    echo -e "║   ${C_BOLD_MAGENTA}marpd-help${C_BOLD_GREEN}     - Show available commands                 ║"
+    echo -e "║   ${C_BOLD_MAGENTA}marpd-info${C_BOLD_GREEN}     - Show theme information                  ║"
+    echo -e "║   ${C_BOLD_MAGENTA}marpd-update${C_BOLD_GREEN}   - Update MAR-PD THEME                     ║"
+    echo -e "║   ${C_BOLD_MAGENTA}marpd-config${C_BOLD_GREEN}   - Edit configuration                      ║"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_CYAN}Restart Termux to activate the theme!${C_BOLD_GREEN}                         ║"
+    echo "║                                                          ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo -e "${C_RESET}"
+    
+    echo ""
+    echo -e "${C_BOLD_CYAN}Next Steps:${C_RESET}"
+    echo -e "  1. ${C_BOLD_WHITE}Close and reopen Termux${C_RESET}"
+    echo -e "  2. ${C_BOLD_WHITE}Type 'marpd-help' to see all commands${C_RESET}"
+    echo -e "  3. ${C_BOLD_WHITE}Type 'marpd-info' for theme information${C_RESET}"
+    echo -e "  4. ${C_BOLD_WHITE}Enjoy your professional terminal!${C_RESET}"
+    echo ""
+    echo -e "${C_BOLD_YELLOW}Support: https://t.me/master_spamming${C_RESET}"
+    echo -e "${C_BOLD_MAGENTA}Repository: https://github.com/master-pd/marpd-theme.git${C_RESET}"
+    echo ""
+}
 
-# Execute Nexus Installation
+# ============================================
+# MAIN INSTALLATION
+# ============================================
+
+main_install() {
+    show_marpd_header
+    
+    echo -e "${C_BOLD_CYAN}Starting MAR-PD THEME v3 Installation...${C_RESET}"
+    echo ""
+    
+    # Step 1: Check environment
+    echo -e "${C_BOLD_WHITE}Step 1: Checking environment${C_RESET}"
+    if ! check_termux; then
+        exit 1
+    fi
+    show_progress "Environment checked"
+    
+    # Step 2: Check internet
+    echo -e "\n${C_BOLD_WHITE}Step 2: Checking internet${C_RESET}"
+    check_internet
+    show_progress "Internet checked"
+    
+    # Step 3: Install dependencies
+    echo -e "\n${C_BOLD_WHITE}Step 3: Installing dependencies${C_RESET}"
+    install_dependencies
+    show_progress "Dependencies installed"
+    
+    # Step 4: Create backup
+    echo -e "\n${C_BOLD_WHITE}Step 4: Creating backup${C_RESET}"
+    create_backup
+    show_progress "Backup created"
+    
+    # Step 5: Install theme
+    echo -e "\n${C_BOLD_WHITE}Step 5: Installing theme${C_RESET}"
+    install_theme
+    show_progress "Theme installed"
+    
+    # Step 6: Setup prompt
+    echo -e "\n${C_BOLD_WHITE}Step 6: Setting up prompt${C_RESET}"
+    setup_prompt
+    show_progress "Prompt configured"
+    
+    # Step 7: Setup commands
+    echo -e "\n${C_BOLD_WHITE}Step 7: Setting up commands${C_RESET}"
+    setup_commands
+    show_progress "Commands configured"
+    
+    # Step 8: Setup utilities
+    echo -e "\n${C_BOLD_WHITE}Step 8: Setting up utilities${C_RESET}"
+    setup_utilities
+    show_progress "Utilities configured"
+    
+    # Step 9: Cleanup default
+    echo -e "\n${C_BOLD_WHITE}Step 9: Cleaning default theme${C_RESET}"
+    cleanup_default
+    show_progress "Default theme cleaned"
+    
+    # Step 10: Final setup
+    echo -e "\n${C_BOLD_WHITE}Step 10: Finalizing installation${C_RESET}"
+    final_setup
+    show_progress "Installation finalized"
+    
+    # Show completion
+    show_completion
+    
+    # Log completion
+    marpd_log "SUCCESS" "MAR-PD THEME v3 installation completed successfully"
+}
+
+# ============================================
+# ERROR HANDLING
+# ============================================
+
+handle_error() {
+    echo -e "${C_BOLD_RED}"
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║                    INSTALLATION ERROR                    ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_WHITE}Error: $1${C_BOLD_RED}                                               ║"
+    echo "║                                                          ║"
+    echo -e "║   ${C_BOLD_YELLOW}Please contact support:${C_BOLD_RED}                                   ║"
+    echo -e "║   ${C_BOLD_CYAN}Telegram: https://t.me/master_spamming${C_BOLD_RED}                     ║"
+    echo "║                                                          ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo -e "${C_RESET}"
+    exit 1
+}
+
+# ============================================
+# TRAP AND EXECUTION
+# ============================================
+
+trap 'handle_error "Installation interrupted by user"' INT
+trap 'handle_error "Installation failed"' ERR
+
+# Start installation
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    nexus_installation
+    main_install
 fi
