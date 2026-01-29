@@ -61,14 +61,58 @@ download_theme() {
     # Download bg.png from GitHub
     echo -e "${BLUE}[*] Downloading background image...${NC}"
     wget -q "https://raw.githubusercontent.com/username/marpd-theme/main/bg.png" \
-         -O "$THEME_DIR/bg.png"
+         -O "$THEME_DIR/bg.png" 2>/dev/null || \
+    wget -q "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1080&q=80" \
+         -O "$THEME_DIR/bg.png" 2>/dev/null
     
     # Download theme script
     echo -e "${BLUE}[*] Downloading theme script...${NC}"
     wget -q "https://raw.githubusercontent.com/username/marpd-theme/main/marpd-theme.sh" \
-         -O "$THEME_DIR/marpd-theme.sh"
+         -O "$THEME_DIR/marpd-theme.sh" 2>/dev/null || \
+    echo -e "${RED}[!] Failed to download theme script${NC}"
+    
+    if [ -f "$THEME_DIR/marpd-theme.sh" ]; then
+        chmod +x "$THEME_DIR/marpd-theme.sh"
+        echo -e "${GREEN}[✓] Theme script downloaded${NC}"
+    else
+        # Create basic theme script if download fails
+        create_basic_theme
+    fi
+}
+
+# Create basic theme if download fails
+create_basic_theme() {
+    echo -e "${YELLOW}[*] Creating basic theme script...${NC}"
+    
+    cat > "$THEME_DIR/marpd-theme.sh" << 'EOF'
+#!/bin/bash
+# MAR-PD Basic Theme
+
+# Colors
+C1='\033[1;36m'
+C2='\033[1;35m'
+C3='\033[1;32m'
+C4='\033[1;31m'
+R='\033[0m'
+
+# Show banner
+echo -e "${C1}"
+echo "    ███╗   ███╗ █████╗ ██████╗ ██████╗ ██████╗ "
+echo "    ████╗ ████║██╔══██╗██╔══██╗██╔══██╗██╔══██╗"
+echo "    ██╔████╔██║███████║██████╔╝██████╔╝██║  ██║"
+echo "    ██║╚██╔╝██║██╔══██║██╔═══╝ ██╔═══╝ ██║  ██║"
+echo "    ██║ ╚═╝ ██║██║  ██║██║     ██║     ██████╔╝"
+echo "    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═════╝ "
+echo -e "${R}"
+echo -e "${C2}┌─────────────────────────────────────────────┐${R}"
+echo -e "${C2}│ ${C3}MAR-PD Theme | WE WORK EXPERIMENT${R}"
+echo -e "${C2}│ ${C3}User: $(whoami)@$(hostname)${R}"
+echo -e "${C2}│ ${C3}Time: $(date '+%H:%M:%S')${R}"
+echo -e "${C2}└─────────────────────────────────────────────┘${R}"
+EOF
     
     chmod +x "$THEME_DIR/marpd-theme.sh"
+    echo -e "${GREEN}[✓] Basic theme created${NC}"
 }
 
 # Configure shell
@@ -76,7 +120,14 @@ configure_shell() {
     echo -e "${YELLOW}[*] Configuring shell...${NC}"
     
     # Backup
-    cp ~/.bashrc ~/.bashrc.backup.marpd 2>/dev/null
+    if [ -f ~/.bashrc ]; then
+        cp ~/.bashrc ~/.bashrc.backup.marpd
+        echo -e "${GREEN}[✓] Backup created: ~/.bashrc.backup.marpd${NC}"
+    fi
+    
+    # Remove existing MAR-PD configuration if any
+    sed -i '/# MAR-PD TERMUX THEME/,/^EOF$/d' ~/.bashrc 2>/dev/null
+    sed -i '/marpd()/,/^}/d' ~/.bashrc 2>/dev/null
     
     # Add to bashrc
     cat >> ~/.bashrc << 'EOF'
@@ -99,6 +150,7 @@ marpd() {
             echo "  marpd info     - System info"
             echo "  marpd bg       - Set background"
             echo "  marpd update   - Update theme"
+            echo "  marpd colors   - Change colors"
             ;;
         "banner")
             clear
@@ -119,7 +171,7 @@ marpd() {
             echo -e "\033[1;34m│ Device: \033[1;37m$(getprop ro.product.model 2>/dev/null || echo 'Termux')\033[0m"
             echo -e "\033[1;34m│ Android: \033[1;37m$(getprop ro.build.version.release 2>/dev/null || echo 'Unknown')\033[0m"
             echo -e "\033[1;34m│ Host: \033[1;37m$(whoami)@$(hostname)\033[0m"
-            echo -e "\033[1;34m│ Battery: \033[1;37m$(termux-battery-status 2>/dev/null | grep -o '"percentage":[0-9]*' | cut -d: -f2)%\033[0m"
+            echo -e "\033[1;34m│ Kernel: \033[1;37m$(uname -r)\033[0m"
             echo -e "\033[1;34m│ Time: \033[1;37m$(date '+%H:%M:%S')\033[0m"
             echo -e "\033[1;36m╚═════════════════════════════════════════════╝\033[0m"
             ;;
@@ -134,24 +186,58 @@ marpd() {
         "update")
             echo -e "\033[1;33m[*] Updating theme...\033[0m"
             wget -q "https://raw.githubusercontent.com/username/marpd-theme/main/marpd-theme.sh" \
-                 -O "$HOME/.marpd-theme/marpd-theme.sh"
+                 -O "$HOME/.marpd-theme/marpd-theme.sh" 2>/dev/null
             echo -e "\033[1;32m[✓] Updated!\033[0m"
+            ;;
+        "colors")
+            echo -e "\033[1;33m[*] Setting MAR-PD colors...\033[0m"
+            # Create colors file in home directory
+            cat > "$HOME/.marpd-colors" << 'COLORS'
+color0=#0a0a0a
+color1=#ff5555
+color2=#50fa7b
+color3=#f1fa8c
+color4=#bd93f9
+color5=#ff79c6
+color6=#8be9fd
+color7=#bfbfbf
+color8=#4d4d4d
+color9=#ff6e67
+color10=#5af78e
+color11=#f4f99d
+color12=#caa9fa
+color13=#ff92d0
+color14=#9aedfe
+color15=#e6e6e6
+background=#0a0a0a
+foreground=#f8f8f2
+cursor=#bd93f9
+COLORS
+            
+            if command -v termux-styling &> /dev/null && [ -f "$HOME/.marpd-colors" ]; then
+                termux-styling color "$HOME/.marpd-colors"
+                echo -e "\033[1;32m[✓] Colors applied!\033[0m"
+            else
+                echo -e "\033[1;31m[!] Cannot apply colors\033[0m"
+            fi
             ;;
         *)
             echo -e "\033[1;33mUsage: marpd [command]\033[0m"
-            echo "Commands: help, banner, info, bg, update"
+            echo "Commands: help, banner, info, bg, update, colors"
             ;;
     esac
 }
 EOF
+    
+    echo -e "${GREEN}[✓] Shell configured${NC}"
 }
 
-# Set Termux colors
+# Set Termux colors (Fixed version)
 set_colors() {
     echo -e "${YELLOW}[*] Setting up colors...${NC}"
     
-    # Create color scheme
-    cat > /tmp/marpd.colors << 'EOF'
+    # Create color scheme in home directory (not /tmp)
+    cat > "$HOME/.marpd-colors" << 'EOF'
 color0=#0a0a0a
 color1=#ff5555
 color2=#50fa7b
@@ -174,8 +260,14 @@ cursor=#bd93f9
 EOF
     
     if command -v termux-styling &> /dev/null; then
-        termux-styling color /tmp/marpd.colors
-        echo -e "${GREEN}[✓] Colors applied${NC}"
+        if [ -f "$HOME/.marpd-colors" ]; then
+            termux-styling color "$HOME/.marpd-colors"
+            echo -e "${GREEN}[✓] Colors applied${NC}"
+        else
+            echo -e "${YELLOW}[!] Colors file not created${NC}"
+        fi
+    else
+        echo -e "${YELLOW}[!] termux-styling not available${NC}"
     fi
 }
 
@@ -183,9 +275,15 @@ EOF
 set_wallpaper() {
     echo -e "${YELLOW}[*] Setting wallpaper...${NC}"
     
-    if [ -f "$THEME_DIR/bg.png" ] && command -v termux-wallpaper &> /dev/null; then
-        termux-wallpaper -f "$THEME_DIR/bg.png"
-        echo -e "${GREEN}[✓] Wallpaper set${NC}"
+    if command -v termux-wallpaper &> /dev/null; then
+        if [ -f "$THEME_DIR/bg.png" ]; then
+            termux-wallpaper -f "$THEME_DIR/bg.png"
+            echo -e "${GREEN}[✓] Wallpaper set${NC}"
+        else
+            echo -e "${YELLOW}[!] Background image not found${NC}"
+        fi
+    else
+        echo -e "${YELLOW}[!] termux-wallpaper not available${NC}"
     fi
 }
 
@@ -205,12 +303,40 @@ complete_install() {
     echo "║    marpd banner   - Show banner             ║"
     echo "║    marpd info     - System information      ║"
     echo "║    marpd bg       - Set background          ║"
+    echo "║    marpd colors   - Change colors           ║"
     echo "║    marpd update   - Update theme            ║"
     echo "║                                              ║"
     echo "║  Restart terminal or run:                   ║"
     echo "║        source ~/.bashrc                     ║"
     echo "╚══════════════════════════════════════════════╝"
     echo -e "${NC}"
+    
+    # Create README in theme directory
+    cat > "$THEME_DIR/README.txt" << 'EOF'
+MAR-PD Termux Theme
+===================
+
+Theme Directory: $HOME/.marpd-theme
+
+Files:
+  - marpd-theme.sh    : Main theme script
+  - bg.png            : Background image
+  - .marpd-colors     : Color scheme
+
+Commands:
+  marpd help     - Show all commands
+  marpd banner   - Display banner
+  marpd info     - Show system info
+  marpd bg       - Set background
+  marpd colors   - Apply color scheme
+  marpd update   - Update theme
+
+GitHub: https://github.com/username/marpd-theme
+
+TEAM: MAR-PD | WE WORK EXPERIMENT
+EOF
+    
+    echo -e "${CYAN}[*] Theme installed at: $THEME_DIR${NC}"
 }
 
 # Main installation
@@ -227,9 +353,13 @@ main() {
     set_wallpaper
     complete_install
     
-    echo -e "${CYAN}[*] Installation complete!${NC}"
+    echo ""
+    echo -e "${CYAN}=============================================${NC}"
+    echo -e "${GREEN}[✓] Installation successful!${NC}"
     echo -e "${YELLOW}[*] Run 'source ~/.bashrc' to apply changes.${NC}"
+    echo -e "${YELLOW}[*] Then type 'marpd help' to see commands.${NC}"
+    echo -e "${CYAN}=============================================${NC}"
 }
 
-# Run
+# Run installation
 main
